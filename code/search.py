@@ -14,7 +14,7 @@ class LocalSearch:
     def __init__(self, policy, device, config):
         self.policy = policy
         self.device = device
-        if config['method'] == 'reinforce':
+        if config['method'] == 'reinforce' or config['method'] == 'reinforce_augmented':
             self.generate_episode = self._generate_episode_reinforce
         elif config['method'] == 'reinforce_multi':
             self.generate_episode = self._generate_episode_reinforce_multi
@@ -22,6 +22,9 @@ class LocalSearch:
             self.generate_episode = self._generate_episode_pg
         elif config['method'] == 'a2c':
             self.generate_episode = self._generate_episode_a2c
+        elif config['method'] == 'ppo':
+            self.generate_episode = self._generate_episode_ppo
+            # self.eval = self._eval_generate_episode_ppo
 
     def eval(self):
         self.generate_episode = self._eval_generate_episode_reinforce
@@ -72,6 +75,25 @@ class LocalSearch:
         v = dist.sample()
 
         return v, dist.log_prob(v), value, entropy
+    
+    def _select_variable_ppo(self, data):
+        logit, value = self.policy(data)
+        prob = F.softmax(logit, dim=0)
+        log_prob = F.log_softmax(logit, dim=0)
+        entropy = -(log_prob * prob).sum()
+        dist = Categorical(prob.view(-1))
+        v = dist.sample()
+        ## TODO: do we need to store the prob?
+        ## TODO: how do we handle the old_log_prob?
+        return v, log_prob[v], value, entropy
+    
+    def _eval_select_variable_ppo(self, data):
+        logit, value = self.policy(data)  # Assuming the policy also returns values for completeness
+        prob = F.softmax(logit, dim=0)
+        v = prob.argmax(dim=0)  # Select the action with the highest probability
+        return v, logit[v], value  # Return variable, log probability of chosen action, and value estimate
+
+
 
     def _eval_generate_episode_reinforce(self, sample, max_flips, walk_prob):
         f = sample.formula
@@ -195,6 +217,76 @@ class LocalSearch:
             entropies.append(entropy)
 
         return sat, flip, (log_probs, values, entropies)
+
+        
+    def _generate_episode_ppo(self, sample, max_flips, walk_prob):
+        f = sample.formula
+        data = init_tensors(sample, self.device)
+        true_lit_count = compute_true_lit_count(f.clauses, data.sol)
+
+        log_probs = []
+        old_log_probs = []  # Store log probabilities under the old policy
+        values = []
+        entropies = []
+
+        flip = 0
+        flipped = set()
+        backflipped = 0
+        unsat_clauses = []
+        while flip < max_flips:
+            unsat_clause_indices = [k for k in range(len(f.clauses)) if true_lit_count[k] == 0]
+            unsat_clauses.append(len(unsat_clause_indices))
+            sat = not unsat_clause_indices
+            if sat:
+                break
+
+            if random.random() < walk_prob:
+                unsat_clause = f.clauses[random.choice(unsat_clause_indices)]
+                v, log_prob = abs(random.choice(unsat_clause)) - 1, None
+            else:
+                # Retrieve action and related data using the PPO policy
+                ## TODO: incorporate the old_log_prob
+                v, log_prob, value, entropy = self._select_variable_ppo(data)
+                if v.item() not in flipped:
+                    flipped.add(v.item())
+                else:
+                    backflipped += 1
+
+            flip_(data.x[0], data.sol, true_lit_count, v, f.occur_list)
+            flip += 1
+
+            # Collect data needed for the loss computation
+            log_probs.append(log_prob)
+            old_log_probs.append(old_prob)
+            values.append(value)
+            entropies.append(entropy)
+
+        return sat, (flip, backflipped, unsat_clauses), (log_probs, old_log_probs, values, entropies)
+    
+    def _eval_generate_episode_ppo(self, sample, max_flips, walk_prob):
+        f = sample.formula
+        data = init_tensors(sample, self.device)
+        true_lit_count = compute_true_lit_count(f.clauses, data.sol)
+
+        flip = 0
+        while flip < max_flips:
+            unsat_clause_indices = [k for k in range(len(f.clauses)) if true_lit_count[k] == 0]
+            sat = not unsat_clause_indices
+            if sat:
+                break
+
+            if random.random() < walk_prob:
+                unsat_clause = f.clauses[random.choice(unsat_clause_indices)]
+                v = abs(random.choice(unsat_clause)) - 1
+            else:
+                v, _, _ = self._eval_select_variable_ppo(data)  # Use deterministic action selection
+
+            flip_(data.x[0], data.sol, true_lit_count, v, f.occur_list)
+            flip += 1
+
+        return sat, flip, None  # No need to return detailed data for loss computation in eval
+
+
 
 
 def flip_multi_(xv, sol, true_lit_count, vs, occur_list):

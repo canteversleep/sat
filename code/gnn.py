@@ -220,3 +220,125 @@ class A2CPolicy(nn.Module):
             self.policy_readout(h[0]),
             self.value_readout(h[1]).sum() / h[1].shape[0],
         )  # Variables too?
+
+
+class PPOPolicy(nn.Module):
+    def __init__(
+        self, input_size, gnn_hidden_size, readout_hidden_size, mlp_arch, gnn_iter, gnn_async
+    ):
+        super().__init__()
+        self.gnn = GraphNN(input_size, gnn_hidden_size, mlp_arch, gnn_iter, gnn_async)
+        self.policy_readout = NodeReadout(gnn_hidden_size, 1, readout_hidden_size)  # Assuming a discrete action space
+        self.value_readout = GraphReadout(gnn_hidden_size, 1, readout_hidden_size)
+
+    def forward(self, data):
+        h = self.gnn(data)
+        policy_logits = self.policy_readout(h[0])
+        value = self.value_readout(h[0])
+        return policy_logits, value
+
+
+# class LatentAugGraphNN(nn.Module):
+#     def __init__(self, input_size, hidden_size, mlp_arch, gnn_iter, gnn_async, latent_size):
+#         super().__init__()
+#         self.convs = nn.ModuleList(
+#             [
+#                 GCBN(input_size + latent_size if i == 0 else hidden_size + latent_size, hidden_size, mlp_arch, gnn_async)
+#                 for i in range(gnn_iter)
+#             ]
+#         )
+
+#     def forward(self, data, latent):
+#         h = data.x[:2]
+#         latent_expanded = latent.expand(h[0].size(0), -1)  # Expand the latent to match the number of nodes
+#         h_with_latent = (torch.cat((h[0], latent_expanded), dim=1), h[1])  # Concatenate the latent with node features
+#         # Create a fully connected adjacency matrix for the latent node
+#         # print(data)
+#         num_nodes = h[0].size(0)
+
+#         latent_adj = torch.ones((num_nodes, num_nodes), device=data.adj[0].device)
+#         latent_adj_values = torch.ones(num_nodes * num_nodes, device=data.adj[0].device)
+#         latent_adj = torch.sparse_coo_tensor(latent_adj, latent_adj_values, (num_nodes, num_nodes))
+#         # latent_adj = latent_adj.to_sparse()
+
+#         # Combine the original adjacency matrix with the latent adjacency matrix
+#         adj_with_latent = (
+#             torch.cat((data.adj[0], latent_adj), dim=1),
+#             torch.cat((data.adj[1], latent_adj), dim=1)
+#         )
+
+#         # Pass the updated node features and adjacency matrix through the graph convolution layers
+#         for conv in self.convs:
+#             h_with_latent = conv(h_with_latent, Data(adj=adj_with_latent, x=h_with_latent))
+
+#         return h_with_latent
+
+    # def forward(self, data, latent):
+    #     h = data.x[:2]
+    #     latent_expanded = latent.expand(h[0].size(0), -1)  # Expand the latent to match the number of nodes
+    #     h_with_latent = (torch.cat((h[0], latent_expanded), dim=1), h[1])  # Concatenate the latent with node features
+
+    #     # Create a fully connected adjacency matrix for the latent node
+    #     num_nodes = h[0].size(0)
+    #     latent_adj_indices = torch.cartesian_prod(torch.arange(num_nodes), torch.arange(num_nodes)).t()
+    #     latent_adj_values = torch.ones(num_nodes * num_nodes, device=data.adj[0].device)
+    #     latent_adj = torch.sparse_coo_tensor(latent_adj_indices, latent_adj_values, (num_nodes, num_nodes))
+
+    #     # Combine the original adjacency matrix with the latent adjacency matrix
+    #     adj_with_latent = (
+    #         torch.cat((data.adj[0], latent_adj), dim=1),
+    #         torch.cat((data.adj[1], latent_adj), dim=1)
+    #     )
+
+    #     # Pass the updated node features and adjacency matrix through the graph convolution layers
+    #     for conv in self.convs:
+    #         h_with_latent = conv(h_with_latent, Data(adj=adj_with_latent, x=h_with_latent))
+
+    #     return h_with_latent
+# self, input_size, gnn_hidden_size, readout_hidden_size, mlp_arch, gnn_iter, gnn_async
+class LatentAugReinforcePolicy(nn.Module):
+    def __init__(
+        self, input_size, gnn_hidden_size, readout_hidden_size, mlp_arch, gnn_iter, gnn_async, vgae_encoder
+    ):
+        super().__init__()
+        self.vgae_encoder = vgae_encoder
+        self.gnn = GraphNN(input_size, gnn_hidden_size, mlp_arch, gnn_iter, gnn_async)
+        self.policy_readout = NodeReadout(gnn_hidden_size + vgae_encoder.latent_size, 1, readout_hidden_size)
+
+    def forward(self, data):
+        with torch.no_grad():
+            z_mean, z_log_var = self.vgae_encoder(data)
+            latent = self.vgae_encoder.reparameterize(z_mean, z_log_var)
+
+        h = self.gnn(data)  # Get the node embeddings from the GNN
+
+        # Expand the latent to match the number of nodes
+        latent_expanded = latent.expand(h[0].size(0), -1)
+
+        # Concatenate the node embeddings with the expanded latent
+        h_with_latent = torch.cat((h[0], latent_expanded), dim=1)
+
+        # Pass the concatenated node embeddings and latent through the policy readout
+        policy_logits = self.policy_readout(h_with_latent)
+
+        return policy_logits
+
+class LatentAugPPOPolicy(nn.Module):
+    def __init__(
+        self, input_size, gnn_hidden_size, readout_hidden_size, mlp_arch, gnn_iter, gnn_async, vgae_encoder
+    ):
+        super().__init__()
+        self.vgae_encoder = vgae_encoder
+        # self.gnn = LatentAugGraphNN(input_size, gnn_hidden_size, mlp_arch, gnn_iter, gnn_async, vgae_encoder.latent_size)
+        self.gnn = GraphNN(input_size, gnn_hidden_size, mlp_arch, gnn_iter, gnn_async)
+        self.policy_readout = NodeReadout(gnn_hidden_size, 1, readout_hidden_size)
+        self.value_readout = GraphReadout(gnn_hidden_size, 1, readout_hidden_size)
+
+    def forward(self, data):
+        with torch.no_grad():
+            z_mean, z_log_var = self.vgae_encoder(data)
+            latent = self.vgae_encoder.reparameterize(z_mean, z_log_var)
+        h = self.gnn(data)
+        policy_logits = self.policy_readout(h[0])
+        value = self.value_readout(h[0])
+        return policy_logits, value

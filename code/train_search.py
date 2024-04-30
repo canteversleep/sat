@@ -12,6 +12,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.multiprocessing import Process
+from torch.utils.data import DataLoader
 
 import evaluate
 import util
@@ -19,6 +20,9 @@ from data_search import load_dir
 # from gnn import A2CPolicy, ReinforcePolicy, PGPolicy
 from search import LocalSearch
 from util import normalize
+from collections import namedtuple
+
+Batch = namedtuple('Batch', ['x', 'adj', 'sol'])
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +38,61 @@ def log(epoch, batch_count, avg_loss, avg_acc):
         )
     )
 
+
+def collate_fn(batch):
+    return Batch(*zip(*batch))
+
+def train_vgae(model, optimizer, train_data, device, config):
+    model.train()
+    train_loss = 0.0
+    train_loader = DataLoader(train_data, batch_size=config['batch_size'], shuffle=True, collate_fn=collate_fn)
+
+    for batch in train_loader:
+        batch = batch.to(device)
+        optimizer.zero_grad()
+        z_mean, z_log_var, adj_rec = model(batch.adj)
+
+        # Compute the reconstruction loss
+        rec_loss = F.binary_cross_entropy(adj_rec, batch.adj[0].to_dense())
+
+        # Compute the KL divergence loss
+        kl_loss = -0.5 * torch.sum(1 + z_log_var - z_mean.pow(2) - z_log_var.exp())
+
+        # Combine the losses
+        loss = rec_loss + config['kl_weight'] * kl_loss
+
+        loss.backward()
+        optimizer.step()
+        train_loss += loss.item() * batch.adj[0].size(0)
+
+    train_loss /= len(train_data)
+    logger.info(f"Train Loss: {train_loss:.4f}")
+    return train_loss
+
+def evaluate_vgae(model, eval_data, config, device):
+    model.eval()
+    eval_loss = 0.0
+    eval_loader = DataLoader(eval_data, batch_size=config['batch_size'], shuffle=False, collate_fn=collate_fn)
+
+    with torch.no_grad():
+        for batch in eval_loader:
+            batch = batch.to(device)
+            z_mean, z_log_var, adj_rec = model(batch.adj)
+
+            # Compute the reconstruction loss
+            rec_loss = F.binary_cross_entropy(adj_rec, batch.adj[0].to_dense())
+
+            # Compute the KL divergence loss
+            kl_loss = -0.5 * torch.sum(1 + z_log_var - z_mean.pow(2) - z_log_var.exp())
+
+            # Combine the losses
+            loss = rec_loss + kl_loss
+
+            eval_loss += loss.item() * batch.adj[0].size(0)
+
+    eval_loss /= len(eval_data)
+    logger.info(f"Eval Loss: {eval_loss:.4f}")
+    return eval_loss
 
 def load_data(path, train_sets, eval_set, shuffle=False):
     train_len = 0
@@ -132,6 +191,50 @@ def a2c(sat, history, config):
     return actor_loss + 0.5 * critic_loss + 0.01 * entropy_loss
 
 
+def ppo(sat, history, config):
+    log_probs, old_log_probs, values, entropies = history
+    device = log_probs[0].device
+    
+    epsilon = config['ppo_clip']  # Clipping parameter, e.g., 0.2
+    gamma = config['discount']  # Discount factor for future rewards
+
+    # Convert lists to tensors
+    log_probs = torch.stack(log_probs)
+    old_log_probs = torch.stack(old_log_probs)
+    values = torch.stack(values)
+    entropies = torch.stack(entropies)
+    rewards = torch.zeros_like(log_probs)
+    rewards[-1] = int(sat)  # Assign reward only for the last step
+
+    # Calculate returns and advantages
+    T = rewards.shape[0]
+    R = torch.zeros_like(rewards)
+    Advantages = torch.zeros_like(rewards)
+    for t in reversed(range(T)):
+        R[t] = rewards[t] + gamma * (R[t + 1] if t + 1 < T else 0)
+        Advantages[t] = R[t] - values[t].detach()  # Detached for actor loss calculation
+
+    # Calculate the ratio of the probabilities
+    ratio = torch.exp(log_probs - old_log_probs)  # pi_theta / pi_theta_old
+
+    # Clipped surrogate function
+    surr1 = ratio * Advantages
+    surr2 = torch.clamp(ratio, 1 - epsilon, 1 + epsilon) * Advantages
+    actor_loss = -torch.mean(torch.min(surr1, surr2))
+
+    # Critic loss using MSE
+    critic_loss = F.mse_loss(values, R)
+
+    # Entropy bonus for exploration
+    entropy_bonus = -torch.mean(entropies)
+
+    # Total loss
+    total_loss = actor_loss + 0.5 * critic_loss + 0.01 * entropy_bonus
+
+    return total_loss
+ 
+
+
 # def wrap_single(dummy, ls, sample, discount):
 #     sat, log_probs = ls.generate_episode(sample)
 #     loss = reinforce_loss(sat, log_probs, discount) if log_probs else None
@@ -143,7 +246,7 @@ def generate_episodes(ls, sample, max_tries, max_flips, config):
     # pool = Pool(processes=max_tries)
     # res = pool.map(f, range(max_tries))
     # pdb.set_trace()
-    if config['method'] == 'reinforce':
+    if config['method'] == 'reinforce' or config['method'] == 'reinforce_augmented':
         loss_fn = reinforce
     elif config['method'] == 'reinforce_multi':
         loss_fn = reinforce
@@ -278,9 +381,13 @@ def main():
     config, device = util.setup()
     logger.setLevel(getattr(logging, config['log_level'].upper()))
     gnn = import_module('gnn' if config['mlp_arch'] else 'gnn_old')
+    vgae = import_module('vgae')
+
 
     if config['method'] == 'reinforce':
         model = gnn.ReinforcePolicy
+    elif config['method'] == 'reinforce_augmented':
+        model = gnn.LatentAugReinforcePolicy
     elif config['method'] == 'reinforce_multi':
         model = gnn.ReinforcePolicy
     elif config['method'] == 'pg':
@@ -300,8 +407,14 @@ def main():
                     p.add_(torch.randn(p.size()) * 0.1)
     else:
         if config['mlp_arch']:
-            policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
-                           config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
+            if not config['method'] == 'reinforce_augmented':
+                policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
+                               config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
+            else:
+                encoder = vgae.VGAEEncoder(3, config['gnn_hidden_size'], config['latent_size'], config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
+                policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
+                               config['mlp_arch'], config['gnn_iter'], config['gnn_async'], encoder).to(device)
+
         else:
             policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size']).to(device)
     optimizer = getattr(optim, config['optimizer'])(policy.parameters(), lr=config['lr'])

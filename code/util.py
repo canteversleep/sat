@@ -24,7 +24,7 @@ def setup():
 
     with open(args.config_path) as f:
         config_data = f.read()
-    config = yaml.load(config_data)
+    config = yaml.load(config_data, Loader=yaml.FullLoader)
 
     config['dir'] = join('results', config['name'])
     os.makedirs(config['dir'], exist_ok=True)
