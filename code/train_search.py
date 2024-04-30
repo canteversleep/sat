@@ -22,7 +22,7 @@ from search import LocalSearch
 from util import normalize
 from collections import namedtuple
 
-Batch = namedtuple('Batch', ['x', 'adj', 'sol'])
+Batch = namedtuple('Batch', ['x', 'adj', 'sol', 'something'])
 
 logger = logging.getLogger(__name__)
 
@@ -44,11 +44,13 @@ def collate_fn(batch):
 
 def train_vgae(model, optimizer, train_data, device, config):
     model.train()
+    # print(train_data[0].adj)
     train_loss = 0.0
     train_loader = DataLoader(train_data, batch_size=config['batch_size'], shuffle=True, collate_fn=collate_fn)
 
     for batch in train_loader:
-        batch = batch.to(device)
+        
+        # batch = batch.to(device)
         optimizer.zero_grad()
         z_mean, z_log_var, adj_rec = model(batch.adj)
 
@@ -383,54 +385,80 @@ def main():
     gnn = import_module('gnn' if config['mlp_arch'] else 'gnn_old')
     vgae = import_module('vgae')
 
-
-    if config['method'] == 'reinforce':
-        model = gnn.ReinforcePolicy
-    elif config['method'] == 'reinforce_augmented':
-        model = gnn.LatentAugReinforcePolicy
-    elif config['method'] == 'reinforce_multi':
-        model = gnn.ReinforcePolicy
-    elif config['method'] == 'pg':
-        model = gnn.PGPolicy
-    elif config['method'] == 'a2c':
-        model = gnn.A2CPolicy
-
-    if config['model_path']:
-        logger.info('Loading model parameters from {}'.format(config['model_path']))
-        policy = torch.load(config['model_path']).to(device)
-
-        if config['load_with_noise']:
-            with torch.no_grad():
-                # for p in policy.parameters():
-                #     p.add_(torch.randn(p.size()) * 0.02)
-                for p in policy.policy_readout.parameters():
-                    p.add_(torch.randn(p.size()) * 0.1)
-    else:
-        if config['mlp_arch']:
-            if not config['method'] == 'reinforce_augmented':
-                policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
-                               config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
-            else:
-                encoder = vgae.VGAEEncoder(3, config['gnn_hidden_size'], config['latent_size'], config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
-                policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
-                               config['mlp_arch'], config['gnn_iter'], config['gnn_async'], encoder).to(device)
-
-        else:
-            policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size']).to(device)
-    optimizer = getattr(optim, config['optimizer'])(policy.parameters(), lr=config['lr'])
-    scheduler = optim.lr_scheduler.MultiStepLR(
-        optimizer, milestones=config['lr_milestones'], gamma=config['lr_decay']
-    )
-    ls = LocalSearch(policy, device, config)
-
     train_sets, eval_set = load_data(config['data_path'], config['train_sets'], config['eval_set'],
                                      config['data_shuffle'])
 
-    for i in range(1, config['cycles'] + 1):
-        logger.info(f'Cycle: {i}')
-        for train_set in train_sets:
-            logger.info('Train set: {}'.format(train_set['name']))
-            train(ls, optimizer, scheduler, (train_set, eval_set), config)
+    if config['pretrain_vgae']:
+        vgae_config = config['pretrain_vgae']
+        vgae_model = vgae.VGAE(
+            3,
+            config['gnn_hidden_size'],
+            config['latent_size'],
+            config['mlp_arch'],
+            config['gnn_iter'],
+            config['gnn_async']
+        ).to(device)
+
+        vgae_optimizer = torch.optim.Adam(vgae_model.parameters(), lr=1e-3)
+
+        best_vgae_loss = float('inf')
+        for epoch in range(vgae_config['num_epochs']):
+            train_loss = train_vgae(vgae_model, vgae_optimizer, train_sets[0]['data'], device, vgae_config)
+            eval_loss = evaluate_vgae(vgae_model, eval_set['data'], device) if eval_set else None
+
+            logger.info(f"Epoch {epoch+1}/{vgae_config['num_epochs']}, Train Loss: {train_loss:.4f}, Eval Loss: {eval_loss:.4f}")
+
+            if eval_loss is not None and eval_loss < best_vgae_loss:
+                best_vgae_loss = eval_loss
+                torch.save(vgae_model.state_dict(), os.path.join(config['model_path'], vgae_config['out_name']))
+
+        logger.info(f"Best VGAE model saved with loss: {best_vgae_loss:.4f}")
+    else:
+        if config['method'] == 'reinforce':
+            model = gnn.ReinforcePolicy
+        elif config['method'] == 'reinforce_augmented':
+            model = gnn.LatentAugReinforcePolicy
+        elif config['method'] == 'reinforce_multi':
+            model = gnn.ReinforcePolicy
+        elif config['method'] == 'pg':
+            model = gnn.PGPolicy
+        elif config['method'] == 'a2c':
+            model = gnn.A2CPolicy
+
+        if config['model_path']:
+            logger.info('Loading model parameters from {}'.format(config['model_path']))
+            policy = torch.load(config['model_path']).to(device)
+
+            if config['load_with_noise']:
+                with torch.no_grad():
+                    # for p in policy.parameters():
+                    #     p.add_(torch.randn(p.size()) * 0.02)
+                    for p in policy.policy_readout.parameters():
+                        p.add_(torch.randn(p.size()) * 0.1)
+        else:
+            if config['mlp_arch']:
+                if not config['method'] == 'reinforce_augmented':
+                    policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
+                                   config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
+                else:
+                    encoder = vgae.VGAEEncoder(3, config['gnn_hidden_size'], config['latent_size'], config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
+                    policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
+                                   config['mlp_arch'], config['gnn_iter'], config['gnn_async'], encoder).to(device)
+
+            else:
+                policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size']).to(device)
+        optimizer = getattr(optim, config['optimizer'])(policy.parameters(), lr=config['lr'])
+        scheduler = optim.lr_scheduler.MultiStepLR(
+            optimizer, milestones=config['lr_milestones'], gamma=config['lr_decay']
+        )
+        ls = LocalSearch(policy, device, config)
+
+
+        for i in range(1, config['cycles'] + 1):
+            logger.info(f'Cycle: {i}')
+            for train_set in train_sets:
+                logger.info('Train set: {}'.format(train_set['name']))
+                train(ls, optimizer, scheduler, (train_set, eval_set), config)
 
 
 if __name__ == '__main__':
