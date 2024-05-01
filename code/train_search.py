@@ -21,6 +21,7 @@ from data_search import load_dir
 from search import LocalSearch
 from util import normalize
 from collections import namedtuple
+from data_search import init_tensors
 
 Batch = namedtuple('Batch', ['x', 'adj', 'sol', 'something'])
 
@@ -46,14 +47,12 @@ def train_vgae(model, optimizer, train_data, device, config):
     model.train()
     # print(train_data[0].adj)
     train_loss = 0.0
-    train_loader = DataLoader(train_data, batch_size=config['batch_size'], shuffle=True, collate_fn=collate_fn)
+    # train_loader = DataLoader(train_data, batch_size=config['batch_size'], shuffle=True, collate_fn=collate_fn)
 
-    for batch in train_loader:
-        
-        # batch = batch.to(device)
+    for sample in train_data:
+        batch = init_tensors(sample, device)
         optimizer.zero_grad()
-        z_mean, z_log_var, adj_rec = model(batch.adj)
-
+        z_mean, z_log_var, adj_rec = model(batch)
         # Compute the reconstruction loss
         rec_loss = F.binary_cross_entropy(adj_rec, batch.adj[0].to_dense())
 

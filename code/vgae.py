@@ -37,7 +37,8 @@ class VGAEEncoder(nn.Module):
 class VGAEDecoder(nn.Module):
     def __init__(self, latent_size, hidden_size, output_size, mlp_arch):
         super().__init__()
-        self.decoder = mlp(latent_size, output_size, mlp_arch['hidden_sizes'], eval('nn.' + mlp_arch['activation'] + '()'), nn.Sigmoid())
+        # self.decoder = mlp(latent_size, output_size, mlp_arch['hidden_sizes'], eval('nn.' + mlp_arch['activation'] + '()'), nn.Sigmoid())
+        self.decoder = mlp(latent_size, output_size, [hidden_size], eval('nn.' + mlp_arch['activation'] + '()'), nn.Sigmoid())
 
     def forward(self, z):
         adj_rec = self.decoder(z)
