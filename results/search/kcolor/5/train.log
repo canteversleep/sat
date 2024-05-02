@@ -1,4 +1,4 @@
-14:55:12 INFO Configuration:
+17:13:55 INFO Configuration:
 name: search/kcolor/5
 seed: 1
 
@@ -49,6 +49,6 @@ method: reinforce_augmented
 discount: 0.25
 walk_prob: 0.5
 
-14:55:12 INFO Device: cpu
-14:55:12 INFO Loaded 64 training problems from data/kcolor
-14:55:12 INFO Loaded 10 evaluation problems from data/kcolor
+17:13:55 INFO Device: cpu
+17:13:55 INFO Loaded 64 training problems from data/kcolor
+17:13:55 INFO Loaded 10 evaluation problems from data/kcolor

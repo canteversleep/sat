@@ -8,7 +8,7 @@ import subprocess
 
 def create_sat_problem(filename, n, p, k):
     while True:
-        subprocess.call(['cnfgen', '-q', '-o', 'tmp.cnf', 'domset', '--gnp', str(n), str(p), str(k)])
+        subprocess.call(['cnfgen', '-q', '-o', 'tmp.cnf', 'domset',str(k), 'gnp', str(n), str(p)])
         try:
             subprocess.check_call(['minisat', 'tmp.cnf'], stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as ex:

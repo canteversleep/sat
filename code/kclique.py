@@ -6,9 +6,21 @@ import pdb
 import subprocess
 
 
+# def create_sat_problem(filename, n, p, k):
+#     while True:
+#         subprocess.call(['cnfgen', '-q', '-o', 'tmp.cnf', 'kclique', '--gnp', str(n), str(p), str(k)])
+#         try:
+#             subprocess.check_call(['minisat', 'tmp.cnf'], stderr=subprocess.STDOUT)
+#         except subprocess.CalledProcessError as ex:
+#             if ex.returncode == 10:
+#                 os.rename('tmp.cnf', filename)
+#                 return
+#             os.remove('tmp.cnf')
+
+
 def create_sat_problem(filename, n, p, k):
     while True:
-        subprocess.call(['cnfgen', '-q', '-o', 'tmp.cnf', 'kclique', '--gnp', str(n), str(p), str(k)])
+        subprocess.call(['cnfgen', '-q', '-o', 'tmp.cnf', 'kclique', str(k),'gnp', str(n), str(p)])
         try:
             subprocess.check_call(['minisat', 'tmp.cnf'], stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as ex:
@@ -16,7 +28,6 @@ def create_sat_problem(filename, n, p, k):
                 os.rename('tmp.cnf', filename)
                 return
             os.remove('tmp.cnf')
-
 
 def main():
     parser = argparse.ArgumentParser()
