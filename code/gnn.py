@@ -312,6 +312,7 @@ class LatentAugReinforcePolicy(nn.Module):
 
         h = self.gnn(data)  # Get the node embeddings from the GNN
 
+        # print('Concatenating node embeddings with latent')
         # Expand the latent to match the number of nodes
         latent_expanded = latent.expand(h[0].size(0), -1)
 

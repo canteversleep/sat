@@ -1,3 +1,4 @@
+import argparse
 import functools
 import logging
 import pdb
@@ -21,7 +22,7 @@ from data_search import load_dir
 from search import LocalSearch
 from util import normalize
 from collections import namedtuple
-from data_search import init_tensors
+from data_search import init_tensors, vgae_wrapper, init_tensors_vgae, init_tensors_vgae_naive_v1, init_tensors_vgae_naive, init_tensors_vgae_bipartite
 
 Batch = namedtuple('Batch', ['x', 'adj', 'sol', 'something'])
 
@@ -51,6 +52,7 @@ def train_vgae(model, optimizer, train_data, device, config):
 
     for sample in train_data:
         batch = init_tensors(sample, device)
+        # print(batch)
         optimizer.zero_grad()
         z_mean, z_log_var, adj_rec = model(batch)
         # Compute the reconstruction loss
@@ -94,6 +96,48 @@ def evaluate_vgae(model, eval_data, config, device):
     eval_loss /= len(eval_data)
     logger.info(f"Eval Loss: {eval_loss:.4f}")
     return eval_loss
+
+
+def train_deep_vgae(model, optimizer, data, device, config):
+    model.train()
+    total_loss = 0
+    num_batches = 0
+
+    for sample in data:
+        # batch = init_tensors(sample, device)
+        x, edge_index, adj = init_tensors_vgae_bipartite(sample, device)
+        print(f'x: {x.shape}, edge_index: {edge_index.shape}, adj: {adj.shape}')
+        # print(f'x: {x}, edge_index: {edge_index}, adj: {adj}')
+
+        optimizer.zero_grad()
+        # adj_pred = model(x, edge_index)
+        loss = model.loss(x, edge_index, adj)  # Pass x, edge_index, and adj
+        loss.backward()
+        optimizer.step()
+
+        total_loss += loss.item()
+        num_batches += 1
+
+    return total_loss / num_batches
+
+
+def evaluate_deep_vgae(model, data, device):
+    model.eval()
+    total_loss = 0
+    num_batches = 0
+
+    with torch.no_grad():
+        for sample in data:
+            batch = init_tensors(sample, device)
+            x, edge_index, adj = vgae_wrapper(batch, device)
+
+            # adj_pred = model(x, edge_index)
+            loss = model.loss(x, edge_index, adj)  # Pass x, edge_index, and adj
+
+            total_loss += loss.item()
+            num_batches += 1
+
+    return total_loss / num_batches
 
 def load_data(path, train_sets, eval_set, shuffle=False):
     train_len = 0
@@ -389,21 +433,37 @@ def main():
 
     if config['pretrain_vgae']:
         vgae_config = config['pretrain_vgae']
-        vgae_model = vgae.VGAE(
-            3,
-            config['gnn_hidden_size'],
-            config['latent_size'],
-            config['mlp_arch'],
-            config['gnn_iter'],
-            config['gnn_async']
-        ).to(device)
+        # vgae_model = vgae.WeakVGAE(
+        #     3,
+        #     config['gnn_hidden_size'],
+        #     config['latent_size'],
+        #     config['mlp_arch'],
+        #     config['gnn_iter'],
+        #     config['gnn_async']
+        # ).to(device)
+
+        # Create an args object or dictionary with the required parameters
+        vgae_args = argparse.Namespace(
+            enc_in_channels=3,
+            enc_hidden_channels=config['gnn_hidden_size'],
+            enc_out_channels=config['latent_size']
+        )
+
+# Instantiate the DeepVGAE model with the args object
+        vgae_model = vgae.DeepVGAE(vgae_args).to(device)
+
+        # vgae_model = vgae.DeepVGAE(
+        #     enc_in_channels=3,
+        #     enc_hidden_channels=config['gnn_hidden_size'],
+        #     enc_out_channels=config['latent_size'],
+        # ).to(device)
 
         vgae_optimizer = torch.optim.Adam(vgae_model.parameters(), lr=1e-3)
 
         best_vgae_loss = float('inf')
         for epoch in range(vgae_config['num_epochs']):
-            train_loss = train_vgae(vgae_model, vgae_optimizer, train_sets[0]['data'], device, vgae_config)
-            eval_loss = evaluate_vgae(vgae_model, eval_set['data'], device) if eval_set else None
+            train_loss = train_deep_vgae(vgae_model, vgae_optimizer, train_sets[0]['data'], device, vgae_config)
+            eval_loss = evaluate_deep_vgae(vgae_model, eval_set['data'], device) if eval_set else None
 
             logger.info(f"Epoch {epoch+1}/{vgae_config['num_epochs']}, Train Loss: {train_loss:.4f}, Eval Loss: {eval_loss:.4f}")
 

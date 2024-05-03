@@ -2,8 +2,63 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 from gnn import GraphNN, GraphReadout, mlp
+import numpy as np
 
-class VGAE(nn.Module):
+
+######### PyTorch Geometric Implementation -- Strong VGAE ########
+
+from torch_geometric.nn.models import InnerProductDecoder, VGAE
+from torch_geometric.nn.conv import GCNConv
+from torch_geometric.utils import negative_sampling, remove_self_loops, add_self_loops
+
+
+class GCNEncoder(nn.Module):
+    def __init__(self, in_channels, hidden_channels, out_channels):
+        super(GCNEncoder, self).__init__()
+        self.gcn_shared = GCNConv(in_channels, hidden_channels)
+        self.gcn_mu = GCNConv(hidden_channels, out_channels)
+        self.gcn_logvar = GCNConv(hidden_channels, out_channels)
+
+    def forward(self, x, edge_index):
+        x = F.relu(self.gcn_shared(x, edge_index))
+        mu = self.gcn_mu(x, edge_index)
+        logvar = self.gcn_logvar(x, edge_index)
+        return mu, logvar
+
+
+class DeepVGAE(VGAE):
+    def __init__(self, args):
+        super(DeepVGAE, self).__init__(encoder=GCNEncoder(args.enc_in_channels,
+                                                          args.enc_hidden_channels,
+                                                          args.enc_out_channels),
+                                       decoder=InnerProductDecoder())
+
+    def forward(self, x, edge_index):
+        z = self.encode(x, edge_index)
+        adj_pred = self.decoder.forward_all(z)
+        return adj_pred
+
+    def loss(self, x, pos_edge_index, all_edge_index):
+        z = self.encode(x, pos_edge_index)
+
+        pos_loss = -torch.log(
+            self.decoder(z, pos_edge_index, sigmoid=True) + 1e-15).mean()
+
+        # Do not include self-loops in negative samples
+        all_edge_index_tmp, _ = remove_self_loops(all_edge_index)
+        all_edge_index_tmp, _ = add_self_loops(all_edge_index_tmp)
+
+        neg_edge_index = negative_sampling(all_edge_index_tmp, z.size(0), pos_edge_index.size(1))
+        neg_loss = -torch.log(1 - self.decoder(z, neg_edge_index, sigmoid=True) + 1e-15).mean()
+
+        kl_loss = 1 / x.size(0) * self.kl_loss()
+
+        return pos_loss + neg_loss + kl_loss
+
+        
+####### Weak VGAEs ought to predict SAT class alongside other characterizing features of the SAT problem ########
+
+class WeakVGAE(nn.Module):
     def __init__(self, input_size, hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async):
         super().__init__()
         self.encoder = VGAEEncoder(input_size, hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async)
@@ -22,13 +77,16 @@ class VGAEEncoder(nn.Module):
         self.gnn = GraphNN(input_size, hidden_size, mlp_arch, gnn_iter, gnn_async)
         self.mean_readout = GraphReadout(hidden_size, latent_size, hidden_size)
         self.log_var_readout = GraphReadout(hidden_size, latent_size, hidden_size)
+        # self.mean_readout = GraphNN(hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async)
+        # self.log_var_readout = GraphNN(hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async)
         self.latent_size = latent_size
 
     def forward(self, data):
         h = self.gnn(data)
-        print(len(h))
-        z_mean = self.mean_readout(h[0])
-        z_log_var = self.log_var_readout(h[0])
+        h_pool = torch.mean(h, dim=1)
+        z_mean = self.mean_readout(h_pool)
+        z_log_var = self.log_var_readout(h_pool)
+        print(z_mean.shape, z_log_var.shape)
         return z_mean, z_log_var
 
     def reparameterize(self, z_mean, z_log_var):
