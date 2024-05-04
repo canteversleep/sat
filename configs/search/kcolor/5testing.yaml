@@ -36,7 +36,8 @@ lr: 0.0005
 lr_milestones: [200, 500, 1000, 5000]
 lr_decay: 0.5
 
-method: reinforce_augmented
+method: ppo
+ppo_clip: 0.2
 discount: 0.25
 walk_prob: 0.5
 

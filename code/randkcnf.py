@@ -37,7 +37,7 @@ def main():
     os.chdir(args.dir)
 
     for i in range(args.N):
-        filename = 'id={}_n={}_m={}.cnf'.format(args.id + i, args.n, args.m)
+        filename = 'rand_id={}_n={}_m={}.cnf'.format(args.id + i, args.n, args.m)
         create_sat_problem(filename, args.k, args.n, args.m)
 
 

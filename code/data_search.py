@@ -45,6 +45,8 @@ def init_tensors(sample, device):
     cadj = to_sparse_tensor(sparse.vstack(adj)).t().to(device)
     return Batch((xv, xc, xev, xec), (vadj, cadj), sol)
 
+def init_tensor_wrapper(sample_wrapper, device):
+    return (sample_wrapper.ptype, init_tensors(sample_wrapper.sample, device))
 
 # def vgae_wrapper(batch, device):
 #     (xv, xc, xev, xec), (vadj, cadj), sol = batch

@@ -37,7 +37,7 @@ def main():
     os.chdir(args.dir)
 
     for i in range(args.N):
-        filename = 'id={}_n={}_p={}_k={}.cnf'.format(args.id + i, args.n, args.p, args.k)
+        filename = 'domset_id={}_n={}_p={}_k={}.cnf'.format(args.id + i, args.n, args.p, args.k)
         create_sat_problem(filename, args.n, args.p, args.k)
 
 

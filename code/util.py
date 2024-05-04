@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 DataSample = namedtuple('DataSample', ['filename', 'formula', 'adj', 'sat'])
 
 
+
 def setup():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--config_path', type=str, required=True)
@@ -96,3 +97,9 @@ def normalize(x):
 
 def unnormalize(x):
     return (x + 1) / 2
+
+
+
+def load_dir_wrapper(path):
+    data = load_dir(path)
+    return [SampleWrapper(ptype, sample) for sample in data]

@@ -6,6 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
+
 def mlp(input_size, output_size, hidden_sizes, activation, output_activation):
     sizes = [input_size, *hidden_sizes, output_size]
     n = len(sizes)
@@ -234,7 +235,7 @@ class PPOPolicy(nn.Module):
     def forward(self, data):
         h = self.gnn(data)
         policy_logits = self.policy_readout(h[0])
-        value = self.value_readout(h[0])
+        value = self.value_readout(h[0]).mean()
         return policy_logits, value
 
 

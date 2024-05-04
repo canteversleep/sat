@@ -1,4 +1,4 @@
-14:17:32 INFO Configuration:
+01:31:57 INFO Configuration:
 name: search/kcolor/5
 seed: 1
 
@@ -8,6 +8,7 @@ eval_interval: 50
 save_interval: 50
 
 # pretraining section
+data_shuffle: True
 
 latent_size: 16
 pretrain_vgae:
@@ -15,19 +16,19 @@ pretrain_vgae:
   out_name: vgaeinit.pth
   batch_size: 16
 
-data_path: data/kcolor
+data_path: data/mixed
 train_sets:
-  - name: 3-5-0.5
-    samples: 64
+  - name: '1'
+    samples: 1800
     max_tries: 5
-    max_flips: 50
+    max_flips: 200
     iterations: 10000
 
 eval_set:
-  name: 3-10-0.5
-  samples: 10
-  max_tries: 10
-  max_flips: 200
+  name: '2'
+  samples: 25
+  max_tries: 25
+  max_flips: 300
 
 mlp_arch:
   hidden_sizes: [32]
@@ -49,6 +50,36 @@ method: reinforce_augmented
 discount: 0.25
 walk_prob: 0.5
 
-14:17:32 INFO Device: cpu
-14:17:32 INFO Loaded 64 training problems from data/kcolor
-14:17:32 INFO Loaded 10 evaluation problems from data/kcolor
+01:31:57 INFO Device: cpu
+01:31:58 INFO Loaded 1800 training problems from data/mixed
+01:31:58 INFO Loaded 25 evaluation problems from data/mixed
+01:32:05 INFO Train Loss: 1.1097 -- Train Accuracy: 0.3300
+01:32:05 INFO Eval Loss: 1.9478
+01:32:05 INFO Epoch 1/20, Train Loss: 1.1097, Eval Loss: 1.9478
+01:32:12 INFO Train Loss: 1.1031 -- Train Accuracy: 0.3417
+01:32:12 INFO Eval Loss: 5.6979
+01:32:12 INFO Epoch 2/20, Train Loss: 1.1031, Eval Loss: 5.6979
+01:32:20 INFO Train Loss: 1.1035 -- Train Accuracy: 0.3256
+01:32:20 INFO Eval Loss: 14.5181
+01:32:20 INFO Epoch 3/20, Train Loss: 1.1035, Eval Loss: 14.5181
+01:32:27 INFO Train Loss: 1.1010 -- Train Accuracy: 0.3178
+01:32:27 INFO Eval Loss: 20.5621
+01:32:27 INFO Epoch 4/20, Train Loss: 1.1010, Eval Loss: 20.5621
+01:32:34 INFO Train Loss: 1.1002 -- Train Accuracy: 0.3256
+01:32:34 INFO Eval Loss: 24.1594
+01:32:34 INFO Epoch 5/20, Train Loss: 1.1002, Eval Loss: 24.1594
+01:32:41 INFO Train Loss: 1.1000 -- Train Accuracy: 0.3117
+01:32:41 INFO Eval Loss: 26.7519
+01:32:41 INFO Epoch 6/20, Train Loss: 1.1000, Eval Loss: 26.7519
+01:32:48 INFO Train Loss: 1.0998 -- Train Accuracy: 0.2900
+01:32:48 INFO Eval Loss: 40.0976
+01:32:48 INFO Epoch 7/20, Train Loss: 1.0998, Eval Loss: 40.0976
+01:32:55 INFO Train Loss: 1.0996 -- Train Accuracy: 0.3089
+01:32:55 INFO Eval Loss: 36.3274
+01:32:55 INFO Epoch 8/20, Train Loss: 1.0996, Eval Loss: 36.3274
+01:33:03 INFO Train Loss: 1.0994 -- Train Accuracy: 0.3067
+01:33:03 INFO Eval Loss: 51.4009
+01:33:03 INFO Epoch 9/20, Train Loss: 1.0994, Eval Loss: 51.4009
+01:33:10 INFO Train Loss: 1.0993 -- Train Accuracy: 0.3006
+01:33:10 INFO Eval Loss: 52.4079
+01:33:10 INFO Epoch 10/20, Train Loss: 1.0993, Eval Loss: 52.4079

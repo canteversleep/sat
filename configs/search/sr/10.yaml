@@ -9,19 +9,19 @@ eval_multi: True
 
 data_path: data/sr
 train_sets:
-  - name: "10"
+  - name: '10'
     samples: 2000
     max_tries: 5
     max_flips: 200
     iterations: 10000
 
 eval_set:
-  name: "25"
+  name: '25'
   samples: 10
   max_tries: 25
   max_flips: 400
 
-model_path: results/search/sr/5/model_best.pth
+model_path: results/search/sr/sr_5_reinforce_noaug/model_best.pth
 
 gnn_hidden_size: 32
 gnn_iter: 2

@@ -67,7 +67,6 @@ class WeakVGAE(nn.Module):
     def forward(self, data):
         z_mean, z_log_var = self.encoder(data)
         z = self.encoder.reparameterize(z_mean, z_log_var)
-        print(z.shape)
         adj_rec = self.decoder(z)
         return z_mean, z_log_var, adj_rec
 
@@ -83,10 +82,12 @@ class VGAEEncoder(nn.Module):
 
     def forward(self, data):
         h = self.gnn(data)
-        h_pool = torch.mean(h, dim=1)
+        h_pool = torch.mean(h[0], dim=0)
+        # print(h_pool.shape)
+        # h_pool = torch.mean(h)
         z_mean = self.mean_readout(h_pool)
         z_log_var = self.log_var_readout(h_pool)
-        print(z_mean.shape, z_log_var.shape)
+        # print(z_mean.shape, z_log_var.shape)
         return z_mean, z_log_var
 
     def reparameterize(self, z_mean, z_log_var):
@@ -97,12 +98,19 @@ class VGAEEncoder(nn.Module):
 class VGAEDecoder(nn.Module):
     def __init__(self, latent_size, hidden_size, output_size, mlp_arch):
         super().__init__()
-        # self.decoder = mlp(latent_size, output_size, mlp_arch['hidden_sizes'], eval('nn.' + mlp_arch['activation'] + '()'), nn.Sigmoid())
-        self.decoder = mlp(latent_size, output_size, [hidden_size], eval('nn.' + mlp_arch['activation'] + '()'), nn.Sigmoid())
-
+        self.n_classes = 3
+        # we want to predict the number of variables, clauses, and the number of positive literals
+        # self.n_properties = 3
+        # self.decoder = nn.Linear(latent_size, hidden_size)
+        self.decoder = GraphReadout(latent_size, self.n_classes, hidden_size)
+        # self.property_retriever = GraphReadout(hidden_size, self.n_properties, hidden_size)
+        
     def forward(self, z):
-        adj_rec = self.decoder(z)
-        return adj_rec
+        logits = self.decoder(z)
+        # return F.softmax(logits, dim=-1)
+        return logits
+        # class_pred = self.class_redout(h)
+        
 
         
 class MultiHeadVGAE(nn.Module):

@@ -1,3 +1,4 @@
+import copy
 import pdb
 import random
 
@@ -13,7 +14,10 @@ from util import normalize
 class LocalSearch:
     def __init__(self, policy, device, config):
         self.policy = policy
+        # if config['method'] == 'ppo' or config['method'] == 'ppo_augmented':
+        #     self.old_policy = copy.deepcopy(policy) ## we only really worry about the old_policy for ppo
         self.device = device
+        # self.config = config
         if config['method'] == 'reinforce' or config['method'] == 'reinforce_augmented':
             self.generate_episode = self._generate_episode_reinforce
         elif config['method'] == 'reinforce_multi':
@@ -26,11 +30,20 @@ class LocalSearch:
             self.generate_episode = self._generate_episode_ppo
             # self.eval = self._eval_generate_episode_ppo
 
+    # def update_policy(self):
+    #     self.old_policy.load_state_dict(self.policy.state_dict())
+
     def eval(self):
-        self.generate_episode = self._eval_generate_episode_reinforce
+        if self.config['method'] == 'reinforce' or self.config['method'] == 'reinforce_augmented':
+            self.generate_episode = self._eval_generate_episode_reinforce
+        elif self.config['method'] == 'ppo':
+            self.generate_episode = self._eval_generate_episode_ppo
 
     def train(self):
-        self.generate_episode = self._generate_episode_reinforce
+        if self.config['method'] == 'reinforce' or self.config['method'] == 'reinforce_augmented':
+            self.generate_episode = self._generate_episode_reinforce
+        elif self.config['method'] == 'ppo':
+            self.generate_episode = self._generate_episode_ppo
 
     def _eval_select_variable_reinforce(self, data):
         logit = self.policy(data)
@@ -239,14 +252,15 @@ class LocalSearch:
             sat = not unsat_clause_indices
             if sat:
                 break
-
-            if random.random() < walk_prob:
-                unsat_clause = f.clauses[random.choice(unsat_clause_indices)]
-                v, log_prob = abs(random.choice(unsat_clause)) - 1, None
             else:
                 # Retrieve action and related data using the PPO policy
                 ## TODO: incorporate the old_log_prob
                 v, log_prob, value, entropy = self._select_variable_ppo(data)
+                with torch.no_grad():
+                    old_logit, _ = self.old_policy(data)
+                    old_prob = F.softmax(old_logit, dim=0)
+                    old_log_prob = torch.log(old_prob[v])
+                
                 if v.item() not in flipped:
                     flipped.add(v.item())
                 else:
@@ -257,7 +271,7 @@ class LocalSearch:
 
             # Collect data needed for the loss computation
             log_probs.append(log_prob)
-            old_log_probs.append(old_prob)
+            old_log_probs.append(old_log_prob)
             values.append(value)
             entropies.append(entropy)
 

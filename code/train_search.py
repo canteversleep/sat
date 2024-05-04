@@ -17,14 +17,15 @@ from torch.utils.data import DataLoader
 
 import evaluate
 import util
-from data_search import load_dir
+from data_search import load_dir, init_tensor_wrapper
 # from gnn import A2CPolicy, ReinforcePolicy, PGPolicy
 from search import LocalSearch
 from util import normalize
 from collections import namedtuple
-from data_search import init_tensors, vgae_wrapper, init_tensors_vgae, init_tensors_vgae_naive_v1, init_tensors_vgae_naive, init_tensors_vgae_bipartite
+from data_search import init_tensors, init_tensor_wrapper
 
 Batch = namedtuple('Batch', ['x', 'adj', 'sol', 'something'])
+SampleWrapper = namedtuple('SampleWrapper', ['ptype', 'sample'])
 
 logger = logging.getLogger(__name__)
 
@@ -44,46 +45,63 @@ def log(epoch, batch_count, avg_loss, avg_acc):
 def collate_fn(batch):
     return Batch(*zip(*batch))
 
+classes = ['rand', 'kclique', 'domset']
+
 def train_vgae(model, optimizer, train_data, device, config):
     model.train()
     # print(train_data[0].adj)
     train_loss = 0.0
     # train_loader = DataLoader(train_data, batch_size=config['batch_size'], shuffle=True, collate_fn=collate_fn)
+    n_correct = 0.
+    n_total = len(train_data)
 
     for sample in train_data:
-        batch = init_tensors(sample, device)
-        # print(batch)
+        (satclass, batch) = init_tensor_wrapper(sample, device)
+        # calculate true class as a one-hot vector for cross-entropy loss
+        true_class = torch.tensor([classes.index(satclass)], dtype=torch.long).to(device)
+        true_logits = torch.zeros(3).to(device)
+        true_logits[true_class] = 1
+
         optimizer.zero_grad()
-        z_mean, z_log_var, adj_rec = model(batch)
-        # Compute the reconstruction loss
-        rec_loss = F.binary_cross_entropy(adj_rec, batch.adj[0].to_dense())
+        z_mean, z_log_var, class_logits = model(batch)
+
+        rec_loss = F.cross_entropy(class_logits, true_logits)
+
+        n_correct += (torch.argmax(class_logits) == true_class).item()
 
         # Compute the KL divergence loss
-        kl_loss = -0.5 * torch.sum(1 + z_log_var - z_mean.pow(2) - z_log_var.exp())
+        # kl_loss = -0.5 * torch.sum(1 + z_log_var - z_mean.pow(2) - z_log_var.exp())
 
         # Combine the losses
-        loss = rec_loss + config['kl_weight'] * kl_loss
+        loss = rec_loss # 0.1 * kl_loss
 
         loss.backward()
         optimizer.step()
-        train_loss += loss.item() * batch.adj[0].size(0)
+        train_loss += loss.item() #* batch.adj[0].size(0)
 
     train_loss /= len(train_data)
-    logger.info(f"Train Loss: {train_loss:.4f}")
+    accuracy = n_correct / n_total
+    
+    logger.info(f"Train Loss: {train_loss:.4f} -- Train Accuracy: {accuracy:.4f}")
     return train_loss
 
 def evaluate_vgae(model, eval_data, config, device):
     model.eval()
     eval_loss = 0.0
-    eval_loader = DataLoader(eval_data, batch_size=config['batch_size'], shuffle=False, collate_fn=collate_fn)
+    # eval_loader = DataLoader(eval_data, batch_size=config['batch_size'], shuffle=False, collate_fn=collate_fn)
 
     with torch.no_grad():
-        for batch in eval_loader:
-            batch = batch.to(device)
-            z_mean, z_log_var, adj_rec = model(batch.adj)
+        for sample in eval_data:
+            (satclass, batch) = init_tensor_wrapper(sample, device)
+
+            true_class = torch.tensor([classes.index(satclass)], dtype=torch.long).to(device)
+            true_logits = torch.zeros(3).to(device)
+            true_logits[true_class] = 1
+
+            z_mean, z_log_var, class_logits = model(batch)
 
             # Compute the reconstruction loss
-            rec_loss = F.binary_cross_entropy(adj_rec, batch.adj[0].to_dense())
+            rec_loss = F.cross_entropy(class_logits, true_logits)
 
             # Compute the KL divergence loss
             kl_loss = -0.5 * torch.sum(1 + z_log_var - z_mean.pow(2) - z_log_var.exp())
@@ -91,63 +109,71 @@ def evaluate_vgae(model, eval_data, config, device):
             # Combine the losses
             loss = rec_loss + kl_loss
 
-            eval_loss += loss.item() * batch.adj[0].size(0)
+            eval_loss += loss.item() #* batch.adj[0].size(0)
 
     eval_loss /= len(eval_data)
     logger.info(f"Eval Loss: {eval_loss:.4f}")
     return eval_loss
 
+def load_dir_wrapper(path):
+    data = load_dir(path)
+    # we get the ptype from the filename. the first word in the filename is the ptype
+    # the file name will follow the format: ptype_*.cnf
+    return [SampleWrapper(sample.filename.split('_')[0], sample) for sample in data]
+    
 
-def train_deep_vgae(model, optimizer, data, device, config):
-    model.train()
-    total_loss = 0
-    num_batches = 0
+# def train_deep_vgae(model, optimizer, data, device, config):
+#     model.train()
+#     total_loss = 0
+#     num_batches = 0
 
-    for sample in data:
-        # batch = init_tensors(sample, device)
-        x, edge_index, adj = init_tensors_vgae_bipartite(sample, device)
-        print(f'x: {x.shape}, edge_index: {edge_index.shape}, adj: {adj.shape}')
-        # print(f'x: {x}, edge_index: {edge_index}, adj: {adj}')
+#     for sample in data:
+#         # batch = init_tensors(sample, device)
+#         x, edge_index, adj = init_tensors_vgae_bipartite(sample, device)
+#         print(f'x: {x.shape}, edge_index: {edge_index.shape}, adj: {adj.shape}')
+#         # print(f'x: {x}, edge_index: {edge_index}, adj: {adj}')
 
-        optimizer.zero_grad()
-        # adj_pred = model(x, edge_index)
-        loss = model.loss(x, edge_index, adj)  # Pass x, edge_index, and adj
-        loss.backward()
-        optimizer.step()
+#         optimizer.zero_grad()
+#         # adj_pred = model(x, edge_index)
+#         loss = model.loss(x, edge_index, adj)  # Pass x, edge_index, and adj
+#         loss.backward()
+#         optimizer.step()
 
-        total_loss += loss.item()
-        num_batches += 1
+#         total_loss += loss.item()
+#         num_batches += 1
 
-    return total_loss / num_batches
+#     return total_loss / num_batches
 
 
-def evaluate_deep_vgae(model, data, device):
-    model.eval()
-    total_loss = 0
-    num_batches = 0
+# def evaluate_deep_vgae(model, data, device):
+#     model.eval()
+#     total_loss = 0
+#     num_batches = 0
 
-    with torch.no_grad():
-        for sample in data:
-            batch = init_tensors(sample, device)
-            x, edge_index, adj = vgae_wrapper(batch, device)
+#     with torch.no_grad():
+#         for sample in data:
+#             batch = init_tensors(sample, device)
+#             x, edge_index, adj = vgae_wrapper(batch, device)
 
-            # adj_pred = model(x, edge_index)
-            loss = model.loss(x, edge_index, adj)  # Pass x, edge_index, and adj
+#             # adj_pred = model(x, edge_index)
+#             loss = model.loss(x, edge_index, adj)  # Pass x, edge_index, and adj
 
-            total_loss += loss.item()
-            num_batches += 1
+#             total_loss += loss.item()
+#             num_batches += 1
 
-    return total_loss / num_batches
+#     return total_loss / num_batches
 
 def load_data(path, train_sets, eval_set, shuffle=False):
     train_len = 0
     for train_set in train_sets:
-        train_set['data'] = load_dir(join(path, train_set['name']))[: train_set['samples']]
+        # train_set['data'] = load_dir(join(path, train_set['name']))[: train_set['samples']] ## TODO: please switch this back when not training vgae
+        train_set['data'] = load_dir_wrapper(join(path, train_set['name']))[: train_set['samples']]
         if shuffle:
             random.shuffle(train_set['data'])
         train_len += len(train_set['data'])
     if eval_set:
-        eval_set['data'] = load_dir(join(path, eval_set['name']))[: eval_set['samples']]
+        # eval_set['data'] = load_dir(join(path, eval_set['name']))[: eval_set['samples']] ## TODO: please see above
+        eval_set['data'] = load_dir_wrapper(join(path, eval_set['name']))[: eval_set['samples']]
         if shuffle:
             random.shuffle(eval_set['data'])
 
@@ -240,16 +266,18 @@ def ppo(sat, history, config):
     log_probs, old_log_probs, values, entropies = history
     device = log_probs[0].device
     
-    epsilon = config['ppo_clip']  # Clipping parameter, e.g., 0.2
+    epsilon = config['ppo_clip']  # Clipping parameter, ge.., 0.2
     gamma = config['discount']  # Discount factor for future rewards
 
     # Convert lists to tensors
-    log_probs = torch.stack(log_probs)
-    old_log_probs = torch.stack(old_log_probs)
+    log_probs = torch.stack(log_probs).unsqueeze()
+    old_log_probs = torch.stack(old_log_probs).unsqueeze()
     values = torch.stack(values)
     entropies = torch.stack(entropies)
     rewards = torch.zeros_like(log_probs)
     rewards[-1] = int(sat)  # Assign reward only for the last step
+    rewards = rewards.squeeze(dim=1)
+    print(f'shapes: log_probs: {log_probs.shape}, old_log_probs: {old_log_probs.shape}, values: {values.shape}, entropies: {entropies.shape}, rewards: {rewards.shape}')
 
     # Calculate returns and advantages
     T = rewards.shape[0]
@@ -299,6 +327,8 @@ def generate_episodes(ls, sample, max_tries, max_flips, config):
         loss_fn = pg
     elif config['method'] == 'a2c':
         loss_fn = a2c
+    elif config['method'] == 'ppo' or config['method'] == 'ppo_augmented':
+        loss_fn = ppo
 
     flips = []
     losses = []
@@ -389,6 +419,9 @@ def train(ls, optimizer, scheduler, data, config):
             optimizer.step()
             scheduler.step()
 
+            if config['method'] == 'ppo' or config['method'] == 'ppo_augmented':
+                ls.update_policy()
+
         if i % config['report_interval'] == 0:
             fp, new_stats = flip_report(f'Iter: {i:6d},', fp)
             m, a, ax, acc = new_stats
@@ -433,24 +466,24 @@ def main():
 
     if config['pretrain_vgae']:
         vgae_config = config['pretrain_vgae']
-        # vgae_model = vgae.WeakVGAE(
-        #     3,
-        #     config['gnn_hidden_size'],
-        #     config['latent_size'],
-        #     config['mlp_arch'],
-        #     config['gnn_iter'],
-        #     config['gnn_async']
-        # ).to(device)
+        vgae_model = vgae.WeakVGAE(
+            3,
+            config['gnn_hidden_size'],
+            config['latent_size'],
+            config['mlp_arch'],
+            config['gnn_iter'],
+            config['gnn_async']
+        ).to(device)
 
         # Create an args object or dictionary with the required parameters
-        vgae_args = argparse.Namespace(
-            enc_in_channels=3,
-            enc_hidden_channels=config['gnn_hidden_size'],
-            enc_out_channels=config['latent_size']
-        )
+        # vgae_args = argparse.Namespace(
+        #     enc_in_channels=3,
+        #     enc_hidden_channels=config['gnn_hidden_size'],
+        #     enc_out_channels=config['latent_size']
+        # )
 
 # Instantiate the DeepVGAE model with the args object
-        vgae_model = vgae.DeepVGAE(vgae_args).to(device)
+        # vgae_model = vgae.DeepVGAE(vgae_args).to(device)
 
         # vgae_model = vgae.DeepVGAE(
         #     enc_in_channels=3,
@@ -462,14 +495,14 @@ def main():
 
         best_vgae_loss = float('inf')
         for epoch in range(vgae_config['num_epochs']):
-            train_loss = train_deep_vgae(vgae_model, vgae_optimizer, train_sets[0]['data'], device, vgae_config)
-            eval_loss = evaluate_deep_vgae(vgae_model, eval_set['data'], device) if eval_set else None
+            train_loss = train_vgae(vgae_model, vgae_optimizer, train_sets[0]['data'], device, vgae_config)
+            eval_loss = evaluate_vgae(vgae_model, eval_set['data'], vgae_config, device) if eval_set else None
 
             logger.info(f"Epoch {epoch+1}/{vgae_config['num_epochs']}, Train Loss: {train_loss:.4f}, Eval Loss: {eval_loss:.4f}")
 
             if eval_loss is not None and eval_loss < best_vgae_loss:
                 best_vgae_loss = eval_loss
-                torch.save(vgae_model.state_dict(), os.path.join(config['model_path'], vgae_config['out_name']))
+                torch.save(vgae_model, join(config['model_path'], vgae_config['out_name']))
 
         logger.info(f"Best VGAE model saved with loss: {best_vgae_loss:.4f}")
     else:
@@ -483,6 +516,8 @@ def main():
             model = gnn.PGPolicy
         elif config['method'] == 'a2c':
             model = gnn.A2CPolicy
+        elif config['method'] == 'ppo':
+            model = gnn.PPOPolicy
 
         if config['model_path']:
             logger.info('Loading model parameters from {}'.format(config['model_path']))

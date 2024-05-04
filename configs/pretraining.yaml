@@ -7,6 +7,7 @@ eval_interval: 50
 save_interval: 50
 
 # pretraining section
+data_shuffle: True
 
 latent_size: 16
 pretrain_vgae:
@@ -14,19 +15,19 @@ pretrain_vgae:
   out_name: vgaeinit.pth
   batch_size: 16
 
-data_path: data/kcolor
+data_path: data/mixed
 train_sets:
-  - name: 3-5-0.5
-    samples: 64
+  - name: '1'
+    samples: 1800
     max_tries: 5
-    max_flips: 50
+    max_flips: 200
     iterations: 10000
 
 eval_set:
-  name: 3-10-0.5
-  samples: 10
-  max_tries: 10
-  max_flips: 200
+  name: '2'
+  samples: 25
+  max_tries: 25
+  max_flips: 300
 
 mlp_arch:
   hidden_sizes: [32]
