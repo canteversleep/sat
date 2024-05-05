@@ -18,14 +18,14 @@ pretrain_vgae:
 data_path: data/mixed
 train_sets:
   - name: '1'
-    samples: 1800
+    samples: 6000
     max_tries: 5
     max_flips: 200
     iterations: 10000
 
 eval_set:
   name: '2'
-  samples: 25
+  samples: 1800
   max_tries: 25
   max_flips: 300
 

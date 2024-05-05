@@ -45,7 +45,7 @@ def log(epoch, batch_count, avg_loss, avg_acc):
 def collate_fn(batch):
     return Batch(*zip(*batch))
 
-classes = ['rand', 'kclique', 'domset']
+classes = ['rand', 'kclique', 'domset', 'kcolor']
 
 def train_vgae(model, optimizer, train_data, device, config):
     model.train()
@@ -59,7 +59,7 @@ def train_vgae(model, optimizer, train_data, device, config):
         (satclass, batch) = init_tensor_wrapper(sample, device)
         # calculate true class as a one-hot vector for cross-entropy loss
         true_class = torch.tensor([classes.index(satclass)], dtype=torch.long).to(device)
-        true_logits = torch.zeros(3).to(device)
+        true_logits = torch.zeros(len(classes)).to(device)
         true_logits[true_class] = 1
 
         optimizer.zero_grad()
@@ -88,6 +88,8 @@ def train_vgae(model, optimizer, train_data, device, config):
 def evaluate_vgae(model, eval_data, config, device):
     model.eval()
     eval_loss = 0.0
+    eval_correct = 0
+    eval_total = len(eval_data)
     # eval_loader = DataLoader(eval_data, batch_size=config['batch_size'], shuffle=False, collate_fn=collate_fn)
 
     with torch.no_grad():
@@ -95,24 +97,26 @@ def evaluate_vgae(model, eval_data, config, device):
             (satclass, batch) = init_tensor_wrapper(sample, device)
 
             true_class = torch.tensor([classes.index(satclass)], dtype=torch.long).to(device)
-            true_logits = torch.zeros(3).to(device)
+            true_logits = torch.zeros(len(classes)).to(device)
             true_logits[true_class] = 1
 
             z_mean, z_log_var, class_logits = model(batch)
+            eval_correct += (torch.argmax(class_logits) == true_class).item()
 
             # Compute the reconstruction loss
             rec_loss = F.cross_entropy(class_logits, true_logits)
 
             # Compute the KL divergence loss
-            kl_loss = -0.5 * torch.sum(1 + z_log_var - z_mean.pow(2) - z_log_var.exp())
+            # kl_loss = -0.5 * torch.sum(1 + z_log_var - z_mean.pow(2) - z_log_var.exp())
 
             # Combine the losses
-            loss = rec_loss + kl_loss
+            loss = rec_loss #+ kl_loss
 
             eval_loss += loss.item() #* batch.adj[0].size(0)
 
     eval_loss /= len(eval_data)
-    logger.info(f"Eval Loss: {eval_loss:.4f}")
+    eval_accuracy = eval_correct / eval_total
+    logger.info(f"Eval Loss: {eval_loss:.4f} -- Eval Accuracy: {eval_accuracy:.4f}")
     return eval_loss
 
 def load_dir_wrapper(path):
@@ -166,14 +170,14 @@ def load_dir_wrapper(path):
 def load_data(path, train_sets, eval_set, shuffle=False):
     train_len = 0
     for train_set in train_sets:
-        # train_set['data'] = load_dir(join(path, train_set['name']))[: train_set['samples']] ## TODO: please switch this back when not training vgae
-        train_set['data'] = load_dir_wrapper(join(path, train_set['name']))[: train_set['samples']]
+        train_set['data'] = load_dir(join(path, train_set['name']))[: train_set['samples']] ## TODO: please switch this back when not training vgae
+        # train_set['data'] = load_dir_wrapper(join(path, train_set['name']))[: train_set['samples']]
         if shuffle:
             random.shuffle(train_set['data'])
         train_len += len(train_set['data'])
     if eval_set:
-        # eval_set['data'] = load_dir(join(path, eval_set['name']))[: eval_set['samples']] ## TODO: please see above
-        eval_set['data'] = load_dir_wrapper(join(path, eval_set['name']))[: eval_set['samples']]
+        eval_set['data'] = load_dir(join(path, eval_set['name']))[: eval_set['samples']] ## TODO: please see above
+        # eval_set['data'] = load_dir_wrapper(join(path, eval_set['name']))[: eval_set['samples']]
         if shuffle:
             random.shuffle(eval_set['data'])
 
@@ -535,12 +539,14 @@ def main():
                     policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
                                    config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
                 else:
-                    encoder = vgae.VGAEEncoder(3, config['gnn_hidden_size'], config['latent_size'], config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
+                    # encoder = vgae.VGAEEncoder(3, config['gnn_hidden_size'], config['latent_size'], config['mlp_arch'], config['gnn_iter'], config['gnn_async']).to(device)
+                    encoder = torch.load(config['vgae_path']).encoder
                     policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size'],
                                    config['mlp_arch'], config['gnn_iter'], config['gnn_async'], encoder).to(device)
 
             else:
                 policy = model(3, config['gnn_hidden_size'], config['readout_hidden_size']).to(device)
+
         optimizer = getattr(optim, config['optimizer'])(policy.parameters(), lr=config['lr'])
         scheduler = optim.lr_scheduler.MultiStepLR(
             optimizer, milestones=config['lr_milestones'], gamma=config['lr_decay']

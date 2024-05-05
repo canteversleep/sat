@@ -5,6 +5,7 @@ from gnn import GraphNN, GraphReadout, mlp
 import numpy as np
 
 
+
 ######### PyTorch Geometric Implementation -- Strong VGAE ########
 
 from torch_geometric.nn.models import InnerProductDecoder, VGAE
@@ -64,11 +65,13 @@ class WeakVGAE(nn.Module):
         self.encoder = VGAEEncoder(input_size, hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async)
         self.decoder = VGAEDecoder(latent_size, hidden_size, input_size, mlp_arch)
 
-    def forward(self, data):
+    def forward(self, data): # TODO: CHK1 retun this to be variational once you figure out classification
         z_mean, z_log_var = self.encoder(data)
         z = self.encoder.reparameterize(z_mean, z_log_var)
-        adj_rec = self.decoder(z)
-        return z_mean, z_log_var, adj_rec
+        class_pred = self.decoder(z)
+        # h = self.encoder(data)
+        # class_pred = self.decoder(h)
+        return 0, 0, class_pred
 
 class VGAEEncoder(nn.Module):
     def __init__(self, input_size, hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async):
@@ -76,19 +79,21 @@ class VGAEEncoder(nn.Module):
         self.gnn = GraphNN(input_size, hidden_size, mlp_arch, gnn_iter, gnn_async)
         self.mean_readout = GraphReadout(hidden_size, latent_size, hidden_size)
         self.log_var_readout = GraphReadout(hidden_size, latent_size, hidden_size)
-        # self.mean_readout = GraphNN(hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async)
-        # self.log_var_readout = GraphNN(hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async)
+        # self.latent = nn.Sequential(
+        #     nn.Linear(hidden_size, latent_size),
+        #     nn.ReLU()
+        # )
         self.latent_size = latent_size
 
     def forward(self, data):
         h = self.gnn(data)
-        h_pool = torch.mean(h[0], dim=0)
-        # print(h_pool.shape)
-        # h_pool = torch.mean(h)
+        h_pool = torch.mean(torch.cat(h), dim=0)
+        # h1_pool = torch.mean(h[1], dim=0)
+        # latent = self.latent(h_pool)
         z_mean = self.mean_readout(h_pool)
         z_log_var = self.log_var_readout(h_pool)
-        # print(z_mean.shape, z_log_var.shape)
         return z_mean, z_log_var
+        # return latent
 
     def reparameterize(self, z_mean, z_log_var):
         std = torch.exp(0.5 * z_log_var)
@@ -98,14 +103,15 @@ class VGAEEncoder(nn.Module):
 class VGAEDecoder(nn.Module):
     def __init__(self, latent_size, hidden_size, output_size, mlp_arch):
         super().__init__()
-        self.n_classes = 3
+        self.n_classes = 4
         # we want to predict the number of variables, clauses, and the number of positive literals
         # self.n_properties = 3
         # self.decoder = nn.Linear(latent_size, hidden_size)
-        self.decoder = GraphReadout(latent_size, self.n_classes, hidden_size)
+        self.decoder = nn.Linear(latent_size, self.n_classes)
         # self.property_retriever = GraphReadout(hidden_size, self.n_properties, hidden_size)
         
     def forward(self, z):
+        # print(f'z shape: {z.shape}')
         logits = self.decoder(z)
         # return F.softmax(logits, dim=-1)
         return logits
