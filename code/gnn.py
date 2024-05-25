@@ -4,6 +4,10 @@ import pdb
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 
@@ -63,8 +67,8 @@ class GraphConv(nn.Module):
             input_size,
             output_size,
             mlp_arch['hidden_sizes'],
-            eval('nn.' + mlp_arch['activation'] + '()'),
-            nn.ReLU(),
+            eval('nn.' + mlp_arch['activation'] + '()') if mlp_arch['activation'] else nn.Identity(),
+            nn.ReLU() if mlp_arch['activation'] else nn.Identity()
         )
 
         self.fmv_pos = _mlp(input_size, output_size)
@@ -140,6 +144,22 @@ class GraphNN(nn.Module):
 
     def forward(self, data):
         h = data.x[:2]
+        for conv in self.convs:
+            h = conv(h, data)
+        return h
+
+class GraphNNFHead(nn.Module):
+    def __init__(self, input_size, hidden_size, mlp_arch, gnn_iter, gnn_async):
+        super().__init__()
+        self.convs = nn.ModuleList(
+            [
+                GCBN(input_size if i == 0 else hidden_size, hidden_size, mlp_arch, gnn_async)
+                for i in range(gnn_iter)
+            ]
+        )
+
+    def forward(self, h, data):
+        # h = data.x[:2]
         for conv in self.convs:
             h = conv(h, data)
         return h
@@ -311,7 +331,10 @@ class LatentAugReinforcePolicy(nn.Module):
             z_mean, z_log_var = self.vgae_encoder(data)
             latent = self.vgae_encoder.reparameterize(z_mean, z_log_var)
 
+        # print('Passing data through GNN')
         h = self.gnn(data)  # Get the node embeddings from the GNN
+        # print(f'Node embeddings shape: {h[0].shape}')
+        # print(f'Latent shape: {latent.shape}')
 
         # print('Concatenating node embeddings with latent')
         # Expand the latent to match the number of nodes

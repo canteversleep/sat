@@ -99,7 +99,3 @@ def unnormalize(x):
     return (x + 1) / 2
 
 
-
-def load_dir_wrapper(path):
-    data = load_dir(path)
-    return [SampleWrapper(ptype, sample) for sample in data]

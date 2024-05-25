@@ -75,6 +75,7 @@ def main(args):
     policy = torch.load(args.model_path).to(device)
     ls = LocalSearch(policy, device, {'method': 'reinforce'})
     eval_set = load_dir(args.dir_path)
+    random.Random(10).shuffle(eval_set)
 
     ls.policy.eval()
     # ls.eval()
@@ -95,13 +96,20 @@ def main(args):
                 break
             flips, backflips, unsats = generate_episodes(ls, sample, args.max_tries,
     args.max_flips, args.p, args.no_multi)
+            logger.info(f'Flips: {flips}')
+            logger.info(f'Backflips: {backflips}')
+            # logger.info(f'Unsats: {unsats}')
             if backflips is not None:
                 med_backflips.append(np.median(backflips))
                 avg_backflips.append(np.mean(backflips))
                 max_backflips.append(np.max(backflips))
-            if unsats is not None:
-                diffs = [np.diff(u) for u in unsats]
-                diff_a = np.array(diffs)
+            if unsats is not None: #TODO: switch back
+                max_length = max(len(u) for u in unsats) #
+                padded_unsats = [u + [-1] * (max_length - len(u)) for u in unsats] #
+                diffs = [np.diff(u) for u in padded_unsats] #
+                diff_a = np.array(diffs) #
+                # diffs = [np.diff(u) for u in unsats]
+                # diff_a = np.array(diffs)
                 upwards.append(np.mean([np.sum(a > 0) for a in diff_a]))
                 downwards.append(np.mean([np.sum(a < 0) for a in diff_a]))
                 sideways.append(np.mean([np.sum(a == 0) for a in diff_a]))

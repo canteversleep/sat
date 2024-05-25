@@ -1,8 +1,9 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
-from gnn import GraphNN, GraphReadout, mlp
+from gnn import GraphNN, GraphReadout, mlp, GraphNNFHead
 import numpy as np
+from collections import defaultdict
 
 
 
@@ -13,48 +14,6 @@ from torch_geometric.nn.conv import GCNConv
 from torch_geometric.utils import negative_sampling, remove_self_loops, add_self_loops
 
 
-class GCNEncoder(nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels):
-        super(GCNEncoder, self).__init__()
-        self.gcn_shared = GCNConv(in_channels, hidden_channels)
-        self.gcn_mu = GCNConv(hidden_channels, out_channels)
-        self.gcn_logvar = GCNConv(hidden_channels, out_channels)
-
-    def forward(self, x, edge_index):
-        x = F.relu(self.gcn_shared(x, edge_index))
-        mu = self.gcn_mu(x, edge_index)
-        logvar = self.gcn_logvar(x, edge_index)
-        return mu, logvar
-
-
-class DeepVGAE(VGAE):
-    def __init__(self, args):
-        super(DeepVGAE, self).__init__(encoder=GCNEncoder(args.enc_in_channels,
-                                                          args.enc_hidden_channels,
-                                                          args.enc_out_channels),
-                                       decoder=InnerProductDecoder())
-
-    def forward(self, x, edge_index):
-        z = self.encode(x, edge_index)
-        adj_pred = self.decoder.forward_all(z)
-        return adj_pred
-
-    def loss(self, x, pos_edge_index, all_edge_index):
-        z = self.encode(x, pos_edge_index)
-
-        pos_loss = -torch.log(
-            self.decoder(z, pos_edge_index, sigmoid=True) + 1e-15).mean()
-
-        # Do not include self-loops in negative samples
-        all_edge_index_tmp, _ = remove_self_loops(all_edge_index)
-        all_edge_index_tmp, _ = add_self_loops(all_edge_index_tmp)
-
-        neg_edge_index = negative_sampling(all_edge_index_tmp, z.size(0), pos_edge_index.size(1))
-        neg_loss = -torch.log(1 - self.decoder(z, neg_edge_index, sigmoid=True) + 1e-15).mean()
-
-        kl_loss = 1 / x.size(0) * self.kl_loss()
-
-        return pos_loss + neg_loss + kl_loss
 
         
 ####### Weak VGAEs ought to predict SAT class alongside other characterizing features of the SAT problem ########
@@ -118,47 +77,40 @@ class VGAEDecoder(nn.Module):
         # class_pred = self.class_redout(h)
         
 
-        
-class MultiHeadVGAE(nn.Module):
+class VGAE(nn.Module):
     def __init__(self, input_size, hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async):
-        super().__init__()
-        self.encoder = VGAEEncoder(input_size, hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async)
-        self.node_decoder = NodeFeatureDecoder(latent_size, hidden_size, input_size, mlp_arch)
-        self.adj_pos_decoder = AdjacencyDecoder(latent_size, hidden_size, mlp_arch)
-        self.adj_neg_decoder = AdjacencyDecoder(latent_size, hidden_size, mlp_arch)
+        super(VGAE, self).__init__()
+        self.encoder = GraphEncoder(input_size, hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async)
+        self.decoder = DotProductDecoder()
+
+    def reparameterize(self, mean, log_var):
+        std = torch.exp(0.5 * log_var)
+        eps = torch.randn_like(std)
+        return mean + eps * std
 
     def forward(self, data):
-        z_mean, z_log_var = self.encoder(data)
-        z = self.encoder.reparameterize(z_mean, z_log_var)
-        node_features_rec = self.node_decoder(z)
-        adj_pos_rec = self.adj_pos_decoder(z, node_features_rec)
-        adj_neg_rec = self.adj_neg_decoder(z, node_features_rec)
-        return z_mean, z_log_var, node_features_rec, adj_pos_rec, adj_neg_rec
+        mean, log_var = self.encoder(data)
+        zv = self.reparameterize(mean[0], log_var[0])
+        zc = self.reparameterize(mean[1], log_var[1])
+        adj_reconstructed = self.decoder(zv,zc)
+        return adj_reconstructed, mean, log_var
+
+class GraphEncoder(nn.Module):
+    def __init__(self, input_size, hidden_size, latent_size, mlp_arch, gnn_iter, gnn_async):
+        super(GraphEncoder, self).__init__()
+        self.gnn = GraphNN(input_size, hidden_size, mlp_arch, gnn_iter, gnn_async)
+        self.mean_gnn = GraphNNFHead(hidden_size, latent_size, {"hidden_sizes": [32], "activation": False}, gnn_iter, gnn_async)
+        self.log_var_gnn = GraphNNFHead(hidden_size, latent_size, {"hidden_sizes": [32], "activation": False}, gnn_iter, gnn_async)
+
+    def forward(self, data):
+        h = self.gnn(data)
+        # return h
+        mean = self.mean_gnn(h, data)
+        log_var = self.log_var_gnn(h, data)
+        return (mean, log_var)  # Assuming we are using the variable nodes for encoding
 
 
-class NodeFeatureDecoder(nn.Module):
-    def __init__(self, latent_size, hidden_size, output_size, mlp_arch):
-        super().__init__()
-        self.decoder = mlp(latent_size, output_size, [hidden_size],
-                           eval('nn.' + mlp_arch['activation'] + '()'),
-                           final_activation=nn.Sigmoid())  # Use Sigmoid if the output is binary
-
-    def forward(self, z):
-        node_features = self.decoder(z)
-        return node_features
-
-
-class AdjacencyDecoder(nn.Module):
-    def __init__(self, latent_size, hidden_size, mlp_arch):
-        super().__init__()
-        # Assuming output_size is computed or set externally based on graph size
-        output_size = computed_output_size  # This needs to be defined based on your graph's characteristics
-        self.decoder = mlp(latent_size, output_size, [hidden_size],
-                           eval('nn.' + mlp_arch['activation'] + '()'),
-                           final_activation=nn.Sigmoid())  # Sigmoid to represent probabilities of edges
-
-    def forward(self, z, node_features):
-        # Optionally use node_features to assist in reconstructing the adjacency matrix
-        combined_input = torch.cat([z, node_features], dim=-1)
-        adj_matrix = self.decoder(combined_input)
-        return adj_matrix.reshape(-1, num_nodes, num_nodes)  # Reshape output to matrix form
+class DotProductDecoder(nn.Module):
+    def forward(self, zv, zc):
+        adj = torch.sigmoid(torch.matmul(zv, zc.t()))
+        return adj

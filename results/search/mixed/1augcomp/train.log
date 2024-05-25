@@ -1,0 +1,4710 @@
+20:26:12 INFO Configuration:
+name: search/mixed/1
+seed: 1
+
+log_level: debug
+report_interval: 10
+eval_interval: 50
+save_interval: 50
+eval_multi: True
+
+data_path: data/mixed
+data_shuffle: True
+train_sets:
+  - name: '1'
+    samples: 2000
+    max_tries: 5
+    max_flips: 200
+    iterations: 10000
+
+eval_set:
+  name: '2'
+  samples: 25
+  max_tries: 25
+  max_flips: 300
+
+model_path: False
+load_with_noise: False
+
+gnn_hidden_size: 32
+gnn_iter: 2
+gnn_async: False
+readout_hidden_size: 64
+
+mlp_arch:
+  hidden_sizes: [32]
+  activation: ReLU
+
+cycles: 1
+optimizer: RMSprop
+lr: 0.0005
+lr_milestones: [200, 500, 1000, 5000]
+lr_decay: 0.5
+
+method: reinforce_augmented
+vgae_path: results/vgae_mixed_class_comp.pth
+discount: 0.25
+walk_prob: 0.5
+
+20:26:12 INFO Device: cpu
+20:26:13 INFO Loaded 1800 training problems from data/mixed
+20:26:13 INFO Loaded 25 evaluation problems from data/mixed
+20:26:13 DEBUG Loading VGAE model
+20:26:13 DEBUG Loaded VGAE model
+20:26:14 INFO Cycle: 1
+20:26:14 INFO Train set: 1
+20:26:14 DEBUG Evaluating before training
+20:31:39 INFO (Eval)    Acc:      32.00,  Flips:     300.00 (med) /     227.80 (mean) /     277.20 (max)
+20:31:39 INFO Saving best model parameters
+20:31:39 DEBUG Iteration 1
+20:31:39 DEBUG Iteration 2
+20:31:41 DEBUG Iteration 3
+20:31:41 DEBUG Iteration 4
+20:31:41 DEBUG Iteration 5
+20:31:42 DEBUG Iteration 6
+20:31:44 DEBUG Iteration 7
+20:31:45 DEBUG Iteration 8
+20:31:46 DEBUG Iteration 9
+20:31:48 DEBUG Iteration 10
+20:31:48 INFO Iter:     10,  Acc:      70.00,  Flips:     101.50 (med) /      96.96 (mean) /     147.60 (max)
+20:31:48 DEBUG Iteration 11
+20:31:48 DEBUG Iteration 12
+20:31:49 DEBUG Iteration 13
+20:31:51 DEBUG Iteration 14
+20:31:51 DEBUG Iteration 15
+20:31:53 DEBUG Iteration 16
+20:31:54 DEBUG Iteration 17
+20:31:54 DEBUG Iteration 18
+20:31:55 DEBUG Iteration 19
+20:31:56 DEBUG Iteration 20
+20:31:58 INFO Iter:     20,  Acc:      70.00,  Flips:     144.00 (med) /     106.26 (mean) /     155.00 (max)
+20:31:58 DEBUG Iteration 21
+20:31:59 DEBUG Iteration 22
+20:32:01 DEBUG Iteration 23
+20:32:02 DEBUG Iteration 24
+20:32:03 DEBUG Iteration 25
+20:32:04 DEBUG Iteration 26
+20:32:05 DEBUG Iteration 27
+20:32:06 DEBUG Iteration 28
+20:32:07 DEBUG Iteration 29
+20:32:08 DEBUG Iteration 30
+20:32:09 INFO Iter:     30,  Acc:      60.00,  Flips:     137.00 (med) /     118.90 (mean) /     166.30 (max)
+20:32:09 DEBUG Iteration 31
+20:32:11 DEBUG Iteration 32
+20:32:11 DEBUG Iteration 33
+20:32:12 DEBUG Iteration 34
+20:32:14 DEBUG Iteration 35
+20:32:14 DEBUG Iteration 36
+20:32:14 DEBUG Iteration 37
+20:32:14 DEBUG Iteration 38
+20:32:16 DEBUG Iteration 39
+20:32:17 DEBUG Iteration 40
+20:32:17 INFO Iter:     40,  Acc:      70.00,  Flips:      83.50 (med) /      87.50 (mean) /     122.00 (max)
+20:32:17 DEBUG Iteration 41
+20:32:19 DEBUG Iteration 42
+20:32:20 DEBUG Iteration 43
+20:32:22 DEBUG Iteration 44
+20:32:22 DEBUG Iteration 45
+20:32:23 DEBUG Iteration 46
+20:32:23 DEBUG Iteration 47
+20:32:25 DEBUG Iteration 48
+20:32:25 DEBUG Iteration 49
+20:32:25 DEBUG Iteration 50
+20:32:26 INFO Iter:     50,  Acc:      70.00,  Flips:     154.50 (med) /      93.54 (mean) /     129.30 (max)
+20:32:26 INFO Saving last model parameters
+20:32:26 INFO Saving stats
+20:37:59 INFO (Eval)    Acc:      32.00,  Flips:     300.00 (med) /     218.21 (mean) /     274.44 (max)
+20:37:59 INFO Saving best model parameters
+20:37:59 DEBUG Iteration 51
+20:38:01 DEBUG Iteration 52
+20:38:02 DEBUG Iteration 53
+20:38:03 DEBUG Iteration 54
+20:38:04 DEBUG Iteration 55
+20:38:06 DEBUG Iteration 56
+20:38:06 DEBUG Iteration 57
+20:38:07 DEBUG Iteration 58
+20:38:09 DEBUG Iteration 59
+20:38:09 DEBUG Iteration 60
+20:38:10 INFO Iter:     60,  Acc:      50.00,  Flips:     150.50 (med) /     111.42 (mean) /     174.90 (max)
+20:38:10 DEBUG Iteration 61
+20:38:10 DEBUG Iteration 62
+20:38:10 DEBUG Iteration 63
+20:38:11 DEBUG Iteration 64
+20:38:12 DEBUG Iteration 65
+20:38:13 DEBUG Iteration 66
+20:38:13 DEBUG Iteration 67
+20:38:15 DEBUG Iteration 68
+20:38:15 DEBUG Iteration 69
+20:38:17 DEBUG Iteration 70
+20:38:18 INFO Iter:     70,  Acc:      60.00,  Flips:     112.50 (med) /      83.92 (mean) /     136.20 (max)
+20:38:18 DEBUG Iteration 71
+20:38:18 DEBUG Iteration 72
+20:38:18 DEBUG Iteration 73
+20:38:20 DEBUG Iteration 74
+20:38:21 DEBUG Iteration 75
+20:38:22 DEBUG Iteration 76
+20:38:23 DEBUG Iteration 77
+20:38:24 DEBUG Iteration 78
+20:38:24 DEBUG Iteration 79
+20:38:26 DEBUG Iteration 80
+20:38:27 INFO Iter:     80,  Acc:     100.00,  Flips:      83.00 (med) /      92.68 (mean) /     154.60 (max)
+20:38:27 DEBUG Iteration 81
+20:38:28 DEBUG Iteration 82
+20:38:30 DEBUG Iteration 83
+20:38:30 DEBUG Iteration 84
+20:38:30 DEBUG Iteration 85
+20:38:30 DEBUG Iteration 86
+20:38:31 DEBUG Iteration 87
+20:38:33 DEBUG Iteration 88
+20:38:34 DEBUG Iteration 89
+20:38:35 DEBUG Iteration 90
+20:38:36 INFO Iter:     90,  Acc:      60.00,  Flips:     105.50 (med) /      91.46 (mean) /     144.20 (max)
+20:38:36 DEBUG Iteration 91
+20:38:37 DEBUG Iteration 92
+20:38:37 DEBUG Iteration 93
+20:38:38 DEBUG Iteration 94
+20:38:40 DEBUG Iteration 95
+20:38:40 DEBUG Iteration 96
+20:38:42 DEBUG Iteration 97
+20:38:42 DEBUG Iteration 98
+20:38:43 DEBUG Iteration 99
+20:38:45 DEBUG Iteration 100
+20:38:46 INFO Iter:    100,  Acc:      60.00,  Flips:     137.00 (med) /     117.70 (mean) /     155.80 (max)
+20:38:46 INFO Saving last model parameters
+20:38:46 INFO Saving stats
+20:43:45 INFO (Eval)    Acc:      32.00,  Flips:     300.00 (med) /     218.05 (mean) /     269.88 (max)
+20:43:45 INFO Saving best model parameters
+20:43:45 DEBUG Iteration 101
+20:43:45 DEBUG Iteration 102
+20:43:45 DEBUG Iteration 103
+20:43:47 DEBUG Iteration 104
+20:43:49 DEBUG Iteration 105
+20:43:50 DEBUG Iteration 106
+20:43:51 DEBUG Iteration 107
+20:43:52 DEBUG Iteration 108
+20:43:53 DEBUG Iteration 109
+20:43:54 DEBUG Iteration 110
+20:43:55 INFO Iter:    110,  Acc:      80.00,  Flips:     135.50 (med) /     106.76 (mean) /     162.20 (max)
+20:43:55 DEBUG Iteration 111
+20:43:56 DEBUG Iteration 112
+20:43:58 DEBUG Iteration 113
+20:44:00 DEBUG Iteration 114
+20:44:00 DEBUG Iteration 115
+20:44:01 DEBUG Iteration 116
+20:44:02 DEBUG Iteration 117
+20:44:02 DEBUG Iteration 118
+20:44:04 DEBUG Iteration 119
+20:44:04 DEBUG Iteration 120
+20:44:04 INFO Iter:    120,  Acc:      70.00,  Flips:      89.00 (med) /     101.38 (mean) /     146.20 (max)
+20:44:04 DEBUG Iteration 121
+20:44:05 DEBUG Iteration 122
+20:44:05 DEBUG Iteration 123
+20:44:06 DEBUG Iteration 124
+20:44:06 DEBUG Iteration 125
+20:44:07 DEBUG Iteration 126
+20:44:08 DEBUG Iteration 127
+20:44:09 DEBUG Iteration 128
+20:44:10 DEBUG Iteration 129
+20:44:11 DEBUG Iteration 130
+20:44:12 INFO Iter:    130,  Acc:     100.00,  Flips:      64.00 (med) /      77.38 (mean) /     140.70 (max)
+20:44:12 DEBUG Iteration 131
+20:44:14 DEBUG Iteration 132
+20:44:14 DEBUG Iteration 133
+20:44:15 DEBUG Iteration 134
+20:44:16 DEBUG Iteration 135
+20:44:17 DEBUG Iteration 136
+20:44:17 DEBUG Iteration 137
+20:44:18 DEBUG Iteration 138
+20:44:20 DEBUG Iteration 139
+20:44:20 DEBUG Iteration 140
+20:44:21 INFO Iter:    140,  Acc:      80.00,  Flips:      98.50 (med) /      99.16 (mean) /     148.40 (max)
+20:44:21 DEBUG Iteration 141
+20:44:22 DEBUG Iteration 142
+20:44:24 DEBUG Iteration 143
+20:44:25 DEBUG Iteration 144
+20:44:26 DEBUG Iteration 145
+20:44:27 DEBUG Iteration 146
+20:44:27 DEBUG Iteration 147
+20:44:28 DEBUG Iteration 148
+20:44:29 DEBUG Iteration 149
+20:44:29 DEBUG Iteration 150
+20:44:29 INFO Iter:    150,  Acc:     100.00,  Flips:      73.00 (med) /      83.06 (mean) /     148.60 (max)
+20:44:29 INFO Saving last model parameters
+20:44:29 INFO Saving stats
+20:49:53 INFO (Eval)    Acc:      32.00,  Flips:     300.00 (med) /     211.95 (mean) /     276.76 (max)
+20:49:53 DEBUG Iteration 151
+20:49:54 DEBUG Iteration 152
+20:49:55 DEBUG Iteration 153
+20:49:55 DEBUG Iteration 154
+20:49:56 DEBUG Iteration 155
+20:49:56 DEBUG Iteration 156
+20:49:57 DEBUG Iteration 157
+20:49:58 DEBUG Iteration 158
+20:49:59 DEBUG Iteration 159
+20:49:59 DEBUG Iteration 160
+20:50:00 INFO Iter:    160,  Acc:     100.00,  Flips:      58.50 (med) /      68.50 (mean) /     136.50 (max)
+20:50:00 DEBUG Iteration 161
+20:50:01 DEBUG Iteration 162
+20:50:01 DEBUG Iteration 163
+20:50:02 DEBUG Iteration 164
+20:50:02 DEBUG Iteration 165
+20:50:02 DEBUG Iteration 166
+20:50:03 DEBUG Iteration 167
+20:50:04 DEBUG Iteration 168
+20:50:04 DEBUG Iteration 169
+20:50:04 DEBUG Iteration 170
+20:50:04 INFO Iter:    170,  Acc:      90.00,  Flips:      26.00 (med) /      48.30 (mean) /      83.00 (max)
+20:50:04 DEBUG Iteration 171
+20:50:04 DEBUG Iteration 172
+20:50:06 DEBUG Iteration 173
+20:50:06 DEBUG Iteration 174
+20:50:07 DEBUG Iteration 175
+20:50:08 DEBUG Iteration 176
+20:50:09 DEBUG Iteration 177
+20:50:09 DEBUG Iteration 178
+20:50:10 DEBUG Iteration 179
+20:50:11 DEBUG Iteration 180
+20:50:12 INFO Iter:    180,  Acc:      80.00,  Flips:      75.00 (med) /      81.78 (mean) /     124.20 (max)
+20:50:12 DEBUG Iteration 181
+20:50:13 DEBUG Iteration 182
+20:50:13 DEBUG Iteration 183
+20:50:14 DEBUG Iteration 184
+20:50:16 DEBUG Iteration 185
+20:50:18 DEBUG Iteration 186
+20:50:18 DEBUG Iteration 187
+20:50:18 DEBUG Iteration 188
+20:50:19 DEBUG Iteration 189
+20:50:20 DEBUG Iteration 190
+20:50:20 INFO Iter:    190,  Acc:      80.00,  Flips:      87.00 (med) /      87.00 (mean) /     134.00 (max)
+20:50:20 DEBUG Iteration 191
+20:50:22 DEBUG Iteration 192
+20:50:23 DEBUG Iteration 193
+20:50:23 DEBUG Iteration 194
+20:50:24 DEBUG Iteration 195
+20:50:25 DEBUG Iteration 196
+20:50:25 DEBUG Iteration 197
+20:50:25 DEBUG Iteration 198
+20:50:25 DEBUG Iteration 199
+20:50:27 DEBUG Iteration 200
+20:50:27 INFO Iter:    200,  Acc:      90.00,  Flips:      20.50 (med) /      62.24 (mean) /      97.10 (max)
+20:50:27 INFO Saving last model parameters
+20:50:27 INFO Saving stats
+20:55:17 INFO (Eval)    Acc:      32.00,  Flips:     300.00 (med) /     206.64 (mean) /     271.44 (max)
+20:55:17 DEBUG Iteration 201
+20:55:17 DEBUG Iteration 202
+20:55:18 DEBUG Iteration 203
+20:55:19 DEBUG Iteration 204
+20:55:21 DEBUG Iteration 205
+20:55:22 DEBUG Iteration 206
+20:55:23 DEBUG Iteration 207
+20:55:25 DEBUG Iteration 208
+20:55:25 DEBUG Iteration 209
+20:55:26 DEBUG Iteration 210
+20:55:27 INFO Iter:    210,  Acc:      90.00,  Flips:     130.50 (med) /     104.90 (mean) /     163.80 (max)
+20:55:27 DEBUG Iteration 211
+20:55:29 DEBUG Iteration 212
+20:55:29 DEBUG Iteration 213
+20:55:30 DEBUG Iteration 214
+20:55:30 DEBUG Iteration 215
+20:55:31 DEBUG Iteration 216
+20:55:32 DEBUG Iteration 217
+20:55:33 DEBUG Iteration 218
+20:55:33 DEBUG Iteration 219
+20:55:35 DEBUG Iteration 220
+20:55:36 INFO Iter:    220,  Acc:      70.00,  Flips:      79.00 (med) /      96.24 (mean) /     145.10 (max)
+20:55:36 DEBUG Iteration 221
+20:55:37 DEBUG Iteration 222
+20:55:39 DEBUG Iteration 223
+20:55:39 DEBUG Iteration 224
+20:55:40 DEBUG Iteration 225
+20:55:41 DEBUG Iteration 226
+20:55:42 DEBUG Iteration 227
+20:55:42 DEBUG Iteration 228
+20:55:42 DEBUG Iteration 229
+20:55:43 DEBUG Iteration 230
+20:55:43 INFO Iter:    230,  Acc:      90.00,  Flips:      53.50 (med) /      69.10 (mean) /     130.30 (max)
+20:55:43 DEBUG Iteration 231
+20:55:43 DEBUG Iteration 232
+20:55:44 DEBUG Iteration 233
+20:55:46 DEBUG Iteration 234
+20:55:46 DEBUG Iteration 235
+20:55:46 DEBUG Iteration 236
+20:55:47 DEBUG Iteration 237
+20:55:47 DEBUG Iteration 238
+20:55:48 DEBUG Iteration 239
+20:55:49 DEBUG Iteration 240
+20:55:51 INFO Iter:    240,  Acc:      80.00,  Flips:      64.50 (med) /      86.60 (mean) /     147.40 (max)
+20:55:51 DEBUG Iteration 241
+20:55:53 DEBUG Iteration 242
+20:55:54 DEBUG Iteration 243
+20:55:54 DEBUG Iteration 244
+20:55:55 DEBUG Iteration 245
+20:55:56 DEBUG Iteration 246
+20:55:56 DEBUG Iteration 247
+20:55:57 DEBUG Iteration 248
+20:55:57 DEBUG Iteration 249
+20:55:58 DEBUG Iteration 250
+20:55:59 INFO Iter:    250,  Acc:      90.00,  Flips:      74.00 (med) /      81.72 (mean) /     135.50 (max)
+20:55:59 INFO Saving last model parameters
+20:55:59 INFO Saving stats
+21:00:56 INFO (Eval)    Acc:      32.00,  Flips:     300.00 (med) /     207.83 (mean) /     268.36 (max)
+21:00:56 INFO Saving best model parameters
+21:00:56 DEBUG Iteration 251
+21:00:57 DEBUG Iteration 252
+21:00:58 DEBUG Iteration 253
+21:00:58 DEBUG Iteration 254
+21:00:59 DEBUG Iteration 255
+21:01:00 DEBUG Iteration 256
+21:01:01 DEBUG Iteration 257
+21:01:02 DEBUG Iteration 258
+21:01:02 DEBUG Iteration 259
+21:01:03 DEBUG Iteration 260
+21:01:03 INFO Iter:    260,  Acc:     100.00,  Flips:      46.00 (med) /      62.72 (mean) /     127.00 (max)
+21:01:03 DEBUG Iteration 261
+21:01:04 DEBUG Iteration 262
+21:01:05 DEBUG Iteration 263
+21:01:05 DEBUG Iteration 264
+21:01:05 DEBUG Iteration 265
+21:01:07 DEBUG Iteration 266
+21:01:07 DEBUG Iteration 267
+21:01:07 DEBUG Iteration 268
+21:01:08 DEBUG Iteration 269
+21:01:08 DEBUG Iteration 270
+21:01:09 INFO Iter:    270,  Acc:     100.00,  Flips:      36.50 (med) /      63.70 (mean) /     109.80 (max)
+21:01:09 DEBUG Iteration 271
+21:01:09 DEBUG Iteration 272
+21:01:09 DEBUG Iteration 273
+21:01:11 DEBUG Iteration 274
+21:01:12 DEBUG Iteration 275
+21:01:12 DEBUG Iteration 276
+21:01:12 DEBUG Iteration 277
+21:01:13 DEBUG Iteration 278
+21:01:15 DEBUG Iteration 279
+21:01:15 DEBUG Iteration 280
+21:01:16 INFO Iter:    280,  Acc:      70.00,  Flips:      61.50 (med) /      78.36 (mean) /     119.40 (max)
+21:01:16 DEBUG Iteration 281
+21:01:17 DEBUG Iteration 282
+21:01:19 DEBUG Iteration 283
+21:01:19 DEBUG Iteration 284
+21:01:19 DEBUG Iteration 285
+21:01:20 DEBUG Iteration 286
+21:01:20 DEBUG Iteration 287
+21:01:20 DEBUG Iteration 288
+21:01:21 DEBUG Iteration 289
+21:01:22 DEBUG Iteration 290
+21:01:24 INFO Iter:    290,  Acc:     100.00,  Flips:      59.00 (med) /      75.42 (mean) /     136.30 (max)
+21:01:24 DEBUG Iteration 291
+21:01:25 DEBUG Iteration 292
+21:01:25 DEBUG Iteration 293
+21:01:27 DEBUG Iteration 294
+21:01:27 DEBUG Iteration 295
+21:01:29 DEBUG Iteration 296
+21:01:30 DEBUG Iteration 297
+21:01:31 DEBUG Iteration 298
+21:01:32 DEBUG Iteration 299
+21:01:33 DEBUG Iteration 300
+21:01:33 INFO Iter:    300,  Acc:     100.00,  Flips:      75.50 (med) /      82.28 (mean) /     135.30 (max)
+21:01:33 INFO Saving last model parameters
+21:01:33 INFO Saving stats
+21:06:42 INFO (Eval)    Acc:      32.00,  Flips:     300.00 (med) /     202.55 (mean) /     259.24 (max)
+21:06:42 INFO Saving best model parameters
+21:06:42 DEBUG Iteration 301
+21:06:43 DEBUG Iteration 302
+21:06:44 DEBUG Iteration 303
+21:06:44 DEBUG Iteration 304
+21:06:45 DEBUG Iteration 305
+21:06:45 DEBUG Iteration 306
+21:06:46 DEBUG Iteration 307
+21:06:47 DEBUG Iteration 308
+21:06:48 DEBUG Iteration 309
+21:06:49 DEBUG Iteration 310
+21:06:49 INFO Iter:    310,  Acc:      90.00,  Flips:      60.50 (med) /      76.86 (mean) /     125.50 (max)
+21:06:49 DEBUG Iteration 311
+21:06:50 DEBUG Iteration 312
+21:06:50 DEBUG Iteration 313
+21:06:52 DEBUG Iteration 314
+21:06:52 DEBUG Iteration 315
+21:06:52 DEBUG Iteration 316
+21:06:52 DEBUG Iteration 317
+21:06:54 DEBUG Iteration 318
+21:06:55 DEBUG Iteration 319
+21:06:55 DEBUG Iteration 320
+21:06:55 INFO Iter:    320,  Acc:      90.00,  Flips:      40.50 (med) /      63.20 (mean) /     112.50 (max)
+21:06:55 DEBUG Iteration 321
+21:06:57 DEBUG Iteration 322
+21:06:59 DEBUG Iteration 323
+21:06:59 DEBUG Iteration 324
+21:06:59 DEBUG Iteration 325
+21:07:01 DEBUG Iteration 326
+21:07:01 DEBUG Iteration 327
+21:07:01 DEBUG Iteration 328
+21:07:01 DEBUG Iteration 329
+21:07:02 DEBUG Iteration 330
+21:07:02 INFO Iter:    330,  Acc:      70.00,  Flips:      37.00 (med) /      76.76 (mean) /     117.30 (max)
+21:07:02 DEBUG Iteration 331
+21:07:03 DEBUG Iteration 332
+21:07:05 DEBUG Iteration 333
+21:07:05 DEBUG Iteration 334
+21:07:05 DEBUG Iteration 335
+21:07:06 DEBUG Iteration 336
+21:07:06 DEBUG Iteration 337
+21:07:06 DEBUG Iteration 338
+21:07:08 DEBUG Iteration 339
+21:07:08 DEBUG Iteration 340
+21:07:08 INFO Iter:    340,  Acc:      80.00,  Flips:      42.50 (med) /      62.42 (mean) /      98.70 (max)
+21:07:08 DEBUG Iteration 341
+21:07:09 DEBUG Iteration 342
+21:07:09 DEBUG Iteration 343
+21:07:10 DEBUG Iteration 344
+21:07:10 DEBUG Iteration 345
+21:07:10 DEBUG Iteration 346
+21:07:11 DEBUG Iteration 347
+21:07:12 DEBUG Iteration 348
+21:07:12 DEBUG Iteration 349
+21:07:13 DEBUG Iteration 350
+21:07:13 INFO Iter:    350,  Acc:      90.00,  Flips:      26.00 (med) /      52.54 (mean) /     101.60 (max)
+21:07:13 INFO Saving last model parameters
+21:07:13 INFO Saving stats
+21:12:46 INFO (Eval)    Acc:      52.00,  Flips:     271.00 (med) /     192.51 (mean) /     262.80 (max)
+21:12:46 DEBUG Iteration 351
+21:12:46 DEBUG Iteration 352
+21:12:47 DEBUG Iteration 353
+21:12:48 DEBUG Iteration 354
+21:12:48 DEBUG Iteration 355
+21:12:48 DEBUG Iteration 356
+21:12:48 DEBUG Iteration 357
+21:12:49 DEBUG Iteration 358
+21:12:50 DEBUG Iteration 359
+21:12:51 DEBUG Iteration 360
+21:12:51 INFO Iter:    360,  Acc:      90.00,  Flips:      14.50 (med) /      50.40 (mean) /      96.70 (max)
+21:12:51 DEBUG Iteration 361
+21:12:53 DEBUG Iteration 362
+21:12:53 DEBUG Iteration 363
+21:12:53 DEBUG Iteration 364
+21:12:54 DEBUG Iteration 365
+21:12:55 DEBUG Iteration 366
+21:12:56 DEBUG Iteration 367
+21:12:56 DEBUG Iteration 368
+21:12:57 DEBUG Iteration 369
+21:12:58 DEBUG Iteration 370
+21:12:58 INFO Iter:    370,  Acc:      90.00,  Flips:      39.50 (med) /      60.96 (mean) /      97.40 (max)
+21:12:58 DEBUG Iteration 371
+21:12:58 DEBUG Iteration 372
+21:13:00 DEBUG Iteration 373
+21:13:01 DEBUG Iteration 374
+21:13:03 DEBUG Iteration 375
+21:13:03 DEBUG Iteration 376
+21:13:04 DEBUG Iteration 377
+21:13:04 DEBUG Iteration 378
+21:13:05 DEBUG Iteration 379
+21:13:05 DEBUG Iteration 380
+21:13:07 INFO Iter:    380,  Acc:      90.00,  Flips:      75.50 (med) /      82.90 (mean) /     126.20 (max)
+21:13:07 DEBUG Iteration 381
+21:13:08 DEBUG Iteration 382
+21:13:10 DEBUG Iteration 383
+21:13:11 DEBUG Iteration 384
+21:13:12 DEBUG Iteration 385
+21:13:12 DEBUG Iteration 386
+21:13:12 DEBUG Iteration 387
+21:13:13 DEBUG Iteration 388
+21:13:13 DEBUG Iteration 389
+21:13:14 DEBUG Iteration 390
+21:13:14 INFO Iter:    390,  Acc:      80.00,  Flips:      40.00 (med) /      77.34 (mean) /     106.80 (max)
+21:13:14 DEBUG Iteration 391
+21:13:15 DEBUG Iteration 392
+21:13:17 DEBUG Iteration 393
+21:13:18 DEBUG Iteration 394
+21:13:19 DEBUG Iteration 395
+21:13:20 DEBUG Iteration 396
+21:13:20 DEBUG Iteration 397
+21:13:20 DEBUG Iteration 398
+21:13:20 DEBUG Iteration 399
+21:13:22 DEBUG Iteration 400
+21:13:23 INFO Iter:    400,  Acc:      90.00,  Flips:      80.00 (med) /      80.56 (mean) /     143.70 (max)
+21:13:23 INFO Saving last model parameters
+21:13:23 INFO Saving stats
+21:18:34 INFO (Eval)    Acc:      60.00,  Flips:     227.00 (med) /     183.82 (mean) /     251.88 (max)
+21:18:34 INFO Saving best model parameters
+21:18:34 DEBUG Iteration 401
+21:18:34 DEBUG Iteration 402
+21:18:35 DEBUG Iteration 403
+21:18:35 DEBUG Iteration 404
+21:18:35 DEBUG Iteration 405
+21:18:35 DEBUG Iteration 406
+21:18:36 DEBUG Iteration 407
+21:18:36 DEBUG Iteration 408
+21:18:37 DEBUG Iteration 409
+21:18:37 DEBUG Iteration 410
+21:18:38 INFO Iter:    410,  Acc:      90.00,  Flips:      23.50 (med) /      37.38 (mean) /      56.50 (max)
+21:18:38 DEBUG Iteration 411
+21:18:38 DEBUG Iteration 412
+21:18:39 DEBUG Iteration 413
+21:18:41 DEBUG Iteration 414
+21:18:41 DEBUG Iteration 415
+21:18:42 DEBUG Iteration 416
+21:18:43 DEBUG Iteration 417
+21:18:43 DEBUG Iteration 418
+21:18:44 DEBUG Iteration 419
+21:18:45 DEBUG Iteration 420
+21:18:45 INFO Iter:    420,  Acc:      70.00,  Flips:      28.00 (med) /      73.92 (mean) /     113.60 (max)
+21:18:45 DEBUG Iteration 421
+21:18:45 DEBUG Iteration 422
+21:18:45 DEBUG Iteration 423
+21:18:46 DEBUG Iteration 424
+21:18:46 DEBUG Iteration 425
+21:18:46 DEBUG Iteration 426
+21:18:46 DEBUG Iteration 427
+21:18:47 DEBUG Iteration 428
+21:18:47 DEBUG Iteration 429
+21:18:48 DEBUG Iteration 430
+21:18:48 INFO Iter:    430,  Acc:     100.00,  Flips:      22.00 (med) /      33.28 (mean) /      75.80 (max)
+21:18:48 DEBUG Iteration 431
+21:18:49 DEBUG Iteration 432
+21:18:49 DEBUG Iteration 433
+21:18:50 DEBUG Iteration 434
+21:18:50 DEBUG Iteration 435
+21:18:50 DEBUG Iteration 436
+21:18:51 DEBUG Iteration 437
+21:18:51 DEBUG Iteration 438
+21:18:52 DEBUG Iteration 439
+21:18:52 DEBUG Iteration 440
+21:18:54 INFO Iter:    440,  Acc:      80.00,  Flips:      25.50 (med) /      61.92 (mean) /      90.90 (max)
+21:18:54 DEBUG Iteration 441
+21:18:55 DEBUG Iteration 442
+21:18:56 DEBUG Iteration 443
+21:18:56 DEBUG Iteration 444
+21:18:57 DEBUG Iteration 445
+21:18:58 DEBUG Iteration 446
+21:18:59 DEBUG Iteration 447
+21:18:59 DEBUG Iteration 448
+21:19:00 DEBUG Iteration 449
+21:19:01 DEBUG Iteration 450
+21:19:02 INFO Iter:    450,  Acc:      70.00,  Flips:      82.50 (med) /      90.56 (mean) /     142.50 (max)
+21:19:02 INFO Saving last model parameters
+21:19:02 INFO Saving stats
+21:23:22 INFO (Eval)    Acc:      64.00,  Flips:     151.00 (med) /     163.35 (mean) /     248.04 (max)
+21:23:22 INFO Saving best model parameters
+21:23:22 DEBUG Iteration 451
+21:23:23 DEBUG Iteration 452
+21:23:24 DEBUG Iteration 453
+21:23:24 DEBUG Iteration 454
+21:23:24 DEBUG Iteration 455
+21:23:24 DEBUG Iteration 456
+21:23:24 DEBUG Iteration 457
+21:23:25 DEBUG Iteration 458
+21:23:26 DEBUG Iteration 459
+21:23:26 DEBUG Iteration 460
+21:23:26 INFO Iter:    460,  Acc:     100.00,  Flips:      12.00 (med) /      38.94 (mean) /      71.80 (max)
+21:23:26 DEBUG Iteration 461
+21:23:26 DEBUG Iteration 462
+21:23:28 DEBUG Iteration 463
+21:23:28 DEBUG Iteration 464
+21:23:29 DEBUG Iteration 465
+21:23:30 DEBUG Iteration 466
+21:23:30 DEBUG Iteration 467
+21:23:30 DEBUG Iteration 468
+21:23:32 DEBUG Iteration 469
+21:23:32 DEBUG Iteration 470
+21:23:32 INFO Iter:    470,  Acc:      90.00,  Flips:      21.50 (med) /      58.64 (mean) /      98.10 (max)
+21:23:32 DEBUG Iteration 471
+21:23:32 DEBUG Iteration 472
+21:23:32 DEBUG Iteration 473
+21:23:33 DEBUG Iteration 474
+21:23:33 DEBUG Iteration 475
+21:23:33 DEBUG Iteration 476
+21:23:33 DEBUG Iteration 477
+21:23:33 DEBUG Iteration 478
+21:23:34 DEBUG Iteration 479
+21:23:34 DEBUG Iteration 480
+21:23:35 INFO Iter:    480,  Acc:     100.00,  Flips:      13.50 (med) /      28.10 (mean) /      48.90 (max)
+21:23:35 DEBUG Iteration 481
+21:23:36 DEBUG Iteration 482
+21:23:37 DEBUG Iteration 483
+21:23:37 DEBUG Iteration 484
+21:23:37 DEBUG Iteration 485
+21:23:38 DEBUG Iteration 486
+21:23:39 DEBUG Iteration 487
+21:23:39 DEBUG Iteration 488
+21:23:39 DEBUG Iteration 489
+21:23:40 DEBUG Iteration 490
+21:23:40 INFO Iter:    490,  Acc:      90.00,  Flips:      18.50 (med) /      60.20 (mean) /      99.30 (max)
+21:23:40 DEBUG Iteration 491
+21:23:40 DEBUG Iteration 492
+21:23:42 DEBUG Iteration 493
+21:23:42 DEBUG Iteration 494
+21:23:43 DEBUG Iteration 495
+21:23:43 DEBUG Iteration 496
+21:23:44 DEBUG Iteration 497
+21:23:45 DEBUG Iteration 498
+21:23:47 DEBUG Iteration 499
+21:23:48 DEBUG Iteration 500
+21:23:49 INFO Iter:    500,  Acc:      90.00,  Flips:      87.00 (med) /      88.92 (mean) /     133.60 (max)
+21:23:49 INFO Saving last model parameters
+21:23:49 INFO Saving stats
+21:28:10 INFO (Eval)    Acc:      60.00,  Flips:     210.00 (med) /     170.69 (mean) /     246.88 (max)
+21:28:10 DEBUG Iteration 501
+21:28:10 DEBUG Iteration 502
+21:28:10 DEBUG Iteration 503
+21:28:11 DEBUG Iteration 504
+21:28:12 DEBUG Iteration 505
+21:28:12 DEBUG Iteration 506
+21:28:14 DEBUG Iteration 507
+21:28:14 DEBUG Iteration 508
+21:28:14 DEBUG Iteration 509
+21:28:16 DEBUG Iteration 510
+21:28:16 INFO Iter:    510,  Acc:     100.00,  Flips:      29.50 (med) /      65.48 (mean) /     112.40 (max)
+21:28:16 DEBUG Iteration 511
+21:28:17 DEBUG Iteration 512
+21:28:17 DEBUG Iteration 513
+21:28:18 DEBUG Iteration 514
+21:28:18 DEBUG Iteration 515
+21:28:19 DEBUG Iteration 516
+21:28:19 DEBUG Iteration 517
+21:28:20 DEBUG Iteration 518
+21:28:21 DEBUG Iteration 519
+21:28:22 DEBUG Iteration 520
+21:28:23 INFO Iter:    520,  Acc:      90.00,  Flips:      22.50 (med) /      63.80 (mean) /     104.10 (max)
+21:28:23 DEBUG Iteration 521
+21:28:24 DEBUG Iteration 522
+21:28:25 DEBUG Iteration 523
+21:28:26 DEBUG Iteration 524
+21:28:26 DEBUG Iteration 525
+21:28:26 DEBUG Iteration 526
+21:28:26 DEBUG Iteration 527
+21:28:27 DEBUG Iteration 528
+21:28:28 DEBUG Iteration 529
+21:28:28 DEBUG Iteration 530
+21:28:28 INFO Iter:    530,  Acc:      90.00,  Flips:      33.50 (med) /      58.24 (mean) /      96.50 (max)
+21:28:28 DEBUG Iteration 531
+21:28:30 DEBUG Iteration 532
+21:28:30 DEBUG Iteration 533
+21:28:30 DEBUG Iteration 534
+21:28:30 DEBUG Iteration 535
+21:28:30 DEBUG Iteration 536
+21:28:31 DEBUG Iteration 537
+21:28:32 DEBUG Iteration 538
+21:28:33 DEBUG Iteration 539
+21:28:34 DEBUG Iteration 540
+21:28:34 INFO Iter:    540,  Acc:      90.00,  Flips:      49.00 (med) /      60.32 (mean) /      99.80 (max)
+21:28:34 DEBUG Iteration 541
+21:28:34 DEBUG Iteration 542
+21:28:34 DEBUG Iteration 543
+21:28:35 DEBUG Iteration 544
+21:28:35 DEBUG Iteration 545
+21:28:35 DEBUG Iteration 546
+21:28:35 DEBUG Iteration 547
+21:28:37 DEBUG Iteration 548
+21:28:37 DEBUG Iteration 549
+21:28:37 DEBUG Iteration 550
+21:28:39 INFO Iter:    550,  Acc:     100.00,  Flips:      22.50 (med) /      44.88 (mean) /      72.60 (max)
+21:28:39 INFO Saving last model parameters
+21:28:39 INFO Saving stats
+21:32:38 INFO (Eval)    Acc:      72.00,  Flips:     126.00 (med) /     144.40 (mean) /     240.48 (max)
+21:32:38 INFO Saving best model parameters
+21:32:38 DEBUG Iteration 551
+21:32:39 DEBUG Iteration 552
+21:32:39 DEBUG Iteration 553
+21:32:41 DEBUG Iteration 554
+21:32:41 DEBUG Iteration 555
+21:32:41 DEBUG Iteration 556
+21:32:41 DEBUG Iteration 557
+21:32:41 DEBUG Iteration 558
+21:32:43 DEBUG Iteration 559
+21:32:43 DEBUG Iteration 560
+21:32:43 INFO Iter:    560,  Acc:     100.00,  Flips:      26.00 (med) /      48.50 (mean) /      82.80 (max)
+21:32:43 DEBUG Iteration 561
+21:32:43 DEBUG Iteration 562
+21:32:43 DEBUG Iteration 563
+21:32:43 DEBUG Iteration 564
+21:32:44 DEBUG Iteration 565
+21:32:44 DEBUG Iteration 566
+21:32:44 DEBUG Iteration 567
+21:32:45 DEBUG Iteration 568
+21:32:45 DEBUG Iteration 569
+21:32:45 DEBUG Iteration 570
+21:32:46 INFO Iter:    570,  Acc:     100.00,  Flips:      15.00 (med) /      25.68 (mean) /      51.20 (max)
+21:32:46 DEBUG Iteration 571
+21:32:46 DEBUG Iteration 572
+21:32:47 DEBUG Iteration 573
+21:32:47 DEBUG Iteration 574
+21:32:48 DEBUG Iteration 575
+21:32:49 DEBUG Iteration 576
+21:32:49 DEBUG Iteration 577
+21:32:51 DEBUG Iteration 578
+21:32:52 DEBUG Iteration 579
+21:32:53 DEBUG Iteration 580
+21:32:53 INFO Iter:    580,  Acc:     100.00,  Flips:      75.50 (med) /      75.94 (mean) /     143.40 (max)
+21:32:53 DEBUG Iteration 581
+21:32:53 DEBUG Iteration 582
+21:32:54 DEBUG Iteration 583
+21:32:54 DEBUG Iteration 584
+21:32:54 DEBUG Iteration 585
+21:32:55 DEBUG Iteration 586
+21:32:55 DEBUG Iteration 587
+21:32:55 DEBUG Iteration 588
+21:32:56 DEBUG Iteration 589
+21:32:56 DEBUG Iteration 590
+21:32:57 INFO Iter:    590,  Acc:     100.00,  Flips:      21.50 (med) /      42.90 (mean) /      83.50 (max)
+21:32:57 DEBUG Iteration 591
+21:32:57 DEBUG Iteration 592
+21:32:57 DEBUG Iteration 593
+21:32:58 DEBUG Iteration 594
+21:32:58 DEBUG Iteration 595
+21:32:59 DEBUG Iteration 596
+21:33:00 DEBUG Iteration 597
+21:33:00 DEBUG Iteration 598
+21:33:01 DEBUG Iteration 599
+21:33:01 DEBUG Iteration 600
+21:33:01 INFO Iter:    600,  Acc:     100.00,  Flips:      14.50 (med) /      36.66 (mean) /      84.20 (max)
+21:33:01 INFO Saving last model parameters
+21:33:01 INFO Saving stats
+21:36:55 INFO (Eval)    Acc:      80.00,  Flips:     126.00 (med) /     140.37 (mean) /     241.88 (max)
+21:36:55 DEBUG Iteration 601
+21:36:55 DEBUG Iteration 602
+21:36:55 DEBUG Iteration 603
+21:36:56 DEBUG Iteration 604
+21:36:56 DEBUG Iteration 605
+21:36:56 DEBUG Iteration 606
+21:36:57 DEBUG Iteration 607
+21:36:57 DEBUG Iteration 608
+21:36:58 DEBUG Iteration 609
+21:36:58 DEBUG Iteration 610
+21:36:58 INFO Iter:    610,  Acc:     100.00,  Flips:      20.00 (med) /      31.20 (mean) /      67.50 (max)
+21:36:58 DEBUG Iteration 611
+21:36:58 DEBUG Iteration 612
+21:36:59 DEBUG Iteration 613
+21:36:59 DEBUG Iteration 614
+21:37:00 DEBUG Iteration 615
+21:37:00 DEBUG Iteration 616
+21:37:00 DEBUG Iteration 617
+21:37:00 DEBUG Iteration 618
+21:37:01 DEBUG Iteration 619
+21:37:01 DEBUG Iteration 620
+21:37:01 INFO Iter:    620,  Acc:     100.00,  Flips:      12.00 (med) /      29.02 (mean) /      64.40 (max)
+21:37:01 DEBUG Iteration 621
+21:37:01 DEBUG Iteration 622
+21:37:01 DEBUG Iteration 623
+21:37:01 DEBUG Iteration 624
+21:37:02 DEBUG Iteration 625
+21:37:02 DEBUG Iteration 626
+21:37:03 DEBUG Iteration 627
+21:37:03 DEBUG Iteration 628
+21:37:03 DEBUG Iteration 629
+21:37:04 DEBUG Iteration 630
+21:37:04 INFO Iter:    630,  Acc:     100.00,  Flips:      14.00 (med) /      32.00 (mean) /      69.40 (max)
+21:37:04 DEBUG Iteration 631
+21:37:05 DEBUG Iteration 632
+21:37:05 DEBUG Iteration 633
+21:37:06 DEBUG Iteration 634
+21:37:06 DEBUG Iteration 635
+21:37:06 DEBUG Iteration 636
+21:37:07 DEBUG Iteration 637
+21:37:08 DEBUG Iteration 638
+21:37:08 DEBUG Iteration 639
+21:37:08 DEBUG Iteration 640
+21:37:08 INFO Iter:    640,  Acc:     100.00,  Flips:      14.50 (med) /      40.20 (mean) /      84.50 (max)
+21:37:08 DEBUG Iteration 641
+21:37:08 DEBUG Iteration 642
+21:37:09 DEBUG Iteration 643
+21:37:09 DEBUG Iteration 644
+21:37:09 DEBUG Iteration 645
+21:37:09 DEBUG Iteration 646
+21:37:09 DEBUG Iteration 647
+21:37:10 DEBUG Iteration 648
+21:37:10 DEBUG Iteration 649
+21:37:10 DEBUG Iteration 650
+21:37:10 INFO Iter:    650,  Acc:     100.00,  Flips:      15.00 (med) /      22.58 (mean) /      57.60 (max)
+21:37:10 INFO Saving last model parameters
+21:37:10 INFO Saving stats
+21:40:51 INFO (Eval)    Acc:      92.00,  Flips:      88.00 (med) /     113.35 (mean) /     240.00 (max)
+21:40:51 INFO Saving best model parameters
+21:40:51 DEBUG Iteration 651
+21:40:51 DEBUG Iteration 652
+21:40:51 DEBUG Iteration 653
+21:40:51 DEBUG Iteration 654
+21:40:51 DEBUG Iteration 655
+21:40:52 DEBUG Iteration 656
+21:40:52 DEBUG Iteration 657
+21:40:52 DEBUG Iteration 658
+21:40:52 DEBUG Iteration 659
+21:40:53 DEBUG Iteration 660
+21:40:53 INFO Iter:    660,  Acc:     100.00,  Flips:      11.50 (med) /      24.36 (mean) /      52.70 (max)
+21:40:53 DEBUG Iteration 661
+21:40:53 DEBUG Iteration 662
+21:40:54 DEBUG Iteration 663
+21:40:54 DEBUG Iteration 664
+21:40:55 DEBUG Iteration 665
+21:40:55 DEBUG Iteration 666
+21:40:55 DEBUG Iteration 667
+21:40:56 DEBUG Iteration 668
+21:40:56 DEBUG Iteration 669
+21:40:56 DEBUG Iteration 670
+21:40:56 INFO Iter:    670,  Acc:     100.00,  Flips:      17.50 (med) /      33.60 (mean) /      65.50 (max)
+21:40:56 DEBUG Iteration 671
+21:40:57 DEBUG Iteration 672
+21:40:57 DEBUG Iteration 673
+21:40:57 DEBUG Iteration 674
+21:40:57 DEBUG Iteration 675
+21:40:58 DEBUG Iteration 676
+21:40:58 DEBUG Iteration 677
+21:40:58 DEBUG Iteration 678
+21:40:58 DEBUG Iteration 679
+21:40:58 DEBUG Iteration 680
+21:40:59 INFO Iter:    680,  Acc:     100.00,  Flips:      14.00 (med) /      25.36 (mean) /      48.60 (max)
+21:40:59 DEBUG Iteration 681
+21:40:59 DEBUG Iteration 682
+21:41:00 DEBUG Iteration 683
+21:41:00 DEBUG Iteration 684
+21:41:01 DEBUG Iteration 685
+21:41:01 DEBUG Iteration 686
+21:41:02 DEBUG Iteration 687
+21:41:02 DEBUG Iteration 688
+21:41:02 DEBUG Iteration 689
+21:41:02 DEBUG Iteration 690
+21:41:02 INFO Iter:    690,  Acc:     100.00,  Flips:      20.50 (med) /      32.68 (mean) /      66.40 (max)
+21:41:02 DEBUG Iteration 691
+21:41:03 DEBUG Iteration 692
+21:41:03 DEBUG Iteration 693
+21:41:03 DEBUG Iteration 694
+21:41:03 DEBUG Iteration 695
+21:41:03 DEBUG Iteration 696
+21:41:03 DEBUG Iteration 697
+21:41:04 DEBUG Iteration 698
+21:41:04 DEBUG Iteration 699
+21:41:04 DEBUG Iteration 700
+21:41:04 INFO Iter:    700,  Acc:     100.00,  Flips:       9.00 (med) /      16.56 (mean) /      36.10 (max)
+21:41:04 INFO Saving last model parameters
+21:41:04 INFO Saving stats
+21:44:47 INFO (Eval)    Acc:      84.00,  Flips:      94.00 (med) /     119.38 (mean) /     232.44 (max)
+21:44:47 DEBUG Iteration 701
+21:44:47 DEBUG Iteration 702
+21:44:47 DEBUG Iteration 703
+21:44:47 DEBUG Iteration 704
+21:44:48 DEBUG Iteration 705
+21:44:48 DEBUG Iteration 706
+21:44:49 DEBUG Iteration 707
+21:44:49 DEBUG Iteration 708
+21:44:50 DEBUG Iteration 709
+21:44:50 DEBUG Iteration 710
+21:44:50 INFO Iter:    710,  Acc:     100.00,  Flips:      27.00 (med) /      37.74 (mean) /      72.00 (max)
+21:44:50 DEBUG Iteration 711
+21:44:50 DEBUG Iteration 712
+21:44:51 DEBUG Iteration 713
+21:44:51 DEBUG Iteration 714
+21:44:51 DEBUG Iteration 715
+21:44:51 DEBUG Iteration 716
+21:44:52 DEBUG Iteration 717
+21:44:52 DEBUG Iteration 718
+21:44:52 DEBUG Iteration 719
+21:44:52 DEBUG Iteration 720
+21:44:53 INFO Iter:    720,  Acc:     100.00,  Flips:      16.00 (med) /      24.94 (mean) /      50.60 (max)
+21:44:53 DEBUG Iteration 721
+21:44:54 DEBUG Iteration 722
+21:44:54 DEBUG Iteration 723
+21:44:55 DEBUG Iteration 724
+21:44:56 DEBUG Iteration 725
+21:44:56 DEBUG Iteration 726
+21:44:57 DEBUG Iteration 727
+21:44:57 DEBUG Iteration 728
+21:44:57 DEBUG Iteration 729
+21:44:58 DEBUG Iteration 730
+21:44:58 INFO Iter:    730,  Acc:     100.00,  Flips:      46.50 (med) /      52.18 (mean) /     105.80 (max)
+21:44:58 DEBUG Iteration 731
+21:44:58 DEBUG Iteration 732
+21:44:59 DEBUG Iteration 733
+21:44:59 DEBUG Iteration 734
+21:44:59 DEBUG Iteration 735
+21:44:59 DEBUG Iteration 736
+21:45:00 DEBUG Iteration 737
+21:45:00 DEBUG Iteration 738
+21:45:00 DEBUG Iteration 739
+21:45:00 DEBUG Iteration 740
+21:45:01 INFO Iter:    740,  Acc:     100.00,  Flips:      23.00 (med) /      27.00 (mean) /      53.70 (max)
+21:45:01 DEBUG Iteration 741
+21:45:02 DEBUG Iteration 742
+21:45:02 DEBUG Iteration 743
+21:45:02 DEBUG Iteration 744
+21:45:02 DEBUG Iteration 745
+21:45:02 DEBUG Iteration 746
+21:45:03 DEBUG Iteration 747
+21:45:03 DEBUG Iteration 748
+21:45:03 DEBUG Iteration 749
+21:45:03 DEBUG Iteration 750
+21:45:03 INFO Iter:    750,  Acc:     100.00,  Flips:      10.00 (med) /      25.02 (mean) /      47.20 (max)
+21:45:03 INFO Saving last model parameters
+21:45:03 INFO Saving stats
+21:48:38 INFO (Eval)    Acc:      92.00,  Flips:      81.00 (med) /     106.47 (mean) /     228.60 (max)
+21:48:38 INFO Saving best model parameters
+21:48:38 DEBUG Iteration 751
+21:48:39 DEBUG Iteration 752
+21:48:39 DEBUG Iteration 753
+21:48:39 DEBUG Iteration 754
+21:48:40 DEBUG Iteration 755
+21:48:40 DEBUG Iteration 756
+21:48:40 DEBUG Iteration 757
+21:48:41 DEBUG Iteration 758
+21:48:41 DEBUG Iteration 759
+21:48:41 DEBUG Iteration 760
+21:48:42 INFO Iter:    760,  Acc:     100.00,  Flips:      27.00 (med) /      41.12 (mean) /      74.80 (max)
+21:48:42 DEBUG Iteration 761
+21:48:43 DEBUG Iteration 762
+21:48:43 DEBUG Iteration 763
+21:48:43 DEBUG Iteration 764
+21:48:44 DEBUG Iteration 765
+21:48:44 DEBUG Iteration 766
+21:48:44 DEBUG Iteration 767
+21:48:44 DEBUG Iteration 768
+21:48:44 DEBUG Iteration 769
+21:48:45 DEBUG Iteration 770
+21:48:45 INFO Iter:    770,  Acc:     100.00,  Flips:      11.50 (med) /      29.16 (mean) /      74.90 (max)
+21:48:45 DEBUG Iteration 771
+21:48:45 DEBUG Iteration 772
+21:48:45 DEBUG Iteration 773
+21:48:45 DEBUG Iteration 774
+21:48:46 DEBUG Iteration 775
+21:48:46 DEBUG Iteration 776
+21:48:47 DEBUG Iteration 777
+21:48:47 DEBUG Iteration 778
+21:48:47 DEBUG Iteration 779
+21:48:47 DEBUG Iteration 780
+21:48:48 INFO Iter:    780,  Acc:     100.00,  Flips:      17.00 (med) /      25.94 (mean) /      57.30 (max)
+21:48:48 DEBUG Iteration 781
+21:48:48 DEBUG Iteration 782
+21:48:49 DEBUG Iteration 783
+21:48:49 DEBUG Iteration 784
+21:48:49 DEBUG Iteration 785
+21:48:49 DEBUG Iteration 786
+21:48:49 DEBUG Iteration 787
+21:48:49 DEBUG Iteration 788
+21:48:49 DEBUG Iteration 789
+21:48:50 DEBUG Iteration 790
+21:48:50 INFO Iter:    790,  Acc:     100.00,  Flips:      14.50 (med) /      26.48 (mean) /      57.90 (max)
+21:48:50 DEBUG Iteration 791
+21:48:51 DEBUG Iteration 792
+21:48:51 DEBUG Iteration 793
+21:48:51 DEBUG Iteration 794
+21:48:51 DEBUG Iteration 795
+21:48:51 DEBUG Iteration 796
+21:48:51 DEBUG Iteration 797
+21:48:51 DEBUG Iteration 798
+21:48:52 DEBUG Iteration 799
+21:48:52 DEBUG Iteration 800
+21:48:53 INFO Iter:    800,  Acc:     100.00,  Flips:      13.50 (med) /      28.16 (mean) /      51.80 (max)
+21:48:53 INFO Saving last model parameters
+21:48:53 INFO Saving stats
+21:52:29 INFO (Eval)    Acc:     100.00,  Flips:     102.00 (med) /     105.96 (mean) /     239.08 (max)
+21:52:29 DEBUG Iteration 801
+21:52:29 DEBUG Iteration 802
+21:52:29 DEBUG Iteration 803
+21:52:29 DEBUG Iteration 804
+21:52:29 DEBUG Iteration 805
+21:52:29 DEBUG Iteration 806
+21:52:30 DEBUG Iteration 807
+21:52:30 DEBUG Iteration 808
+21:52:31 DEBUG Iteration 809
+21:52:31 DEBUG Iteration 810
+21:52:31 INFO Iter:    810,  Acc:     100.00,  Flips:      14.00 (med) /      28.74 (mean) /      57.10 (max)
+21:52:31 DEBUG Iteration 811
+21:52:31 DEBUG Iteration 812
+21:52:32 DEBUG Iteration 813
+21:52:32 DEBUG Iteration 814
+21:52:32 DEBUG Iteration 815
+21:52:33 DEBUG Iteration 816
+21:52:33 DEBUG Iteration 817
+21:52:33 DEBUG Iteration 818
+21:52:34 DEBUG Iteration 819
+21:52:34 DEBUG Iteration 820
+21:52:34 INFO Iter:    820,  Acc:     100.00,  Flips:      16.00 (med) /      25.98 (mean) /      64.30 (max)
+21:52:34 DEBUG Iteration 821
+21:52:34 DEBUG Iteration 822
+21:52:34 DEBUG Iteration 823
+21:52:34 DEBUG Iteration 824
+21:52:35 DEBUG Iteration 825
+21:52:35 DEBUG Iteration 826
+21:52:35 DEBUG Iteration 827
+21:52:35 DEBUG Iteration 828
+21:52:35 DEBUG Iteration 829
+21:52:35 DEBUG Iteration 830
+21:52:36 INFO Iter:    830,  Acc:     100.00,  Flips:      12.50 (med) /      16.86 (mean) /      38.50 (max)
+21:52:36 DEBUG Iteration 831
+21:52:36 DEBUG Iteration 832
+21:52:36 DEBUG Iteration 833
+21:52:36 DEBUG Iteration 834
+21:52:36 DEBUG Iteration 835
+21:52:37 DEBUG Iteration 836
+21:52:37 DEBUG Iteration 837
+21:52:37 DEBUG Iteration 838
+21:52:38 DEBUG Iteration 839
+21:52:38 DEBUG Iteration 840
+21:52:38 INFO Iter:    840,  Acc:     100.00,  Flips:      13.50 (med) /      22.10 (mean) /      45.40 (max)
+21:52:38 DEBUG Iteration 841
+21:52:38 DEBUG Iteration 842
+21:52:38 DEBUG Iteration 843
+21:52:39 DEBUG Iteration 844
+21:52:39 DEBUG Iteration 845
+21:52:39 DEBUG Iteration 846
+21:52:39 DEBUG Iteration 847
+21:52:39 DEBUG Iteration 848
+21:52:39 DEBUG Iteration 849
+21:52:39 DEBUG Iteration 850
+21:52:39 INFO Iter:    850,  Acc:     100.00,  Flips:       8.50 (med) /      14.62 (mean) /      36.70 (max)
+21:52:39 INFO Saving last model parameters
+21:52:39 INFO Saving stats
+21:56:14 INFO (Eval)    Acc:     100.00,  Flips:     104.00 (med) /     117.46 (mean) /     230.36 (max)
+21:56:14 DEBUG Iteration 851
+21:56:15 DEBUG Iteration 852
+21:56:16 DEBUG Iteration 853
+21:56:16 DEBUG Iteration 854
+21:56:16 DEBUG Iteration 855
+21:56:16 DEBUG Iteration 856
+21:56:16 DEBUG Iteration 857
+21:56:16 DEBUG Iteration 858
+21:56:16 DEBUG Iteration 859
+21:56:17 DEBUG Iteration 860
+21:56:17 INFO Iter:    860,  Acc:     100.00,  Flips:      15.00 (med) /      29.76 (mean) /      57.80 (max)
+21:56:17 DEBUG Iteration 861
+21:56:18 DEBUG Iteration 862
+21:56:18 DEBUG Iteration 863
+21:56:18 DEBUG Iteration 864
+21:56:19 DEBUG Iteration 865
+21:56:19 DEBUG Iteration 866
+21:56:20 DEBUG Iteration 867
+21:56:20 DEBUG Iteration 868
+21:56:21 DEBUG Iteration 869
+21:56:21 DEBUG Iteration 870
+21:56:21 INFO Iter:    870,  Acc:     100.00,  Flips:      20.00 (med) /      35.56 (mean) /      85.30 (max)
+21:56:21 DEBUG Iteration 871
+21:56:22 DEBUG Iteration 872
+21:56:22 DEBUG Iteration 873
+21:56:23 DEBUG Iteration 874
+21:56:23 DEBUG Iteration 875
+21:56:24 DEBUG Iteration 876
+21:56:24 DEBUG Iteration 877
+21:56:24 DEBUG Iteration 878
+21:56:25 DEBUG Iteration 879
+21:56:25 DEBUG Iteration 880
+21:56:26 INFO Iter:    880,  Acc:     100.00,  Flips:      22.50 (med) /      42.70 (mean) /      84.90 (max)
+21:56:26 DEBUG Iteration 881
+21:56:26 DEBUG Iteration 882
+21:56:26 DEBUG Iteration 883
+21:56:26 DEBUG Iteration 884
+21:56:27 DEBUG Iteration 885
+21:56:27 DEBUG Iteration 886
+21:56:27 DEBUG Iteration 887
+21:56:27 DEBUG Iteration 888
+21:56:28 DEBUG Iteration 889
+21:56:28 DEBUG Iteration 890
+21:56:29 INFO Iter:    890,  Acc:     100.00,  Flips:      24.50 (med) /      35.06 (mean) /      67.60 (max)
+21:56:29 DEBUG Iteration 891
+21:56:29 DEBUG Iteration 892
+21:56:30 DEBUG Iteration 893
+21:56:31 DEBUG Iteration 894
+21:56:31 DEBUG Iteration 895
+21:56:31 DEBUG Iteration 896
+21:56:31 DEBUG Iteration 897
+21:56:31 DEBUG Iteration 898
+21:56:31 DEBUG Iteration 899
+21:56:32 DEBUG Iteration 900
+21:56:32 INFO Iter:    900,  Acc:     100.00,  Flips:      10.00 (med) /      28.18 (mean) /      49.00 (max)
+21:56:32 INFO Saving last model parameters
+21:56:32 INFO Saving stats
+22:00:18 INFO (Eval)    Acc:      76.00,  Flips:     109.00 (med) /     140.47 (mean) /     228.80 (max)
+22:00:18 DEBUG Iteration 901
+22:00:18 DEBUG Iteration 902
+22:00:19 DEBUG Iteration 903
+22:00:19 DEBUG Iteration 904
+22:00:20 DEBUG Iteration 905
+22:00:20 DEBUG Iteration 906
+22:00:20 DEBUG Iteration 907
+22:00:21 DEBUG Iteration 908
+22:00:21 DEBUG Iteration 909
+22:00:21 DEBUG Iteration 910
+22:00:22 INFO Iter:    910,  Acc:     100.00,  Flips:      15.50 (med) /      28.84 (mean) /      62.50 (max)
+22:00:22 DEBUG Iteration 911
+22:00:22 DEBUG Iteration 912
+22:00:22 DEBUG Iteration 913
+22:00:22 DEBUG Iteration 914
+22:00:22 DEBUG Iteration 915
+22:00:22 DEBUG Iteration 916
+22:00:23 DEBUG Iteration 917
+22:00:23 DEBUG Iteration 918
+22:00:23 DEBUG Iteration 919
+22:00:24 DEBUG Iteration 920
+22:00:24 INFO Iter:    920,  Acc:     100.00,  Flips:      14.50 (med) /      22.86 (mean) /      52.60 (max)
+22:00:24 DEBUG Iteration 921
+22:00:24 DEBUG Iteration 922
+22:00:24 DEBUG Iteration 923
+22:00:24 DEBUG Iteration 924
+22:00:24 DEBUG Iteration 925
+22:00:24 DEBUG Iteration 926
+22:00:24 DEBUG Iteration 927
+22:00:25 DEBUG Iteration 928
+22:00:25 DEBUG Iteration 929
+22:00:25 DEBUG Iteration 930
+22:00:25 INFO Iter:    930,  Acc:     100.00,  Flips:      10.00 (med) /      14.26 (mean) /      28.50 (max)
+22:00:25 DEBUG Iteration 931
+22:00:25 DEBUG Iteration 932
+22:00:26 DEBUG Iteration 933
+22:00:26 DEBUG Iteration 934
+22:00:27 DEBUG Iteration 935
+22:00:27 DEBUG Iteration 936
+22:00:28 DEBUG Iteration 937
+22:00:28 DEBUG Iteration 938
+22:00:28 DEBUG Iteration 939
+22:00:28 DEBUG Iteration 940
+22:00:29 INFO Iter:    940,  Acc:     100.00,  Flips:      21.50 (med) /      32.88 (mean) /      64.10 (max)
+22:00:29 DEBUG Iteration 941
+22:00:29 DEBUG Iteration 942
+22:00:29 DEBUG Iteration 943
+22:00:29 DEBUG Iteration 944
+22:00:29 DEBUG Iteration 945
+22:00:29 DEBUG Iteration 946
+22:00:30 DEBUG Iteration 947
+22:00:31 DEBUG Iteration 948
+22:00:31 DEBUG Iteration 949
+22:00:31 DEBUG Iteration 950
+22:00:31 INFO Iter:    950,  Acc:     100.00,  Flips:      19.00 (med) /      26.80 (mean) /      57.90 (max)
+22:00:31 INFO Saving last model parameters
+22:00:31 INFO Saving stats
+22:04:16 INFO (Eval)    Acc:      76.00,  Flips:     109.00 (med) /     134.81 (mean) /     234.40 (max)
+22:04:16 DEBUG Iteration 951
+22:04:16 DEBUG Iteration 952
+22:04:16 DEBUG Iteration 953
+22:04:16 DEBUG Iteration 954
+22:04:16 DEBUG Iteration 955
+22:04:17 DEBUG Iteration 956
+22:04:17 DEBUG Iteration 957
+22:04:17 DEBUG Iteration 958
+22:04:17 DEBUG Iteration 959
+22:04:17 DEBUG Iteration 960
+22:04:18 INFO Iter:    960,  Acc:     100.00,  Flips:      15.00 (med) /      15.72 (mean) /      28.00 (max)
+22:04:18 DEBUG Iteration 961
+22:04:18 DEBUG Iteration 962
+22:04:18 DEBUG Iteration 963
+22:04:18 DEBUG Iteration 964
+22:04:18 DEBUG Iteration 965
+22:04:18 DEBUG Iteration 966
+22:04:18 DEBUG Iteration 967
+22:04:18 DEBUG Iteration 968
+22:04:19 DEBUG Iteration 969
+22:04:19 DEBUG Iteration 970
+22:04:20 INFO Iter:    970,  Acc:     100.00,  Flips:      16.00 (med) /      19.70 (mean) /      37.00 (max)
+22:04:20 DEBUG Iteration 971
+22:04:20 DEBUG Iteration 972
+22:04:20 DEBUG Iteration 973
+22:04:21 DEBUG Iteration 974
+22:04:22 DEBUG Iteration 975
+22:04:22 DEBUG Iteration 976
+22:04:23 DEBUG Iteration 977
+22:04:23 DEBUG Iteration 978
+22:04:23 DEBUG Iteration 979
+22:04:24 DEBUG Iteration 980
+22:04:24 INFO Iter:    980,  Acc:     100.00,  Flips:      27.50 (med) /      41.48 (mean) /      90.90 (max)
+22:04:24 DEBUG Iteration 981
+22:04:24 DEBUG Iteration 982
+22:04:24 DEBUG Iteration 983
+22:04:24 DEBUG Iteration 984
+22:04:25 DEBUG Iteration 985
+22:04:25 DEBUG Iteration 986
+22:04:25 DEBUG Iteration 987
+22:04:26 DEBUG Iteration 988
+22:04:26 DEBUG Iteration 989
+22:04:26 DEBUG Iteration 990
+22:04:27 INFO Iter:    990,  Acc:     100.00,  Flips:      23.50 (med) /      31.52 (mean) /      63.40 (max)
+22:04:27 DEBUG Iteration 991
+22:04:27 DEBUG Iteration 992
+22:04:27 DEBUG Iteration 993
+22:04:28 DEBUG Iteration 994
+22:04:28 DEBUG Iteration 995
+22:04:28 DEBUG Iteration 996
+22:04:28 DEBUG Iteration 997
+22:04:28 DEBUG Iteration 998
+22:04:29 DEBUG Iteration 999
+22:04:29 DEBUG Iteration 1000
+22:04:29 INFO Iter:   1000,  Acc:     100.00,  Flips:      17.00 (med) /      18.28 (mean) /      39.00 (max)
+22:04:29 INFO Saving last model parameters
+22:04:29 INFO Saving stats
+22:08:20 INFO (Eval)    Acc:      76.00,  Flips:     129.00 (med) /     133.48 (mean) /     236.96 (max)
+22:08:20 DEBUG Iteration 1001
+22:08:20 DEBUG Iteration 1002
+22:08:21 DEBUG Iteration 1003
+22:08:22 DEBUG Iteration 1004
+22:08:22 DEBUG Iteration 1005
+22:08:22 DEBUG Iteration 1006
+22:08:22 DEBUG Iteration 1007
+22:08:23 DEBUG Iteration 1008
+22:08:23 DEBUG Iteration 1009
+22:08:23 DEBUG Iteration 1010
+22:08:23 INFO Iter:   1010,  Acc:     100.00,  Flips:      20.00 (med) /      25.24 (mean) /      54.00 (max)
+22:08:23 DEBUG Iteration 1011
+22:08:24 DEBUG Iteration 1012
+22:08:24 DEBUG Iteration 1013
+22:08:24 DEBUG Iteration 1014
+22:08:24 DEBUG Iteration 1015
+22:08:24 DEBUG Iteration 1016
+22:08:24 DEBUG Iteration 1017
+22:08:25 DEBUG Iteration 1018
+22:08:25 DEBUG Iteration 1019
+22:08:25 DEBUG Iteration 1020
+22:08:25 INFO Iter:   1020,  Acc:     100.00,  Flips:      13.00 (med) /      19.40 (mean) /      38.50 (max)
+22:08:25 DEBUG Iteration 1021
+22:08:26 DEBUG Iteration 1022
+22:08:26 DEBUG Iteration 1023
+22:08:26 DEBUG Iteration 1024
+22:08:26 DEBUG Iteration 1025
+22:08:26 DEBUG Iteration 1026
+22:08:26 DEBUG Iteration 1027
+22:08:27 DEBUG Iteration 1028
+22:08:27 DEBUG Iteration 1029
+22:08:27 DEBUG Iteration 1030
+22:08:27 INFO Iter:   1030,  Acc:     100.00,  Flips:      12.00 (med) /      18.86 (mean) /      39.60 (max)
+22:08:27 DEBUG Iteration 1031
+22:08:28 DEBUG Iteration 1032
+22:08:29 DEBUG Iteration 1033
+22:08:29 DEBUG Iteration 1034
+22:08:29 DEBUG Iteration 1035
+22:08:29 DEBUG Iteration 1036
+22:08:30 DEBUG Iteration 1037
+22:08:30 DEBUG Iteration 1038
+22:08:30 DEBUG Iteration 1039
+22:08:30 DEBUG Iteration 1040
+22:08:30 INFO Iter:   1040,  Acc:     100.00,  Flips:      18.00 (med) /      30.46 (mean) /      71.40 (max)
+22:08:30 DEBUG Iteration 1041
+22:08:30 DEBUG Iteration 1042
+22:08:30 DEBUG Iteration 1043
+22:08:31 DEBUG Iteration 1044
+22:08:31 DEBUG Iteration 1045
+22:08:31 DEBUG Iteration 1046
+22:08:31 DEBUG Iteration 1047
+22:08:31 DEBUG Iteration 1048
+22:08:32 DEBUG Iteration 1049
+22:08:32 DEBUG Iteration 1050
+22:08:32 INFO Iter:   1050,  Acc:     100.00,  Flips:       8.00 (med) /      15.24 (mean) /      33.30 (max)
+22:08:32 INFO Saving last model parameters
+22:08:32 INFO Saving stats
+22:12:17 INFO (Eval)    Acc:      92.00,  Flips:      97.00 (med) /     120.91 (mean) /     230.48 (max)
+22:12:17 DEBUG Iteration 1051
+22:12:17 DEBUG Iteration 1052
+22:12:17 DEBUG Iteration 1053
+22:12:17 DEBUG Iteration 1054
+22:12:17 DEBUG Iteration 1055
+22:12:17 DEBUG Iteration 1056
+22:12:17 DEBUG Iteration 1057
+22:12:17 DEBUG Iteration 1058
+22:12:18 DEBUG Iteration 1059
+22:12:18 DEBUG Iteration 1060
+22:12:18 INFO Iter:   1060,  Acc:     100.00,  Flips:      12.50 (med) /      12.80 (mean) /      25.30 (max)
+22:12:18 DEBUG Iteration 1061
+22:12:19 DEBUG Iteration 1062
+22:12:19 DEBUG Iteration 1063
+22:12:19 DEBUG Iteration 1064
+22:12:20 DEBUG Iteration 1065
+22:12:20 DEBUG Iteration 1066
+22:12:20 DEBUG Iteration 1067
+22:12:20 DEBUG Iteration 1068
+22:12:20 DEBUG Iteration 1069
+22:12:21 DEBUG Iteration 1070
+22:12:21 INFO Iter:   1070,  Acc:     100.00,  Flips:      15.00 (med) /      28.98 (mean) /      62.10 (max)
+22:12:21 DEBUG Iteration 1071
+22:12:21 DEBUG Iteration 1072
+22:12:21 DEBUG Iteration 1073
+22:12:21 DEBUG Iteration 1074
+22:12:22 DEBUG Iteration 1075
+22:12:22 DEBUG Iteration 1076
+22:12:22 DEBUG Iteration 1077
+22:12:22 DEBUG Iteration 1078
+22:12:22 DEBUG Iteration 1079
+22:12:22 DEBUG Iteration 1080
+22:12:23 INFO Iter:   1080,  Acc:     100.00,  Flips:      11.50 (med) /      15.02 (mean) /      26.70 (max)
+22:12:23 DEBUG Iteration 1081
+22:12:23 DEBUG Iteration 1082
+22:12:23 DEBUG Iteration 1083
+22:12:23 DEBUG Iteration 1084
+22:12:24 DEBUG Iteration 1085
+22:12:24 DEBUG Iteration 1086
+22:12:24 DEBUG Iteration 1087
+22:12:24 DEBUG Iteration 1088
+22:12:25 DEBUG Iteration 1089
+22:12:25 DEBUG Iteration 1090
+22:12:25 INFO Iter:   1090,  Acc:     100.00,  Flips:      16.00 (med) /      24.36 (mean) /      54.50 (max)
+22:12:25 DEBUG Iteration 1091
+22:12:25 DEBUG Iteration 1092
+22:12:25 DEBUG Iteration 1093
+22:12:25 DEBUG Iteration 1094
+22:12:25 DEBUG Iteration 1095
+22:12:26 DEBUG Iteration 1096
+22:12:26 DEBUG Iteration 1097
+22:12:26 DEBUG Iteration 1098
+22:12:26 DEBUG Iteration 1099
+22:12:26 DEBUG Iteration 1100
+22:12:27 INFO Iter:   1100,  Acc:     100.00,  Flips:      10.00 (med) /      16.84 (mean) /      40.80 (max)
+22:12:27 INFO Saving last model parameters
+22:12:27 INFO Saving stats
+22:16:09 INFO (Eval)    Acc:     100.00,  Flips:      85.00 (med) /     100.88 (mean) /     222.88 (max)
+22:16:09 DEBUG Iteration 1101
+22:16:09 DEBUG Iteration 1102
+22:16:09 DEBUG Iteration 1103
+22:16:09 DEBUG Iteration 1104
+22:16:09 DEBUG Iteration 1105
+22:16:10 DEBUG Iteration 1106
+22:16:10 DEBUG Iteration 1107
+22:16:10 DEBUG Iteration 1108
+22:16:11 DEBUG Iteration 1109
+22:16:11 DEBUG Iteration 1110
+22:16:12 INFO Iter:   1110,  Acc:     100.00,  Flips:      14.00 (med) /      29.42 (mean) /      64.40 (max)
+22:16:12 DEBUG Iteration 1111
+22:16:12 DEBUG Iteration 1112
+22:16:12 DEBUG Iteration 1113
+22:16:13 DEBUG Iteration 1114
+22:16:13 DEBUG Iteration 1115
+22:16:13 DEBUG Iteration 1116
+22:16:13 DEBUG Iteration 1117
+22:16:14 DEBUG Iteration 1118
+22:16:14 DEBUG Iteration 1119
+22:16:14 DEBUG Iteration 1120
+22:16:14 INFO Iter:   1120,  Acc:     100.00,  Flips:      14.00 (med) /      21.32 (mean) /      47.80 (max)
+22:16:14 DEBUG Iteration 1121
+22:16:14 DEBUG Iteration 1122
+22:16:15 DEBUG Iteration 1123
+22:16:15 DEBUG Iteration 1124
+22:16:15 DEBUG Iteration 1125
+22:16:15 DEBUG Iteration 1126
+22:16:16 DEBUG Iteration 1127
+22:16:16 DEBUG Iteration 1128
+22:16:16 DEBUG Iteration 1129
+22:16:17 DEBUG Iteration 1130
+22:16:17 INFO Iter:   1130,  Acc:     100.00,  Flips:      22.00 (med) /      25.92 (mean) /      52.30 (max)
+22:16:17 DEBUG Iteration 1131
+22:16:17 DEBUG Iteration 1132
+22:16:18 DEBUG Iteration 1133
+22:16:19 DEBUG Iteration 1134
+22:16:19 DEBUG Iteration 1135
+22:16:19 DEBUG Iteration 1136
+22:16:19 DEBUG Iteration 1137
+22:16:20 DEBUG Iteration 1138
+22:16:20 DEBUG Iteration 1139
+22:16:20 DEBUG Iteration 1140
+22:16:20 INFO Iter:   1140,  Acc:     100.00,  Flips:      20.50 (med) /      32.80 (mean) /      62.80 (max)
+22:16:20 DEBUG Iteration 1141
+22:16:20 DEBUG Iteration 1142
+22:16:20 DEBUG Iteration 1143
+22:16:21 DEBUG Iteration 1144
+22:16:22 DEBUG Iteration 1145
+22:16:22 DEBUG Iteration 1146
+22:16:22 DEBUG Iteration 1147
+22:16:22 DEBUG Iteration 1148
+22:16:23 DEBUG Iteration 1149
+22:16:23 DEBUG Iteration 1150
+22:16:23 INFO Iter:   1150,  Acc:     100.00,  Flips:      18.00 (med) /      23.26 (mean) /      47.80 (max)
+22:16:23 INFO Saving last model parameters
+22:16:23 INFO Saving stats
+22:19:58 INFO (Eval)    Acc:     100.00,  Flips:      84.00 (med) /      99.19 (mean) /     228.28 (max)
+22:19:58 DEBUG Iteration 1151
+22:19:58 DEBUG Iteration 1152
+22:19:59 DEBUG Iteration 1153
+22:19:59 DEBUG Iteration 1154
+22:19:59 DEBUG Iteration 1155
+22:19:59 DEBUG Iteration 1156
+22:20:00 DEBUG Iteration 1157
+22:20:00 DEBUG Iteration 1158
+22:20:00 DEBUG Iteration 1159
+22:20:00 DEBUG Iteration 1160
+22:20:00 INFO Iter:   1160,  Acc:     100.00,  Flips:       9.50 (med) /      20.20 (mean) /      48.40 (max)
+22:20:00 DEBUG Iteration 1161
+22:20:00 DEBUG Iteration 1162
+22:20:00 DEBUG Iteration 1163
+22:20:00 DEBUG Iteration 1164
+22:20:01 DEBUG Iteration 1165
+22:20:01 DEBUG Iteration 1166
+22:20:01 DEBUG Iteration 1167
+22:20:02 DEBUG Iteration 1168
+22:20:02 DEBUG Iteration 1169
+22:20:03 DEBUG Iteration 1170
+22:20:03 INFO Iter:   1170,  Acc:     100.00,  Flips:      24.50 (med) /      28.00 (mean) /      59.10 (max)
+22:20:03 DEBUG Iteration 1171
+22:20:03 DEBUG Iteration 1172
+22:20:04 DEBUG Iteration 1173
+22:20:04 DEBUG Iteration 1174
+22:20:05 DEBUG Iteration 1175
+22:20:05 DEBUG Iteration 1176
+22:20:05 DEBUG Iteration 1177
+22:20:05 DEBUG Iteration 1178
+22:20:06 DEBUG Iteration 1179
+22:20:06 DEBUG Iteration 1180
+22:20:06 INFO Iter:   1180,  Acc:     100.00,  Flips:      16.50 (med) /      32.76 (mean) /      77.10 (max)
+22:20:06 DEBUG Iteration 1181
+22:20:06 DEBUG Iteration 1182
+22:20:07 DEBUG Iteration 1183
+22:20:07 DEBUG Iteration 1184
+22:20:07 DEBUG Iteration 1185
+22:20:07 DEBUG Iteration 1186
+22:20:07 DEBUG Iteration 1187
+22:20:08 DEBUG Iteration 1188
+22:20:08 DEBUG Iteration 1189
+22:20:09 DEBUG Iteration 1190
+22:20:09 INFO Iter:   1190,  Acc:     100.00,  Flips:      22.50 (med) /      32.24 (mean) /      65.20 (max)
+22:20:09 DEBUG Iteration 1191
+22:20:09 DEBUG Iteration 1192
+22:20:10 DEBUG Iteration 1193
+22:20:10 DEBUG Iteration 1194
+22:20:10 DEBUG Iteration 1195
+22:20:10 DEBUG Iteration 1196
+22:20:10 DEBUG Iteration 1197
+22:20:11 DEBUG Iteration 1198
+22:20:11 DEBUG Iteration 1199
+22:20:11 DEBUG Iteration 1200
+22:20:11 INFO Iter:   1200,  Acc:     100.00,  Flips:      11.50 (med) /      18.64 (mean) /      44.30 (max)
+22:20:11 INFO Saving last model parameters
+22:20:11 INFO Saving stats
+22:23:36 INFO (Eval)    Acc:      96.00,  Flips:      64.00 (med) /      86.53 (mean) /     210.00 (max)
+22:23:36 INFO Saving best model parameters
+22:23:36 DEBUG Iteration 1201
+22:23:37 DEBUG Iteration 1202
+22:23:37 DEBUG Iteration 1203
+22:23:37 DEBUG Iteration 1204
+22:23:37 DEBUG Iteration 1205
+22:23:37 DEBUG Iteration 1206
+22:23:37 DEBUG Iteration 1207
+22:23:38 DEBUG Iteration 1208
+22:23:38 DEBUG Iteration 1209
+22:23:38 DEBUG Iteration 1210
+22:23:38 INFO Iter:   1210,  Acc:     100.00,  Flips:       7.00 (med) /      16.94 (mean) /      31.10 (max)
+22:23:38 DEBUG Iteration 1211
+22:23:38 DEBUG Iteration 1212
+22:23:38 DEBUG Iteration 1213
+22:23:38 DEBUG Iteration 1214
+22:23:39 DEBUG Iteration 1215
+22:23:39 DEBUG Iteration 1216
+22:23:39 DEBUG Iteration 1217
+22:23:40 DEBUG Iteration 1218
+22:23:41 DEBUG Iteration 1219
+22:23:41 DEBUG Iteration 1220
+22:23:41 INFO Iter:   1220,  Acc:     100.00,  Flips:      20.00 (med) /      30.50 (mean) /      54.90 (max)
+22:23:41 DEBUG Iteration 1221
+22:23:41 DEBUG Iteration 1222
+22:23:41 DEBUG Iteration 1223
+22:23:41 DEBUG Iteration 1224
+22:23:41 DEBUG Iteration 1225
+22:23:42 DEBUG Iteration 1226
+22:23:42 DEBUG Iteration 1227
+22:23:42 DEBUG Iteration 1228
+22:23:42 DEBUG Iteration 1229
+22:23:43 DEBUG Iteration 1230
+22:23:43 INFO Iter:   1230,  Acc:     100.00,  Flips:       9.50 (med) /      15.60 (mean) /      32.60 (max)
+22:23:43 DEBUG Iteration 1231
+22:23:43 DEBUG Iteration 1232
+22:23:43 DEBUG Iteration 1233
+22:23:44 DEBUG Iteration 1234
+22:23:44 DEBUG Iteration 1235
+22:23:45 DEBUG Iteration 1236
+22:23:45 DEBUG Iteration 1237
+22:23:45 DEBUG Iteration 1238
+22:23:45 DEBUG Iteration 1239
+22:23:46 DEBUG Iteration 1240
+22:23:46 INFO Iter:   1240,  Acc:     100.00,  Flips:      19.00 (med) /      28.54 (mean) /      60.90 (max)
+22:23:46 DEBUG Iteration 1241
+22:23:46 DEBUG Iteration 1242
+22:23:46 DEBUG Iteration 1243
+22:23:47 DEBUG Iteration 1244
+22:23:47 DEBUG Iteration 1245
+22:23:47 DEBUG Iteration 1246
+22:23:47 DEBUG Iteration 1247
+22:23:47 DEBUG Iteration 1248
+22:23:47 DEBUG Iteration 1249
+22:23:48 DEBUG Iteration 1250
+22:23:48 INFO Iter:   1250,  Acc:     100.00,  Flips:      15.00 (med) /      20.30 (mean) /      41.00 (max)
+22:23:48 INFO Saving last model parameters
+22:23:48 INFO Saving stats
+22:27:18 INFO (Eval)    Acc:      96.00,  Flips:      66.00 (med) /      90.40 (mean) /     217.52 (max)
+22:27:18 DEBUG Iteration 1251
+22:27:18 DEBUG Iteration 1252
+22:27:19 DEBUG Iteration 1253
+22:27:19 DEBUG Iteration 1254
+22:27:19 DEBUG Iteration 1255
+22:27:19 DEBUG Iteration 1256
+22:27:20 DEBUG Iteration 1257
+22:27:20 DEBUG Iteration 1258
+22:27:20 DEBUG Iteration 1259
+22:27:20 DEBUG Iteration 1260
+22:27:21 INFO Iter:   1260,  Acc:     100.00,  Flips:      11.50 (med) /      24.22 (mean) /      53.90 (max)
+22:27:21 DEBUG Iteration 1261
+22:27:21 DEBUG Iteration 1262
+22:27:21 DEBUG Iteration 1263
+22:27:22 DEBUG Iteration 1264
+22:27:22 DEBUG Iteration 1265
+22:27:22 DEBUG Iteration 1266
+22:27:23 DEBUG Iteration 1267
+22:27:23 DEBUG Iteration 1268
+22:27:23 DEBUG Iteration 1269
+22:27:23 DEBUG Iteration 1270
+22:27:23 INFO Iter:   1270,  Acc:     100.00,  Flips:      14.00 (med) /      23.00 (mean) /      49.60 (max)
+22:27:23 DEBUG Iteration 1271
+22:27:23 DEBUG Iteration 1272
+22:27:23 DEBUG Iteration 1273
+22:27:24 DEBUG Iteration 1274
+22:27:24 DEBUG Iteration 1275
+22:27:24 DEBUG Iteration 1276
+22:27:24 DEBUG Iteration 1277
+22:27:24 DEBUG Iteration 1278
+22:27:24 DEBUG Iteration 1279
+22:27:25 DEBUG Iteration 1280
+22:27:25 INFO Iter:   1280,  Acc:     100.00,  Flips:       8.00 (med) /      12.94 (mean) /      27.20 (max)
+22:27:25 DEBUG Iteration 1281
+22:27:25 DEBUG Iteration 1282
+22:27:25 DEBUG Iteration 1283
+22:27:25 DEBUG Iteration 1284
+22:27:25 DEBUG Iteration 1285
+22:27:26 DEBUG Iteration 1286
+22:27:26 DEBUG Iteration 1287
+22:27:27 DEBUG Iteration 1288
+22:27:27 DEBUG Iteration 1289
+22:27:27 DEBUG Iteration 1290
+22:27:27 INFO Iter:   1290,  Acc:     100.00,  Flips:      16.50 (med) /      23.36 (mean) /      47.20 (max)
+22:27:27 DEBUG Iteration 1291
+22:27:28 DEBUG Iteration 1292
+22:27:28 DEBUG Iteration 1293
+22:27:28 DEBUG Iteration 1294
+22:27:29 DEBUG Iteration 1295
+22:27:29 DEBUG Iteration 1296
+22:27:29 DEBUG Iteration 1297
+22:27:29 DEBUG Iteration 1298
+22:27:30 DEBUG Iteration 1299
+22:27:30 DEBUG Iteration 1300
+22:27:30 INFO Iter:   1300,  Acc:     100.00,  Flips:      19.00 (med) /      32.82 (mean) /      74.80 (max)
+22:27:30 INFO Saving last model parameters
+22:27:30 INFO Saving stats
+22:31:00 INFO (Eval)    Acc:     100.00,  Flips:      76.00 (med) /     103.85 (mean) /     223.08 (max)
+22:31:00 DEBUG Iteration 1301
+22:31:01 DEBUG Iteration 1302
+22:31:01 DEBUG Iteration 1303
+22:31:01 DEBUG Iteration 1304
+22:31:01 DEBUG Iteration 1305
+22:31:01 DEBUG Iteration 1306
+22:31:01 DEBUG Iteration 1307
+22:31:01 DEBUG Iteration 1308
+22:31:02 DEBUG Iteration 1309
+22:31:02 DEBUG Iteration 1310
+22:31:02 INFO Iter:   1310,  Acc:     100.00,  Flips:      13.00 (med) /      18.34 (mean) /      36.20 (max)
+22:31:02 DEBUG Iteration 1311
+22:31:02 DEBUG Iteration 1312
+22:31:03 DEBUG Iteration 1313
+22:31:03 DEBUG Iteration 1314
+22:31:03 DEBUG Iteration 1315
+22:31:03 DEBUG Iteration 1316
+22:31:04 DEBUG Iteration 1317
+22:31:04 DEBUG Iteration 1318
+22:31:04 DEBUG Iteration 1319
+22:31:05 DEBUG Iteration 1320
+22:31:05 INFO Iter:   1320,  Acc:     100.00,  Flips:      19.00 (med) /      29.24 (mean) /      62.50 (max)
+22:31:05 DEBUG Iteration 1321
+22:31:05 DEBUG Iteration 1322
+22:31:05 DEBUG Iteration 1323
+22:31:06 DEBUG Iteration 1324
+22:31:06 DEBUG Iteration 1325
+22:31:06 DEBUG Iteration 1326
+22:31:06 DEBUG Iteration 1327
+22:31:06 DEBUG Iteration 1328
+22:31:07 DEBUG Iteration 1329
+22:31:07 DEBUG Iteration 1330
+22:31:07 INFO Iter:   1330,  Acc:     100.00,  Flips:      16.50 (med) /      20.78 (mean) /      43.60 (max)
+22:31:07 DEBUG Iteration 1331
+22:31:07 DEBUG Iteration 1332
+22:31:08 DEBUG Iteration 1333
+22:31:08 DEBUG Iteration 1334
+22:31:08 DEBUG Iteration 1335
+22:31:08 DEBUG Iteration 1336
+22:31:09 DEBUG Iteration 1337
+22:31:09 DEBUG Iteration 1338
+22:31:09 DEBUG Iteration 1339
+22:31:09 DEBUG Iteration 1340
+22:31:09 INFO Iter:   1340,  Acc:     100.00,  Flips:      11.00 (med) /      20.14 (mean) /      42.90 (max)
+22:31:09 DEBUG Iteration 1341
+22:31:10 DEBUG Iteration 1342
+22:31:10 DEBUG Iteration 1343
+22:31:10 DEBUG Iteration 1344
+22:31:10 DEBUG Iteration 1345
+22:31:11 DEBUG Iteration 1346
+22:31:11 DEBUG Iteration 1347
+22:31:11 DEBUG Iteration 1348
+22:31:11 DEBUG Iteration 1349
+22:31:11 DEBUG Iteration 1350
+22:31:11 INFO Iter:   1350,  Acc:     100.00,  Flips:      12.00 (med) /      16.88 (mean) /      33.10 (max)
+22:31:11 INFO Saving last model parameters
+22:31:11 INFO Saving stats
+22:34:58 INFO (Eval)    Acc:      92.00,  Flips:      90.00 (med) /     103.23 (mean) /     227.96 (max)
+22:34:58 DEBUG Iteration 1351
+22:34:58 DEBUG Iteration 1352
+22:34:59 DEBUG Iteration 1353
+22:34:59 DEBUG Iteration 1354
+22:34:59 DEBUG Iteration 1355
+22:35:00 DEBUG Iteration 1356
+22:35:00 DEBUG Iteration 1357
+22:35:01 DEBUG Iteration 1358
+22:35:01 DEBUG Iteration 1359
+22:35:01 DEBUG Iteration 1360
+22:35:01 INFO Iter:   1360,  Acc:     100.00,  Flips:      16.00 (med) /      30.58 (mean) /      82.30 (max)
+22:35:01 DEBUG Iteration 1361
+22:35:01 DEBUG Iteration 1362
+22:35:01 DEBUG Iteration 1363
+22:35:02 DEBUG Iteration 1364
+22:35:03 DEBUG Iteration 1365
+22:35:03 DEBUG Iteration 1366
+22:35:03 DEBUG Iteration 1367
+22:35:03 DEBUG Iteration 1368
+22:35:03 DEBUG Iteration 1369
+22:35:03 DEBUG Iteration 1370
+22:35:03 INFO Iter:   1370,  Acc:     100.00,  Flips:       9.00 (med) /      21.34 (mean) /      48.90 (max)
+22:35:03 DEBUG Iteration 1371
+22:35:04 DEBUG Iteration 1372
+22:35:04 DEBUG Iteration 1373
+22:35:04 DEBUG Iteration 1374
+22:35:05 DEBUG Iteration 1375
+22:35:05 DEBUG Iteration 1376
+22:35:05 DEBUG Iteration 1377
+22:35:06 DEBUG Iteration 1378
+22:35:06 DEBUG Iteration 1379
+22:35:06 DEBUG Iteration 1380
+22:35:06 INFO Iter:   1380,  Acc:     100.00,  Flips:      19.50 (med) /      27.44 (mean) /      66.20 (max)
+22:35:06 DEBUG Iteration 1381
+22:35:06 DEBUG Iteration 1382
+22:35:07 DEBUG Iteration 1383
+22:35:07 DEBUG Iteration 1384
+22:35:07 DEBUG Iteration 1385
+22:35:07 DEBUG Iteration 1386
+22:35:08 DEBUG Iteration 1387
+22:35:08 DEBUG Iteration 1388
+22:35:08 DEBUG Iteration 1389
+22:35:09 DEBUG Iteration 1390
+22:35:09 INFO Iter:   1390,  Acc:     100.00,  Flips:      13.00 (med) /      28.96 (mean) /      68.50 (max)
+22:35:09 DEBUG Iteration 1391
+22:35:09 DEBUG Iteration 1392
+22:35:10 DEBUG Iteration 1393
+22:35:10 DEBUG Iteration 1394
+22:35:10 DEBUG Iteration 1395
+22:35:10 DEBUG Iteration 1396
+22:35:10 DEBUG Iteration 1397
+22:35:10 DEBUG Iteration 1398
+22:35:11 DEBUG Iteration 1399
+22:35:11 DEBUG Iteration 1400
+22:35:11 INFO Iter:   1400,  Acc:     100.00,  Flips:      10.50 (med) /      17.74 (mean) /      41.00 (max)
+22:35:11 INFO Saving last model parameters
+22:35:11 INFO Saving stats
+22:38:37 INFO (Eval)    Acc:     100.00,  Flips:      70.00 (med) /      99.13 (mean) /     231.24 (max)
+22:38:37 DEBUG Iteration 1401
+22:38:38 DEBUG Iteration 1402
+22:38:38 DEBUG Iteration 1403
+22:38:38 DEBUG Iteration 1404
+22:38:38 DEBUG Iteration 1405
+22:38:38 DEBUG Iteration 1406
+22:38:39 DEBUG Iteration 1407
+22:38:39 DEBUG Iteration 1408
+22:38:39 DEBUG Iteration 1409
+22:38:39 DEBUG Iteration 1410
+22:38:40 INFO Iter:   1410,  Acc:     100.00,  Flips:      13.00 (med) /      21.90 (mean) /      49.20 (max)
+22:38:40 DEBUG Iteration 1411
+22:38:40 DEBUG Iteration 1412
+22:38:40 DEBUG Iteration 1413
+22:38:40 DEBUG Iteration 1414
+22:38:41 DEBUG Iteration 1415
+22:38:41 DEBUG Iteration 1416
+22:38:41 DEBUG Iteration 1417
+22:38:41 DEBUG Iteration 1418
+22:38:42 DEBUG Iteration 1419
+22:38:42 DEBUG Iteration 1420
+22:38:42 INFO Iter:   1420,  Acc:     100.00,  Flips:      13.00 (med) /      23.42 (mean) /      63.70 (max)
+22:38:42 DEBUG Iteration 1421
+22:38:43 DEBUG Iteration 1422
+22:38:43 DEBUG Iteration 1423
+22:38:43 DEBUG Iteration 1424
+22:38:43 DEBUG Iteration 1425
+22:38:43 DEBUG Iteration 1426
+22:38:43 DEBUG Iteration 1427
+22:38:43 DEBUG Iteration 1428
+22:38:44 DEBUG Iteration 1429
+22:38:44 DEBUG Iteration 1430
+22:38:44 INFO Iter:   1430,  Acc:     100.00,  Flips:       9.50 (med) /      22.36 (mean) /      43.50 (max)
+22:38:44 DEBUG Iteration 1431
+22:38:45 DEBUG Iteration 1432
+22:38:45 DEBUG Iteration 1433
+22:38:45 DEBUG Iteration 1434
+22:38:46 DEBUG Iteration 1435
+22:38:46 DEBUG Iteration 1436
+22:38:46 DEBUG Iteration 1437
+22:38:46 DEBUG Iteration 1438
+22:38:47 DEBUG Iteration 1439
+22:38:47 DEBUG Iteration 1440
+22:38:47 INFO Iter:   1440,  Acc:     100.00,  Flips:      17.00 (med) /      29.18 (mean) /      59.90 (max)
+22:38:47 DEBUG Iteration 1441
+22:38:48 DEBUG Iteration 1442
+22:38:48 DEBUG Iteration 1443
+22:38:48 DEBUG Iteration 1444
+22:38:48 DEBUG Iteration 1445
+22:38:48 DEBUG Iteration 1446
+22:38:49 DEBUG Iteration 1447
+22:38:49 DEBUG Iteration 1448
+22:38:49 DEBUG Iteration 1449
+22:38:50 DEBUG Iteration 1450
+22:38:50 INFO Iter:   1450,  Acc:     100.00,  Flips:      12.00 (med) /      22.40 (mean) /      56.20 (max)
+22:38:50 INFO Saving last model parameters
+22:38:50 INFO Saving stats
+22:42:45 INFO (Eval)    Acc:      92.00,  Flips:     110.00 (med) /     120.33 (mean) /     227.00 (max)
+22:42:45 DEBUG Iteration 1451
+22:42:46 DEBUG Iteration 1452
+22:42:46 DEBUG Iteration 1453
+22:42:46 DEBUG Iteration 1454
+22:42:46 DEBUG Iteration 1455
+22:42:47 DEBUG Iteration 1456
+22:42:47 DEBUG Iteration 1457
+22:42:47 DEBUG Iteration 1458
+22:42:48 DEBUG Iteration 1459
+22:42:48 DEBUG Iteration 1460
+22:42:48 INFO Iter:   1460,  Acc:     100.00,  Flips:      18.50 (med) /      29.18 (mean) /      67.70 (max)
+22:42:48 DEBUG Iteration 1461
+22:42:49 DEBUG Iteration 1462
+22:42:49 DEBUG Iteration 1463
+22:42:49 DEBUG Iteration 1464
+22:42:50 DEBUG Iteration 1465
+22:42:50 DEBUG Iteration 1466
+22:42:50 DEBUG Iteration 1467
+22:42:50 DEBUG Iteration 1468
+22:42:50 DEBUG Iteration 1469
+22:42:50 DEBUG Iteration 1470
+22:42:51 INFO Iter:   1470,  Acc:     100.00,  Flips:      12.50 (med) /      20.02 (mean) /      46.20 (max)
+22:42:51 DEBUG Iteration 1471
+22:42:51 DEBUG Iteration 1472
+22:42:51 DEBUG Iteration 1473
+22:42:51 DEBUG Iteration 1474
+22:42:52 DEBUG Iteration 1475
+22:42:52 DEBUG Iteration 1476
+22:42:52 DEBUG Iteration 1477
+22:42:52 DEBUG Iteration 1478
+22:42:52 DEBUG Iteration 1479
+22:42:52 DEBUG Iteration 1480
+22:42:52 INFO Iter:   1480,  Acc:     100.00,  Flips:      12.00 (med) /      16.94 (mean) /      39.80 (max)
+22:42:52 DEBUG Iteration 1481
+22:42:53 DEBUG Iteration 1482
+22:42:53 DEBUG Iteration 1483
+22:42:53 DEBUG Iteration 1484
+22:42:53 DEBUG Iteration 1485
+22:42:53 DEBUG Iteration 1486
+22:42:53 DEBUG Iteration 1487
+22:42:55 DEBUG Iteration 1488
+22:42:55 DEBUG Iteration 1489
+22:42:55 DEBUG Iteration 1490
+22:42:55 INFO Iter:   1490,  Acc:     100.00,  Flips:      14.00 (med) /      25.06 (mean) /      52.20 (max)
+22:42:55 DEBUG Iteration 1491
+22:42:55 DEBUG Iteration 1492
+22:42:56 DEBUG Iteration 1493
+22:42:56 DEBUG Iteration 1494
+22:42:56 DEBUG Iteration 1495
+22:42:56 DEBUG Iteration 1496
+22:42:56 DEBUG Iteration 1497
+22:42:56 DEBUG Iteration 1498
+22:42:56 DEBUG Iteration 1499
+22:42:56 DEBUG Iteration 1500
+22:42:57 INFO Iter:   1500,  Acc:     100.00,  Flips:      12.00 (med) /      13.06 (mean) /      24.90 (max)
+22:42:57 INFO Saving last model parameters
+22:42:57 INFO Saving stats
+22:46:38 INFO (Eval)    Acc:      84.00,  Flips:      93.00 (med) /     121.39 (mean) /     228.00 (max)
+22:46:38 DEBUG Iteration 1501
+22:46:38 DEBUG Iteration 1502
+22:46:39 DEBUG Iteration 1503
+22:46:39 DEBUG Iteration 1504
+22:46:39 DEBUG Iteration 1505
+22:46:39 DEBUG Iteration 1506
+22:46:39 DEBUG Iteration 1507
+22:46:39 DEBUG Iteration 1508
+22:46:40 DEBUG Iteration 1509
+22:46:40 DEBUG Iteration 1510
+22:46:40 INFO Iter:   1510,  Acc:     100.00,  Flips:      18.00 (med) /      19.34 (mean) /      39.00 (max)
+22:46:40 DEBUG Iteration 1511
+22:46:40 DEBUG Iteration 1512
+22:46:40 DEBUG Iteration 1513
+22:46:41 DEBUG Iteration 1514
+22:46:41 DEBUG Iteration 1515
+22:46:41 DEBUG Iteration 1516
+22:46:42 DEBUG Iteration 1517
+22:46:42 DEBUG Iteration 1518
+22:46:42 DEBUG Iteration 1519
+22:46:42 DEBUG Iteration 1520
+22:46:43 INFO Iter:   1520,  Acc:     100.00,  Flips:      26.50 (med) /      24.56 (mean) /      50.30 (max)
+22:46:43 DEBUG Iteration 1521
+22:46:43 DEBUG Iteration 1522
+22:46:43 DEBUG Iteration 1523
+22:46:43 DEBUG Iteration 1524
+22:46:43 DEBUG Iteration 1525
+22:46:44 DEBUG Iteration 1526
+22:46:44 DEBUG Iteration 1527
+22:46:44 DEBUG Iteration 1528
+22:46:45 DEBUG Iteration 1529
+22:46:45 DEBUG Iteration 1530
+22:46:45 INFO Iter:   1530,  Acc:     100.00,  Flips:      18.00 (med) /      28.54 (mean) /      69.30 (max)
+22:46:45 DEBUG Iteration 1531
+22:46:46 DEBUG Iteration 1532
+22:46:46 DEBUG Iteration 1533
+22:46:46 DEBUG Iteration 1534
+22:46:46 DEBUG Iteration 1535
+22:46:46 DEBUG Iteration 1536
+22:46:46 DEBUG Iteration 1537
+22:46:47 DEBUG Iteration 1538
+22:46:47 DEBUG Iteration 1539
+22:46:47 DEBUG Iteration 1540
+22:46:47 INFO Iter:   1540,  Acc:     100.00,  Flips:      13.50 (med) /      18.98 (mean) /      38.30 (max)
+22:46:47 DEBUG Iteration 1541
+22:46:47 DEBUG Iteration 1542
+22:46:48 DEBUG Iteration 1543
+22:46:48 DEBUG Iteration 1544
+22:46:48 DEBUG Iteration 1545
+22:46:48 DEBUG Iteration 1546
+22:46:48 DEBUG Iteration 1547
+22:46:48 DEBUG Iteration 1548
+22:46:49 DEBUG Iteration 1549
+22:46:49 DEBUG Iteration 1550
+22:46:49 INFO Iter:   1550,  Acc:     100.00,  Flips:      13.50 (med) /      16.20 (mean) /      34.40 (max)
+22:46:49 INFO Saving last model parameters
+22:46:49 INFO Saving stats
+22:50:26 INFO (Eval)    Acc:      88.00,  Flips:     101.00 (med) /     116.30 (mean) /     234.28 (max)
+22:50:26 DEBUG Iteration 1551
+22:50:26 DEBUG Iteration 1552
+22:50:27 DEBUG Iteration 1553
+22:50:27 DEBUG Iteration 1554
+22:50:27 DEBUG Iteration 1555
+22:50:27 DEBUG Iteration 1556
+22:50:27 DEBUG Iteration 1557
+22:50:28 DEBUG Iteration 1558
+22:50:28 DEBUG Iteration 1559
+22:50:29 DEBUG Iteration 1560
+22:50:29 INFO Iter:   1560,  Acc:     100.00,  Flips:      14.50 (med) /      26.48 (mean) /      62.80 (max)
+22:50:29 DEBUG Iteration 1561
+22:50:29 DEBUG Iteration 1562
+22:50:30 DEBUG Iteration 1563
+22:50:30 DEBUG Iteration 1564
+22:50:31 DEBUG Iteration 1565
+22:50:31 DEBUG Iteration 1566
+22:50:31 DEBUG Iteration 1567
+22:50:31 DEBUG Iteration 1568
+22:50:32 DEBUG Iteration 1569
+22:50:32 DEBUG Iteration 1570
+22:50:32 INFO Iter:   1570,  Acc:     100.00,  Flips:      22.00 (med) /      33.70 (mean) /      74.90 (max)
+22:50:32 DEBUG Iteration 1571
+22:50:32 DEBUG Iteration 1572
+22:50:33 DEBUG Iteration 1573
+22:50:33 DEBUG Iteration 1574
+22:50:34 DEBUG Iteration 1575
+22:50:34 DEBUG Iteration 1576
+22:50:35 DEBUG Iteration 1577
+22:50:35 DEBUG Iteration 1578
+22:50:35 DEBUG Iteration 1579
+22:50:35 DEBUG Iteration 1580
+22:50:35 INFO Iter:   1580,  Acc:     100.00,  Flips:      19.00 (med) /      31.72 (mean) /      70.30 (max)
+22:50:35 DEBUG Iteration 1581
+22:50:35 DEBUG Iteration 1582
+22:50:36 DEBUG Iteration 1583
+22:50:37 DEBUG Iteration 1584
+22:50:37 DEBUG Iteration 1585
+22:50:37 DEBUG Iteration 1586
+22:50:37 DEBUG Iteration 1587
+22:50:37 DEBUG Iteration 1588
+22:50:37 DEBUG Iteration 1589
+22:50:38 DEBUG Iteration 1590
+22:50:38 INFO Iter:   1590,  Acc:     100.00,  Flips:      14.50 (med) /      22.16 (mean) /      46.70 (max)
+22:50:38 DEBUG Iteration 1591
+22:50:38 DEBUG Iteration 1592
+22:50:38 DEBUG Iteration 1593
+22:50:38 DEBUG Iteration 1594
+22:50:38 DEBUG Iteration 1595
+22:50:39 DEBUG Iteration 1596
+22:50:39 DEBUG Iteration 1597
+22:50:39 DEBUG Iteration 1598
+22:50:40 DEBUG Iteration 1599
+22:50:40 DEBUG Iteration 1600
+22:50:41 INFO Iter:   1600,  Acc:     100.00,  Flips:      15.00 (med) /      28.54 (mean) /      56.40 (max)
+22:50:41 INFO Saving last model parameters
+22:50:41 INFO Saving stats
+22:54:12 INFO (Eval)    Acc:      96.00,  Flips:      96.00 (med) /     106.12 (mean) /     222.80 (max)
+22:54:12 DEBUG Iteration 1601
+22:54:13 DEBUG Iteration 1602
+22:54:13 DEBUG Iteration 1603
+22:54:13 DEBUG Iteration 1604
+22:54:14 DEBUG Iteration 1605
+22:54:14 DEBUG Iteration 1606
+22:54:14 DEBUG Iteration 1607
+22:54:15 DEBUG Iteration 1608
+22:54:15 DEBUG Iteration 1609
+22:54:16 DEBUG Iteration 1610
+22:54:16 INFO Iter:   1610,  Acc:     100.00,  Flips:      16.00 (med) /      35.46 (mean) /      86.20 (max)
+22:54:16 DEBUG Iteration 1611
+22:54:16 DEBUG Iteration 1612
+22:54:16 DEBUG Iteration 1613
+22:54:16 DEBUG Iteration 1614
+22:54:16 DEBUG Iteration 1615
+22:54:16 DEBUG Iteration 1616
+22:54:17 DEBUG Iteration 1617
+22:54:17 DEBUG Iteration 1618
+22:54:17 DEBUG Iteration 1619
+22:54:18 DEBUG Iteration 1620
+22:54:19 INFO Iter:   1620,  Acc:     100.00,  Flips:      10.50 (med) /      24.94 (mean) /      45.60 (max)
+22:54:19 DEBUG Iteration 1621
+22:54:19 DEBUG Iteration 1622
+22:54:19 DEBUG Iteration 1623
+22:54:20 DEBUG Iteration 1624
+22:54:20 DEBUG Iteration 1625
+22:54:20 DEBUG Iteration 1626
+22:54:20 DEBUG Iteration 1627
+22:54:20 DEBUG Iteration 1628
+22:54:20 DEBUG Iteration 1629
+22:54:21 DEBUG Iteration 1630
+22:54:21 INFO Iter:   1630,  Acc:     100.00,  Flips:      13.00 (med) /      22.92 (mean) /      52.80 (max)
+22:54:21 DEBUG Iteration 1631
+22:54:21 DEBUG Iteration 1632
+22:54:21 DEBUG Iteration 1633
+22:54:21 DEBUG Iteration 1634
+22:54:21 DEBUG Iteration 1635
+22:54:22 DEBUG Iteration 1636
+22:54:22 DEBUG Iteration 1637
+22:54:22 DEBUG Iteration 1638
+22:54:22 DEBUG Iteration 1639
+22:54:22 DEBUG Iteration 1640
+22:54:22 INFO Iter:   1640,  Acc:     100.00,  Flips:       8.00 (med) /      11.64 (mean) /      23.90 (max)
+22:54:22 DEBUG Iteration 1641
+22:54:22 DEBUG Iteration 1642
+22:54:23 DEBUG Iteration 1643
+22:54:23 DEBUG Iteration 1644
+22:54:23 DEBUG Iteration 1645
+22:54:23 DEBUG Iteration 1646
+22:54:23 DEBUG Iteration 1647
+22:54:24 DEBUG Iteration 1648
+22:54:24 DEBUG Iteration 1649
+22:54:25 DEBUG Iteration 1650
+22:54:25 INFO Iter:   1650,  Acc:     100.00,  Flips:      15.50 (med) /      29.28 (mean) /      63.90 (max)
+22:54:25 INFO Saving last model parameters
+22:54:25 INFO Saving stats
+22:57:55 INFO (Eval)    Acc:     100.00,  Flips:      78.00 (med) /     100.82 (mean) /     213.60 (max)
+22:57:55 DEBUG Iteration 1651
+22:57:55 DEBUG Iteration 1652
+22:57:55 DEBUG Iteration 1653
+22:57:55 DEBUG Iteration 1654
+22:57:55 DEBUG Iteration 1655
+22:57:55 DEBUG Iteration 1656
+22:57:56 DEBUG Iteration 1657
+22:57:56 DEBUG Iteration 1658
+22:57:57 DEBUG Iteration 1659
+22:57:57 DEBUG Iteration 1660
+22:57:57 INFO Iter:   1660,  Acc:     100.00,  Flips:      10.50 (med) /      20.10 (mean) /      44.40 (max)
+22:57:57 DEBUG Iteration 1661
+22:57:57 DEBUG Iteration 1662
+22:57:57 DEBUG Iteration 1663
+22:57:57 DEBUG Iteration 1664
+22:57:58 DEBUG Iteration 1665
+22:57:59 DEBUG Iteration 1666
+22:57:59 DEBUG Iteration 1667
+22:57:59 DEBUG Iteration 1668
+22:57:59 DEBUG Iteration 1669
+22:57:59 DEBUG Iteration 1670
+22:57:59 INFO Iter:   1670,  Acc:     100.00,  Flips:       8.50 (med) /      21.42 (mean) /      37.20 (max)
+22:57:59 DEBUG Iteration 1671
+22:57:59 DEBUG Iteration 1672
+22:57:59 DEBUG Iteration 1673
+22:57:59 DEBUG Iteration 1674
+22:57:59 DEBUG Iteration 1675
+22:57:59 DEBUG Iteration 1676
+22:58:00 DEBUG Iteration 1677
+22:58:00 DEBUG Iteration 1678
+22:58:00 DEBUG Iteration 1679
+22:58:00 DEBUG Iteration 1680
+22:58:00 INFO Iter:   1680,  Acc:     100.00,  Flips:       4.50 (med) /      10.34 (mean) /      23.20 (max)
+22:58:00 DEBUG Iteration 1681
+22:58:00 DEBUG Iteration 1682
+22:58:00 DEBUG Iteration 1683
+22:58:01 DEBUG Iteration 1684
+22:58:01 DEBUG Iteration 1685
+22:58:01 DEBUG Iteration 1686
+22:58:02 DEBUG Iteration 1687
+22:58:02 DEBUG Iteration 1688
+22:58:02 DEBUG Iteration 1689
+22:58:03 DEBUG Iteration 1690
+22:58:03 INFO Iter:   1690,  Acc:     100.00,  Flips:      15.50 (med) /      26.32 (mean) /      61.00 (max)
+22:58:03 DEBUG Iteration 1691
+22:58:03 DEBUG Iteration 1692
+22:58:03 DEBUG Iteration 1693
+22:58:03 DEBUG Iteration 1694
+22:58:04 DEBUG Iteration 1695
+22:58:04 DEBUG Iteration 1696
+22:58:05 DEBUG Iteration 1697
+22:58:05 DEBUG Iteration 1698
+22:58:06 DEBUG Iteration 1699
+22:58:06 DEBUG Iteration 1700
+22:58:06 INFO Iter:   1700,  Acc:     100.00,  Flips:      11.50 (med) /      32.24 (mean) /      79.10 (max)
+22:58:06 INFO Saving last model parameters
+22:58:06 INFO Saving stats
+23:02:11 INFO (Eval)    Acc:      80.00,  Flips:      99.00 (med) /     116.24 (mean) /     212.92 (max)
+23:02:11 DEBUG Iteration 1701
+23:02:11 DEBUG Iteration 1702
+23:02:11 DEBUG Iteration 1703
+23:02:11 DEBUG Iteration 1704
+23:02:12 DEBUG Iteration 1705
+23:02:12 DEBUG Iteration 1706
+23:02:12 DEBUG Iteration 1707
+23:02:12 DEBUG Iteration 1708
+23:02:12 DEBUG Iteration 1709
+23:02:13 DEBUG Iteration 1710
+23:02:13 INFO Iter:   1710,  Acc:     100.00,  Flips:      12.50 (med) /      22.00 (mean) /      43.60 (max)
+23:02:13 DEBUG Iteration 1711
+23:02:13 DEBUG Iteration 1712
+23:02:13 DEBUG Iteration 1713
+23:02:14 DEBUG Iteration 1714
+23:02:14 DEBUG Iteration 1715
+23:02:14 DEBUG Iteration 1716
+23:02:15 DEBUG Iteration 1717
+23:02:15 DEBUG Iteration 1718
+23:02:15 DEBUG Iteration 1719
+23:02:15 DEBUG Iteration 1720
+23:02:15 INFO Iter:   1720,  Acc:     100.00,  Flips:      15.00 (med) /      20.34 (mean) /      37.70 (max)
+23:02:15 DEBUG Iteration 1721
+23:02:15 DEBUG Iteration 1722
+23:02:16 DEBUG Iteration 1723
+23:02:17 DEBUG Iteration 1724
+23:02:17 DEBUG Iteration 1725
+23:02:17 DEBUG Iteration 1726
+23:02:18 DEBUG Iteration 1727
+23:02:18 DEBUG Iteration 1728
+23:02:18 DEBUG Iteration 1729
+23:02:18 DEBUG Iteration 1730
+23:02:18 INFO Iter:   1730,  Acc:     100.00,  Flips:      22.00 (med) /      27.50 (mean) /      48.40 (max)
+23:02:18 DEBUG Iteration 1731
+23:02:19 DEBUG Iteration 1732
+23:02:19 DEBUG Iteration 1733
+23:02:19 DEBUG Iteration 1734
+23:02:19 DEBUG Iteration 1735
+23:02:20 DEBUG Iteration 1736
+23:02:20 DEBUG Iteration 1737
+23:02:21 DEBUG Iteration 1738
+23:02:21 DEBUG Iteration 1739
+23:02:21 DEBUG Iteration 1740
+23:02:21 INFO Iter:   1740,  Acc:     100.00,  Flips:      17.00 (med) /      25.22 (mean) /      57.10 (max)
+23:02:21 DEBUG Iteration 1741
+23:02:21 DEBUG Iteration 1742
+23:02:21 DEBUG Iteration 1743
+23:02:22 DEBUG Iteration 1744
+23:02:22 DEBUG Iteration 1745
+23:02:22 DEBUG Iteration 1746
+23:02:22 DEBUG Iteration 1747
+23:02:22 DEBUG Iteration 1748
+23:02:22 DEBUG Iteration 1749
+23:02:23 DEBUG Iteration 1750
+23:02:23 INFO Iter:   1750,  Acc:     100.00,  Flips:      12.50 (med) /      15.04 (mean) /      28.10 (max)
+23:02:23 INFO Saving last model parameters
+23:02:23 INFO Saving stats
+23:06:13 INFO (Eval)    Acc:      80.00,  Flips:     127.00 (med) /     126.76 (mean) /     231.20 (max)
+23:06:13 DEBUG Iteration 1751
+23:06:14 DEBUG Iteration 1752
+23:06:14 DEBUG Iteration 1753
+23:06:14 DEBUG Iteration 1754
+23:06:14 DEBUG Iteration 1755
+23:06:14 DEBUG Iteration 1756
+23:06:15 DEBUG Iteration 1757
+23:06:15 DEBUG Iteration 1758
+23:06:15 DEBUG Iteration 1759
+23:06:15 DEBUG Iteration 1760
+23:06:15 INFO Iter:   1760,  Acc:     100.00,  Flips:      10.50 (med) /      20.36 (mean) /      38.60 (max)
+23:06:15 DEBUG Iteration 1761
+23:06:16 DEBUG Iteration 1762
+23:06:16 DEBUG Iteration 1763
+23:06:17 DEBUG Iteration 1764
+23:06:17 DEBUG Iteration 1765
+23:06:17 DEBUG Iteration 1766
+23:06:17 DEBUG Iteration 1767
+23:06:17 DEBUG Iteration 1768
+23:06:18 DEBUG Iteration 1769
+23:06:18 DEBUG Iteration 1770
+23:06:18 INFO Iter:   1770,  Acc:     100.00,  Flips:      15.00 (med) /      20.12 (mean) /      36.40 (max)
+23:06:18 DEBUG Iteration 1771
+23:06:19 DEBUG Iteration 1772
+23:06:19 DEBUG Iteration 1773
+23:06:19 DEBUG Iteration 1774
+23:06:19 DEBUG Iteration 1775
+23:06:20 DEBUG Iteration 1776
+23:06:20 DEBUG Iteration 1777
+23:06:21 DEBUG Iteration 1778
+23:06:21 DEBUG Iteration 1779
+23:06:22 DEBUG Iteration 1780
+23:06:22 INFO Iter:   1780,  Acc:     100.00,  Flips:      25.50 (med) /      35.94 (mean) /      74.00 (max)
+23:06:22 DEBUG Iteration 1781
+23:06:22 DEBUG Iteration 1782
+23:06:22 DEBUG Iteration 1783
+23:06:23 DEBUG Iteration 1784
+23:06:23 DEBUG Iteration 1785
+23:06:23 DEBUG Iteration 1786
+23:06:23 DEBUG Iteration 1787
+23:06:23 DEBUG Iteration 1788
+23:06:24 DEBUG Iteration 1789
+23:06:24 DEBUG Iteration 1790
+23:06:25 INFO Iter:   1790,  Acc:     100.00,  Flips:      20.00 (med) /      28.32 (mean) /      52.60 (max)
+23:06:25 DEBUG Iteration 1791
+23:06:25 DEBUG Iteration 1792
+23:06:26 DEBUG Iteration 1793
+23:06:26 DEBUG Iteration 1794
+23:06:26 DEBUG Iteration 1795
+23:06:26 DEBUG Iteration 1796
+23:06:27 DEBUG Iteration 1797
+23:06:27 DEBUG Iteration 1798
+23:06:27 DEBUG Iteration 1799
+23:06:27 DEBUG Iteration 1800
+23:06:27 INFO Iter:   1800,  Acc:     100.00,  Flips:      21.00 (med) /      24.84 (mean) /      47.20 (max)
+23:06:27 INFO Saving last model parameters
+23:06:27 INFO Saving stats
+23:10:33 INFO (Eval)    Acc:      96.00,  Flips:     120.00 (med) /     121.02 (mean) /     228.04 (max)
+23:10:33 DEBUG Iteration 1801
+23:10:33 DEBUG Iteration 1802
+23:10:34 DEBUG Iteration 1803
+23:10:34 DEBUG Iteration 1804
+23:10:34 DEBUG Iteration 1805
+23:10:34 DEBUG Iteration 1806
+23:10:34 DEBUG Iteration 1807
+23:10:34 DEBUG Iteration 1808
+23:10:35 DEBUG Iteration 1809
+23:10:35 DEBUG Iteration 1810
+23:10:35 INFO Iter:   1810,  Acc:     100.00,  Flips:      12.50 (med) /      13.00 (mean) /      23.00 (max)
+23:10:35 DEBUG Iteration 1811
+23:10:35 DEBUG Iteration 1812
+23:10:35 DEBUG Iteration 1813
+23:10:36 DEBUG Iteration 1814
+23:10:36 DEBUG Iteration 1815
+23:10:36 DEBUG Iteration 1816
+23:10:37 DEBUG Iteration 1817
+23:10:37 DEBUG Iteration 1818
+23:10:37 DEBUG Iteration 1819
+23:10:37 DEBUG Iteration 1820
+23:10:37 INFO Iter:   1820,  Acc:     100.00,  Flips:      10.00 (med) /      25.48 (mean) /      47.30 (max)
+23:10:37 DEBUG Iteration 1821
+23:10:37 DEBUG Iteration 1822
+23:10:38 DEBUG Iteration 1823
+23:10:38 DEBUG Iteration 1824
+23:10:39 DEBUG Iteration 1825
+23:10:39 DEBUG Iteration 1826
+23:10:39 DEBUG Iteration 1827
+23:10:40 DEBUG Iteration 1828
+23:10:40 DEBUG Iteration 1829
+23:10:40 DEBUG Iteration 1830
+23:10:40 INFO Iter:   1830,  Acc:     100.00,  Flips:      19.50 (med) /      27.58 (mean) /      56.10 (max)
+23:10:40 DEBUG Iteration 1831
+23:10:41 DEBUG Iteration 1832
+23:10:41 DEBUG Iteration 1833
+23:10:41 DEBUG Iteration 1834
+23:10:41 DEBUG Iteration 1835
+23:10:41 DEBUG Iteration 1836
+23:10:41 DEBUG Iteration 1837
+23:10:41 DEBUG Iteration 1838
+23:10:41 DEBUG Iteration 1839
+23:10:41 DEBUG Iteration 1840
+23:10:42 INFO Iter:   1840,  Acc:     100.00,  Flips:       7.50 (med) /      11.54 (mean) /      20.40 (max)
+23:10:42 DEBUG Iteration 1841
+23:10:42 DEBUG Iteration 1842
+23:10:42 DEBUG Iteration 1843
+23:10:42 DEBUG Iteration 1844
+23:10:42 DEBUG Iteration 1845
+23:10:43 DEBUG Iteration 1846
+23:10:43 DEBUG Iteration 1847
+23:10:43 DEBUG Iteration 1848
+23:10:43 DEBUG Iteration 1849
+23:10:43 DEBUG Iteration 1850
+23:10:43 INFO Iter:   1850,  Acc:     100.00,  Flips:      18.00 (med) /      17.64 (mean) /      32.60 (max)
+23:10:43 INFO Saving last model parameters
+23:10:43 INFO Saving stats
+23:15:30 INFO (Eval)    Acc:     100.00,  Flips:     111.00 (med) /     113.48 (mean) /     214.16 (max)
+23:15:30 DEBUG Iteration 1851
+23:15:31 DEBUG Iteration 1852
+23:15:31 DEBUG Iteration 1853
+23:15:32 DEBUG Iteration 1854
+23:15:32 DEBUG Iteration 1855
+23:15:32 DEBUG Iteration 1856
+23:15:32 DEBUG Iteration 1857
+23:15:32 DEBUG Iteration 1858
+23:15:32 DEBUG Iteration 1859
+23:15:32 DEBUG Iteration 1860
+23:15:33 INFO Iter:   1860,  Acc:     100.00,  Flips:      15.50 (med) /      23.42 (mean) /      43.80 (max)
+23:15:33 DEBUG Iteration 1861
+23:15:33 DEBUG Iteration 1862
+23:15:33 DEBUG Iteration 1863
+23:15:33 DEBUG Iteration 1864
+23:15:33 DEBUG Iteration 1865
+23:15:34 DEBUG Iteration 1866
+23:15:34 DEBUG Iteration 1867
+23:15:34 DEBUG Iteration 1868
+23:15:34 DEBUG Iteration 1869
+23:15:34 DEBUG Iteration 1870
+23:15:35 INFO Iter:   1870,  Acc:     100.00,  Flips:      13.00 (med) /      16.88 (mean) /      28.30 (max)
+23:15:35 DEBUG Iteration 1871
+23:15:35 DEBUG Iteration 1872
+23:15:35 DEBUG Iteration 1873
+23:15:35 DEBUG Iteration 1874
+23:15:36 DEBUG Iteration 1875
+23:15:36 DEBUG Iteration 1876
+23:15:36 DEBUG Iteration 1877
+23:15:37 DEBUG Iteration 1878
+23:15:37 DEBUG Iteration 1879
+23:15:37 DEBUG Iteration 1880
+23:15:37 INFO Iter:   1880,  Acc:     100.00,  Flips:      13.50 (med) /      26.50 (mean) /      52.30 (max)
+23:15:37 DEBUG Iteration 1881
+23:15:37 DEBUG Iteration 1882
+23:15:38 DEBUG Iteration 1883
+23:15:38 DEBUG Iteration 1884
+23:15:38 DEBUG Iteration 1885
+23:15:38 DEBUG Iteration 1886
+23:15:38 DEBUG Iteration 1887
+23:15:38 DEBUG Iteration 1888
+23:15:38 DEBUG Iteration 1889
+23:15:39 DEBUG Iteration 1890
+23:15:39 INFO Iter:   1890,  Acc:     100.00,  Flips:      11.50 (med) /      18.46 (mean) /      44.60 (max)
+23:15:39 DEBUG Iteration 1891
+23:15:40 DEBUG Iteration 1892
+23:15:40 DEBUG Iteration 1893
+23:15:40 DEBUG Iteration 1894
+23:15:40 DEBUG Iteration 1895
+23:15:41 DEBUG Iteration 1896
+23:15:41 DEBUG Iteration 1897
+23:15:41 DEBUG Iteration 1898
+23:15:41 DEBUG Iteration 1899
+23:15:42 DEBUG Iteration 1900
+23:15:42 INFO Iter:   1900,  Acc:     100.00,  Flips:      15.50 (med) /      25.00 (mean) /      57.80 (max)
+23:15:42 INFO Saving last model parameters
+23:15:42 INFO Saving stats
+23:19:49 INFO (Eval)    Acc:     100.00,  Flips:      95.00 (med) /     111.21 (mean) /     225.40 (max)
+23:19:49 DEBUG Iteration 1901
+23:19:49 DEBUG Iteration 1902
+23:19:49 DEBUG Iteration 1903
+23:19:49 DEBUG Iteration 1904
+23:19:49 DEBUG Iteration 1905
+23:19:50 DEBUG Iteration 1906
+23:19:50 DEBUG Iteration 1907
+23:19:51 DEBUG Iteration 1908
+23:19:51 DEBUG Iteration 1909
+23:19:51 DEBUG Iteration 1910
+23:19:51 INFO Iter:   1910,  Acc:     100.00,  Flips:      14.50 (med) /      24.76 (mean) /      46.80 (max)
+23:19:51 DEBUG Iteration 1911
+23:19:52 DEBUG Iteration 1912
+23:19:52 DEBUG Iteration 1913
+23:19:53 DEBUG Iteration 1914
+23:19:53 DEBUG Iteration 1915
+23:19:53 DEBUG Iteration 1916
+23:19:54 DEBUG Iteration 1917
+23:19:54 DEBUG Iteration 1918
+23:19:54 DEBUG Iteration 1919
+23:19:54 DEBUG Iteration 1920
+23:19:54 INFO Iter:   1920,  Acc:     100.00,  Flips:      20.00 (med) /      29.62 (mean) /      73.50 (max)
+23:19:54 DEBUG Iteration 1921
+23:19:55 DEBUG Iteration 1922
+23:19:55 DEBUG Iteration 1923
+23:19:55 DEBUG Iteration 1924
+23:19:55 DEBUG Iteration 1925
+23:19:56 DEBUG Iteration 1926
+23:19:56 DEBUG Iteration 1927
+23:19:56 DEBUG Iteration 1928
+23:19:56 DEBUG Iteration 1929
+23:19:56 DEBUG Iteration 1930
+23:19:57 INFO Iter:   1930,  Acc:     100.00,  Flips:      15.00 (med) /      28.96 (mean) /      52.30 (max)
+23:19:57 DEBUG Iteration 1931
+23:19:58 DEBUG Iteration 1932
+23:19:58 DEBUG Iteration 1933
+23:19:58 DEBUG Iteration 1934
+23:19:58 DEBUG Iteration 1935
+23:19:59 DEBUG Iteration 1936
+23:19:59 DEBUG Iteration 1937
+23:19:59 DEBUG Iteration 1938
+23:19:59 DEBUG Iteration 1939
+23:19:59 DEBUG Iteration 1940
+23:20:00 INFO Iter:   1940,  Acc:     100.00,  Flips:      13.50 (med) /      21.14 (mean) /      47.50 (max)
+23:20:00 DEBUG Iteration 1941
+23:20:00 DEBUG Iteration 1942
+23:20:00 DEBUG Iteration 1943
+23:20:00 DEBUG Iteration 1944
+23:20:00 DEBUG Iteration 1945
+23:20:01 DEBUG Iteration 1946
+23:20:01 DEBUG Iteration 1947
+23:20:01 DEBUG Iteration 1948
+23:20:01 DEBUG Iteration 1949
+23:20:01 DEBUG Iteration 1950
+23:20:01 INFO Iter:   1950,  Acc:     100.00,  Flips:      10.50 (med) /      16.94 (mean) /      36.00 (max)
+23:20:01 INFO Saving last model parameters
+23:20:01 INFO Saving stats
+23:23:36 INFO (Eval)    Acc:      92.00,  Flips:      98.00 (med) /     106.80 (mean) /     230.12 (max)
+23:23:36 DEBUG Iteration 1951
+23:23:36 DEBUG Iteration 1952
+23:23:36 DEBUG Iteration 1953
+23:23:37 DEBUG Iteration 1954
+23:23:37 DEBUG Iteration 1955
+23:23:37 DEBUG Iteration 1956
+23:23:37 DEBUG Iteration 1957
+23:23:38 DEBUG Iteration 1958
+23:23:38 DEBUG Iteration 1959
+23:23:38 DEBUG Iteration 1960
+23:23:38 INFO Iter:   1960,  Acc:     100.00,  Flips:      12.00 (med) /      23.78 (mean) /      57.40 (max)
+23:23:38 DEBUG Iteration 1961
+23:23:38 DEBUG Iteration 1962
+23:23:38 DEBUG Iteration 1963
+23:23:39 DEBUG Iteration 1964
+23:23:39 DEBUG Iteration 1965
+23:23:39 DEBUG Iteration 1966
+23:23:39 DEBUG Iteration 1967
+23:23:39 DEBUG Iteration 1968
+23:23:39 DEBUG Iteration 1969
+23:23:40 DEBUG Iteration 1970
+23:23:40 INFO Iter:   1970,  Acc:     100.00,  Flips:      10.50 (med) /      15.96 (mean) /      39.20 (max)
+23:23:40 DEBUG Iteration 1971
+23:23:40 DEBUG Iteration 1972
+23:23:40 DEBUG Iteration 1973
+23:23:40 DEBUG Iteration 1974
+23:23:40 DEBUG Iteration 1975
+23:23:41 DEBUG Iteration 1976
+23:23:41 DEBUG Iteration 1977
+23:23:41 DEBUG Iteration 1978
+23:23:41 DEBUG Iteration 1979
+23:23:41 DEBUG Iteration 1980
+23:23:43 INFO Iter:   1980,  Acc:     100.00,  Flips:      14.50 (med) /      27.80 (mean) /      48.50 (max)
+23:23:43 DEBUG Iteration 1981
+23:23:43 DEBUG Iteration 1982
+23:23:43 DEBUG Iteration 1983
+23:23:43 DEBUG Iteration 1984
+23:23:44 DEBUG Iteration 1985
+23:23:44 DEBUG Iteration 1986
+23:23:45 DEBUG Iteration 1987
+23:23:45 DEBUG Iteration 1988
+23:23:45 DEBUG Iteration 1989
+23:23:45 DEBUG Iteration 1990
+23:23:45 INFO Iter:   1990,  Acc:     100.00,  Flips:      11.50 (med) /      23.70 (mean) /      46.10 (max)
+23:23:45 DEBUG Iteration 1991
+23:23:46 DEBUG Iteration 1992
+23:23:47 DEBUG Iteration 1993
+23:23:47 DEBUG Iteration 1994
+23:23:47 DEBUG Iteration 1995
+23:23:47 DEBUG Iteration 1996
+23:23:47 DEBUG Iteration 1997
+23:23:47 DEBUG Iteration 1998
+23:23:47 DEBUG Iteration 1999
+23:23:47 DEBUG Iteration 2000
+23:23:48 INFO Iter:   2000,  Acc:     100.00,  Flips:       9.00 (med) /      25.94 (mean) /      58.40 (max)
+23:23:48 INFO Saving last model parameters
+23:23:48 INFO Saving stats
+23:27:33 INFO (Eval)    Acc:      92.00,  Flips:     128.00 (med) /     122.18 (mean) /     233.28 (max)
+23:27:33 DEBUG Iteration 2001
+23:27:33 DEBUG Iteration 2002
+23:27:34 DEBUG Iteration 2003
+23:27:34 DEBUG Iteration 2004
+23:27:35 DEBUG Iteration 2005
+23:27:36 DEBUG Iteration 2006
+23:27:36 DEBUG Iteration 2007
+23:27:37 DEBUG Iteration 2008
+23:27:37 DEBUG Iteration 2009
+23:27:37 DEBUG Iteration 2010
+23:27:37 INFO Iter:   2010,  Acc:     100.00,  Flips:      28.00 (med) /      45.52 (mean) /      97.00 (max)
+23:27:37 DEBUG Iteration 2011
+23:27:38 DEBUG Iteration 2012
+23:27:38 DEBUG Iteration 2013
+23:27:38 DEBUG Iteration 2014
+23:27:38 DEBUG Iteration 2015
+23:27:38 DEBUG Iteration 2016
+23:27:38 DEBUG Iteration 2017
+23:27:39 DEBUG Iteration 2018
+23:27:39 DEBUG Iteration 2019
+23:27:40 DEBUG Iteration 2020
+23:27:40 INFO Iter:   2020,  Acc:     100.00,  Flips:      14.50 (med) /      23.80 (mean) /      57.50 (max)
+23:27:40 DEBUG Iteration 2021
+23:27:40 DEBUG Iteration 2022
+23:27:41 DEBUG Iteration 2023
+23:27:41 DEBUG Iteration 2024
+23:27:41 DEBUG Iteration 2025
+23:27:41 DEBUG Iteration 2026
+23:27:41 DEBUG Iteration 2027
+23:27:42 DEBUG Iteration 2028
+23:27:42 DEBUG Iteration 2029
+23:27:42 DEBUG Iteration 2030
+23:27:42 INFO Iter:   2030,  Acc:     100.00,  Flips:      10.50 (med) /      19.26 (mean) /      39.30 (max)
+23:27:42 DEBUG Iteration 2031
+23:27:42 DEBUG Iteration 2032
+23:27:42 DEBUG Iteration 2033
+23:27:42 DEBUG Iteration 2034
+23:27:42 DEBUG Iteration 2035
+23:27:43 DEBUG Iteration 2036
+23:27:43 DEBUG Iteration 2037
+23:27:43 DEBUG Iteration 2038
+23:27:43 DEBUG Iteration 2039
+23:27:43 DEBUG Iteration 2040
+23:27:43 INFO Iter:   2040,  Acc:     100.00,  Flips:      13.00 (med) /      15.10 (mean) /      31.30 (max)
+23:27:43 DEBUG Iteration 2041
+23:27:44 DEBUG Iteration 2042
+23:27:44 DEBUG Iteration 2043
+23:27:44 DEBUG Iteration 2044
+23:27:45 DEBUG Iteration 2045
+23:27:45 DEBUG Iteration 2046
+23:27:45 DEBUG Iteration 2047
+23:27:45 DEBUG Iteration 2048
+23:27:45 DEBUG Iteration 2049
+23:27:45 DEBUG Iteration 2050
+23:27:46 INFO Iter:   2050,  Acc:     100.00,  Flips:      10.00 (med) /      21.22 (mean) /      42.30 (max)
+23:27:46 INFO Saving last model parameters
+23:27:46 INFO Saving stats
+23:31:22 INFO (Eval)    Acc:      96.00,  Flips:     118.00 (med) /     115.47 (mean) /     230.16 (max)
+23:31:22 DEBUG Iteration 2051
+23:31:22 DEBUG Iteration 2052
+23:31:22 DEBUG Iteration 2053
+23:31:22 DEBUG Iteration 2054
+23:31:23 DEBUG Iteration 2055
+23:31:23 DEBUG Iteration 2056
+23:31:23 DEBUG Iteration 2057
+23:31:24 DEBUG Iteration 2058
+23:31:24 DEBUG Iteration 2059
+23:31:24 DEBUG Iteration 2060
+23:31:24 INFO Iter:   2060,  Acc:     100.00,  Flips:       9.00 (med) /      20.00 (mean) /      43.00 (max)
+23:31:24 DEBUG Iteration 2061
+23:31:24 DEBUG Iteration 2062
+23:31:24 DEBUG Iteration 2063
+23:31:24 DEBUG Iteration 2064
+23:31:25 DEBUG Iteration 2065
+23:31:25 DEBUG Iteration 2066
+23:31:25 DEBUG Iteration 2067
+23:31:25 DEBUG Iteration 2068
+23:31:26 DEBUG Iteration 2069
+23:31:26 DEBUG Iteration 2070
+23:31:26 INFO Iter:   2070,  Acc:     100.00,  Flips:       8.00 (med) /      22.94 (mean) /      47.80 (max)
+23:31:26 DEBUG Iteration 2071
+23:31:26 DEBUG Iteration 2072
+23:31:26 DEBUG Iteration 2073
+23:31:27 DEBUG Iteration 2074
+23:31:27 DEBUG Iteration 2075
+23:31:27 DEBUG Iteration 2076
+23:31:28 DEBUG Iteration 2077
+23:31:28 DEBUG Iteration 2078
+23:31:29 DEBUG Iteration 2079
+23:31:29 DEBUG Iteration 2080
+23:31:29 INFO Iter:   2080,  Acc:     100.00,  Flips:      11.00 (med) /      27.98 (mean) /      73.30 (max)
+23:31:29 DEBUG Iteration 2081
+23:31:30 DEBUG Iteration 2082
+23:31:30 DEBUG Iteration 2083
+23:31:30 DEBUG Iteration 2084
+23:31:30 DEBUG Iteration 2085
+23:31:30 DEBUG Iteration 2086
+23:31:30 DEBUG Iteration 2087
+23:31:30 DEBUG Iteration 2088
+23:31:30 DEBUG Iteration 2089
+23:31:31 DEBUG Iteration 2090
+23:31:31 INFO Iter:   2090,  Acc:     100.00,  Flips:       8.50 (med) /      19.38 (mean) /      38.70 (max)
+23:31:31 DEBUG Iteration 2091
+23:31:31 DEBUG Iteration 2092
+23:31:31 DEBUG Iteration 2093
+23:31:32 DEBUG Iteration 2094
+23:31:32 DEBUG Iteration 2095
+23:31:32 DEBUG Iteration 2096
+23:31:32 DEBUG Iteration 2097
+23:31:32 DEBUG Iteration 2098
+23:31:32 DEBUG Iteration 2099
+23:31:33 DEBUG Iteration 2100
+23:31:33 INFO Iter:   2100,  Acc:     100.00,  Flips:      15.50 (med) /      20.62 (mean) /      43.20 (max)
+23:31:33 INFO Saving last model parameters
+23:31:33 INFO Saving stats
+23:35:09 INFO (Eval)    Acc:      96.00,  Flips:      99.00 (med) /     104.76 (mean) /     232.16 (max)
+23:35:09 DEBUG Iteration 2101
+23:35:09 DEBUG Iteration 2102
+23:35:10 DEBUG Iteration 2103
+23:35:10 DEBUG Iteration 2104
+23:35:10 DEBUG Iteration 2105
+23:35:10 DEBUG Iteration 2106
+23:35:11 DEBUG Iteration 2107
+23:35:11 DEBUG Iteration 2108
+23:35:11 DEBUG Iteration 2109
+23:35:12 DEBUG Iteration 2110
+23:35:12 INFO Iter:   2110,  Acc:     100.00,  Flips:      20.50 (med) /      32.64 (mean) /      72.50 (max)
+23:35:12 DEBUG Iteration 2111
+23:35:12 DEBUG Iteration 2112
+23:35:12 DEBUG Iteration 2113
+23:35:13 DEBUG Iteration 2114
+23:35:13 DEBUG Iteration 2115
+23:35:13 DEBUG Iteration 2116
+23:35:13 DEBUG Iteration 2117
+23:35:14 DEBUG Iteration 2118
+23:35:14 DEBUG Iteration 2119
+23:35:14 DEBUG Iteration 2120
+23:35:14 INFO Iter:   2120,  Acc:     100.00,  Flips:      13.00 (med) /      21.90 (mean) /      44.00 (max)
+23:35:14 DEBUG Iteration 2121
+23:35:15 DEBUG Iteration 2122
+23:35:15 DEBUG Iteration 2123
+23:35:15 DEBUG Iteration 2124
+23:35:15 DEBUG Iteration 2125
+23:35:16 DEBUG Iteration 2126
+23:35:16 DEBUG Iteration 2127
+23:35:16 DEBUG Iteration 2128
+23:35:16 DEBUG Iteration 2129
+23:35:16 DEBUG Iteration 2130
+23:35:16 INFO Iter:   2130,  Acc:     100.00,  Flips:      15.00 (med) /      22.72 (mean) /      52.50 (max)
+23:35:16 DEBUG Iteration 2131
+23:35:17 DEBUG Iteration 2132
+23:35:17 DEBUG Iteration 2133
+23:35:17 DEBUG Iteration 2134
+23:35:17 DEBUG Iteration 2135
+23:35:17 DEBUG Iteration 2136
+23:35:17 DEBUG Iteration 2137
+23:35:17 DEBUG Iteration 2138
+23:35:18 DEBUG Iteration 2139
+23:35:18 DEBUG Iteration 2140
+23:35:18 INFO Iter:   2140,  Acc:     100.00,  Flips:      11.00 (med) /      14.10 (mean) /      33.50 (max)
+23:35:18 DEBUG Iteration 2141
+23:35:19 DEBUG Iteration 2142
+23:35:19 DEBUG Iteration 2143
+23:35:19 DEBUG Iteration 2144
+23:35:20 DEBUG Iteration 2145
+23:35:20 DEBUG Iteration 2146
+23:35:20 DEBUG Iteration 2147
+23:35:20 DEBUG Iteration 2148
+23:35:20 DEBUG Iteration 2149
+23:35:20 DEBUG Iteration 2150
+23:35:21 INFO Iter:   2150,  Acc:     100.00,  Flips:      11.50 (med) /      27.20 (mean) /      55.50 (max)
+23:35:21 INFO Saving last model parameters
+23:35:21 INFO Saving stats
+23:38:56 INFO (Eval)    Acc:      92.00,  Flips:      89.00 (med) /     105.36 (mean) /     221.92 (max)
+23:38:56 DEBUG Iteration 2151
+23:38:56 DEBUG Iteration 2152
+23:38:56 DEBUG Iteration 2153
+23:38:57 DEBUG Iteration 2154
+23:38:57 DEBUG Iteration 2155
+23:38:57 DEBUG Iteration 2156
+23:38:57 DEBUG Iteration 2157
+23:38:58 DEBUG Iteration 2158
+23:38:58 DEBUG Iteration 2159
+23:38:59 DEBUG Iteration 2160
+23:38:59 INFO Iter:   2160,  Acc:     100.00,  Flips:      12.50 (med) /      30.28 (mean) /      58.10 (max)
+23:38:59 DEBUG Iteration 2161
+23:39:00 DEBUG Iteration 2162
+23:39:00 DEBUG Iteration 2163
+23:39:00 DEBUG Iteration 2164
+23:39:00 DEBUG Iteration 2165
+23:39:01 DEBUG Iteration 2166
+23:39:01 DEBUG Iteration 2167
+23:39:02 DEBUG Iteration 2168
+23:39:02 DEBUG Iteration 2169
+23:39:02 DEBUG Iteration 2170
+23:39:02 INFO Iter:   2170,  Acc:     100.00,  Flips:      16.50 (med) /      29.76 (mean) /      44.40 (max)
+23:39:02 DEBUG Iteration 2171
+23:39:02 DEBUG Iteration 2172
+23:39:03 DEBUG Iteration 2173
+23:39:04 DEBUG Iteration 2174
+23:39:04 DEBUG Iteration 2175
+23:39:04 DEBUG Iteration 2176
+23:39:04 DEBUG Iteration 2177
+23:39:04 DEBUG Iteration 2178
+23:39:05 DEBUG Iteration 2179
+23:39:05 DEBUG Iteration 2180
+23:39:06 INFO Iter:   2180,  Acc:     100.00,  Flips:      15.00 (med) /      38.02 (mean) /      88.60 (max)
+23:39:06 DEBUG Iteration 2181
+23:39:06 DEBUG Iteration 2182
+23:39:07 DEBUG Iteration 2183
+23:39:07 DEBUG Iteration 2184
+23:39:07 DEBUG Iteration 2185
+23:39:07 DEBUG Iteration 2186
+23:39:08 DEBUG Iteration 2187
+23:39:08 DEBUG Iteration 2188
+23:39:08 DEBUG Iteration 2189
+23:39:08 DEBUG Iteration 2190
+23:39:08 INFO Iter:   2190,  Acc:     100.00,  Flips:      18.00 (med) /      28.10 (mean) /      57.30 (max)
+23:39:08 DEBUG Iteration 2191
+23:39:09 DEBUG Iteration 2192
+23:39:09 DEBUG Iteration 2193
+23:39:10 DEBUG Iteration 2194
+23:39:11 DEBUG Iteration 2195
+23:39:12 DEBUG Iteration 2196
+23:39:12 DEBUG Iteration 2197
+23:39:12 DEBUG Iteration 2198
+23:39:12 DEBUG Iteration 2199
+23:39:13 DEBUG Iteration 2200
+23:39:13 INFO Iter:   2200,  Acc:     100.00,  Flips:      21.50 (med) /      44.16 (mean) /      84.00 (max)
+23:39:13 INFO Saving last model parameters
+23:39:13 INFO Saving stats
+23:42:37 INFO (Eval)    Acc:      96.00,  Flips:      52.00 (med) /      82.69 (mean) /     199.40 (max)
+23:42:37 INFO Saving best model parameters
+23:42:37 DEBUG Iteration 2201
+23:42:37 DEBUG Iteration 2202
+23:42:37 DEBUG Iteration 2203
+23:42:38 DEBUG Iteration 2204
+23:42:38 DEBUG Iteration 2205
+23:42:38 DEBUG Iteration 2206
+23:42:38 DEBUG Iteration 2207
+23:42:38 DEBUG Iteration 2208
+23:42:39 DEBUG Iteration 2209
+23:42:39 DEBUG Iteration 2210
+23:42:39 INFO Iter:   2210,  Acc:     100.00,  Flips:      14.00 (med) /      22.34 (mean) /      49.50 (max)
+23:42:39 DEBUG Iteration 2211
+23:42:39 DEBUG Iteration 2212
+23:42:40 DEBUG Iteration 2213
+23:42:40 DEBUG Iteration 2214
+23:42:40 DEBUG Iteration 2215
+23:42:40 DEBUG Iteration 2216
+23:42:40 DEBUG Iteration 2217
+23:42:40 DEBUG Iteration 2218
+23:42:41 DEBUG Iteration 2219
+23:42:41 DEBUG Iteration 2220
+23:42:41 INFO Iter:   2220,  Acc:     100.00,  Flips:      10.50 (med) /      23.32 (mean) /      50.40 (max)
+23:42:41 DEBUG Iteration 2221
+23:42:41 DEBUG Iteration 2222
+23:42:42 DEBUG Iteration 2223
+23:42:43 DEBUG Iteration 2224
+23:42:43 DEBUG Iteration 2225
+23:42:43 DEBUG Iteration 2226
+23:42:43 DEBUG Iteration 2227
+23:42:43 DEBUG Iteration 2228
+23:42:43 DEBUG Iteration 2229
+23:42:43 DEBUG Iteration 2230
+23:42:44 INFO Iter:   2230,  Acc:     100.00,  Flips:      14.50 (med) /      27.00 (mean) /      53.00 (max)
+23:42:44 DEBUG Iteration 2231
+23:42:44 DEBUG Iteration 2232
+23:42:44 DEBUG Iteration 2233
+23:42:44 DEBUG Iteration 2234
+23:42:44 DEBUG Iteration 2235
+23:42:44 DEBUG Iteration 2236
+23:42:45 DEBUG Iteration 2237
+23:42:45 DEBUG Iteration 2238
+23:42:45 DEBUG Iteration 2239
+23:42:45 DEBUG Iteration 2240
+23:42:46 INFO Iter:   2240,  Acc:     100.00,  Flips:      19.00 (med) /      25.12 (mean) /      50.80 (max)
+23:42:46 DEBUG Iteration 2241
+23:42:47 DEBUG Iteration 2242
+23:42:47 DEBUG Iteration 2243
+23:42:47 DEBUG Iteration 2244
+23:42:47 DEBUG Iteration 2245
+23:42:47 DEBUG Iteration 2246
+23:42:48 DEBUG Iteration 2247
+23:42:48 DEBUG Iteration 2248
+23:42:48 DEBUG Iteration 2249
+23:42:49 DEBUG Iteration 2250
+23:42:49 INFO Iter:   2250,  Acc:     100.00,  Flips:      16.50 (med) /      34.46 (mean) /      63.80 (max)
+23:42:49 INFO Saving last model parameters
+23:42:49 INFO Saving stats
+23:46:09 INFO (Eval)    Acc:      96.00,  Flips:      55.00 (med) /      77.55 (mean) /     187.72 (max)
+23:46:09 DEBUG Iteration 2251
+23:46:10 DEBUG Iteration 2252
+23:46:10 DEBUG Iteration 2253
+23:46:10 DEBUG Iteration 2254
+23:46:10 DEBUG Iteration 2255
+23:46:10 DEBUG Iteration 2256
+23:46:10 DEBUG Iteration 2257
+23:46:11 DEBUG Iteration 2258
+23:46:11 DEBUG Iteration 2259
+23:46:11 DEBUG Iteration 2260
+23:46:11 INFO Iter:   2260,  Acc:     100.00,  Flips:      10.50 (med) /      16.18 (mean) /      32.40 (max)
+23:46:11 DEBUG Iteration 2261
+23:46:11 DEBUG Iteration 2262
+23:46:12 DEBUG Iteration 2263
+23:46:12 DEBUG Iteration 2264
+23:46:13 DEBUG Iteration 2265
+23:46:13 DEBUG Iteration 2266
+23:46:13 DEBUG Iteration 2267
+23:46:13 DEBUG Iteration 2268
+23:46:14 DEBUG Iteration 2269
+23:46:14 DEBUG Iteration 2270
+23:46:14 INFO Iter:   2270,  Acc:     100.00,  Flips:      14.00 (med) /      32.86 (mean) /      73.20 (max)
+23:46:14 DEBUG Iteration 2271
+23:46:14 DEBUG Iteration 2272
+23:46:15 DEBUG Iteration 2273
+23:46:15 DEBUG Iteration 2274
+23:46:15 DEBUG Iteration 2275
+23:46:15 DEBUG Iteration 2276
+23:46:15 DEBUG Iteration 2277
+23:46:15 DEBUG Iteration 2278
+23:46:16 DEBUG Iteration 2279
+23:46:16 DEBUG Iteration 2280
+23:46:16 INFO Iter:   2280,  Acc:     100.00,  Flips:      14.00 (med) /      16.40 (mean) /      30.80 (max)
+23:46:16 DEBUG Iteration 2281
+23:46:17 DEBUG Iteration 2282
+23:46:18 DEBUG Iteration 2283
+23:46:18 DEBUG Iteration 2284
+23:46:18 DEBUG Iteration 2285
+23:46:18 DEBUG Iteration 2286
+23:46:19 DEBUG Iteration 2287
+23:46:19 DEBUG Iteration 2288
+23:46:19 DEBUG Iteration 2289
+23:46:20 DEBUG Iteration 2290
+23:46:20 INFO Iter:   2290,  Acc:     100.00,  Flips:      15.00 (med) /      43.26 (mean) /      91.00 (max)
+23:46:20 DEBUG Iteration 2291
+23:46:20 DEBUG Iteration 2292
+23:46:21 DEBUG Iteration 2293
+23:46:21 DEBUG Iteration 2294
+23:46:21 DEBUG Iteration 2295
+23:46:21 DEBUG Iteration 2296
+23:46:21 DEBUG Iteration 2297
+23:46:22 DEBUG Iteration 2298
+23:46:22 DEBUG Iteration 2299
+23:46:23 DEBUG Iteration 2300
+23:46:23 INFO Iter:   2300,  Acc:     100.00,  Flips:      13.50 (med) /      27.64 (mean) /      51.30 (max)
+23:46:23 INFO Saving last model parameters
+23:46:23 INFO Saving stats
+23:49:39 INFO (Eval)    Acc:      96.00,  Flips:      47.00 (med) /      71.07 (mean) /     170.40 (max)
+23:49:39 INFO Saving best model parameters
+23:49:39 DEBUG Iteration 2301
+23:49:39 DEBUG Iteration 2302
+23:49:39 DEBUG Iteration 2303
+23:49:39 DEBUG Iteration 2304
+23:49:40 DEBUG Iteration 2305
+23:49:40 DEBUG Iteration 2306
+23:49:41 DEBUG Iteration 2307
+23:49:41 DEBUG Iteration 2308
+23:49:41 DEBUG Iteration 2309
+23:49:42 DEBUG Iteration 2310
+23:49:42 INFO Iter:   2310,  Acc:     100.00,  Flips:      19.50 (med) /      37.64 (mean) /      91.70 (max)
+23:49:42 DEBUG Iteration 2311
+23:49:42 DEBUG Iteration 2312
+23:49:42 DEBUG Iteration 2313
+23:49:43 DEBUG Iteration 2314
+23:49:43 DEBUG Iteration 2315
+23:49:43 DEBUG Iteration 2316
+23:49:43 DEBUG Iteration 2317
+23:49:43 DEBUG Iteration 2318
+23:49:44 DEBUG Iteration 2319
+23:49:44 DEBUG Iteration 2320
+23:49:44 INFO Iter:   2320,  Acc:     100.00,  Flips:      15.50 (med) /      19.34 (mean) /      40.50 (max)
+23:49:44 DEBUG Iteration 2321
+23:49:44 DEBUG Iteration 2322
+23:49:46 DEBUG Iteration 2323
+23:49:46 DEBUG Iteration 2324
+23:49:46 DEBUG Iteration 2325
+23:49:46 DEBUG Iteration 2326
+23:49:47 DEBUG Iteration 2327
+23:49:47 DEBUG Iteration 2328
+23:49:47 DEBUG Iteration 2329
+23:49:48 DEBUG Iteration 2330
+23:49:48 INFO Iter:   2330,  Acc:     100.00,  Flips:      26.00 (med) /      42.50 (mean) /      85.60 (max)
+23:49:48 DEBUG Iteration 2331
+23:49:49 DEBUG Iteration 2332
+23:49:49 DEBUG Iteration 2333
+23:49:49 DEBUG Iteration 2334
+23:49:49 DEBUG Iteration 2335
+23:49:49 DEBUG Iteration 2336
+23:49:50 DEBUG Iteration 2337
+23:49:50 DEBUG Iteration 2338
+23:49:51 DEBUG Iteration 2339
+23:49:51 DEBUG Iteration 2340
+23:49:51 INFO Iter:   2340,  Acc:     100.00,  Flips:      13.00 (med) /      28.42 (mean) /      61.20 (max)
+23:49:51 DEBUG Iteration 2341
+23:49:51 DEBUG Iteration 2342
+23:49:51 DEBUG Iteration 2343
+23:49:52 DEBUG Iteration 2344
+23:49:52 DEBUG Iteration 2345
+23:49:52 DEBUG Iteration 2346
+23:49:52 DEBUG Iteration 2347
+23:49:52 DEBUG Iteration 2348
+23:49:52 DEBUG Iteration 2349
+23:49:52 DEBUG Iteration 2350
+23:49:53 INFO Iter:   2350,  Acc:     100.00,  Flips:      10.00 (med) /      17.96 (mean) /      34.00 (max)
+23:49:53 INFO Saving last model parameters
+23:49:53 INFO Saving stats
+23:53:04 INFO (Eval)    Acc:     100.00,  Flips:      37.00 (med) /      59.65 (mean) /     156.00 (max)
+23:53:04 INFO Saving best model parameters
+23:53:04 DEBUG Iteration 2351
+23:53:04 DEBUG Iteration 2352
+23:53:04 DEBUG Iteration 2353
+23:53:05 DEBUG Iteration 2354
+23:53:05 DEBUG Iteration 2355
+23:53:05 DEBUG Iteration 2356
+23:53:05 DEBUG Iteration 2357
+23:53:05 DEBUG Iteration 2358
+23:53:06 DEBUG Iteration 2359
+23:53:06 DEBUG Iteration 2360
+23:53:06 INFO Iter:   2360,  Acc:     100.00,  Flips:      12.00 (med) /      20.60 (mean) /      39.60 (max)
+23:53:06 DEBUG Iteration 2361
+23:53:06 DEBUG Iteration 2362
+23:53:06 DEBUG Iteration 2363
+23:53:06 DEBUG Iteration 2364
+23:53:07 DEBUG Iteration 2365
+23:53:07 DEBUG Iteration 2366
+23:53:07 DEBUG Iteration 2367
+23:53:07 DEBUG Iteration 2368
+23:53:07 DEBUG Iteration 2369
+23:53:08 DEBUG Iteration 2370
+23:53:08 INFO Iter:   2370,  Acc:     100.00,  Flips:      12.00 (med) /      16.52 (mean) /      34.70 (max)
+23:53:08 DEBUG Iteration 2371
+23:53:08 DEBUG Iteration 2372
+23:53:08 DEBUG Iteration 2373
+23:53:08 DEBUG Iteration 2374
+23:53:09 DEBUG Iteration 2375
+23:53:09 DEBUG Iteration 2376
+23:53:09 DEBUG Iteration 2377
+23:53:10 DEBUG Iteration 2378
+23:53:10 DEBUG Iteration 2379
+23:53:11 DEBUG Iteration 2380
+23:53:11 INFO Iter:   2380,  Acc:     100.00,  Flips:      19.00 (med) /      32.18 (mean) /      66.00 (max)
+23:53:11 DEBUG Iteration 2381
+23:53:11 DEBUG Iteration 2382
+23:53:11 DEBUG Iteration 2383
+23:53:12 DEBUG Iteration 2384
+23:53:12 DEBUG Iteration 2385
+23:53:12 DEBUG Iteration 2386
+23:53:12 DEBUG Iteration 2387
+23:53:12 DEBUG Iteration 2388
+23:53:13 DEBUG Iteration 2389
+23:53:13 DEBUG Iteration 2390
+23:53:13 INFO Iter:   2390,  Acc:     100.00,  Flips:      13.00 (med) /      23.78 (mean) /      47.80 (max)
+23:53:13 DEBUG Iteration 2391
+23:53:14 DEBUG Iteration 2392
+23:53:14 DEBUG Iteration 2393
+23:53:14 DEBUG Iteration 2394
+23:53:14 DEBUG Iteration 2395
+23:53:15 DEBUG Iteration 2396
+23:53:16 DEBUG Iteration 2397
+23:53:17 DEBUG Iteration 2398
+23:53:17 DEBUG Iteration 2399
+23:53:17 DEBUG Iteration 2400
+23:53:17 INFO Iter:   2400,  Acc:     100.00,  Flips:      10.00 (med) /      37.98 (mean) /      70.40 (max)
+23:53:17 INFO Saving last model parameters
+23:53:17 INFO Saving stats
+23:56:47 INFO (Eval)    Acc:      92.00,  Flips:      82.00 (med) /      99.31 (mean) /     208.40 (max)
+23:56:47 DEBUG Iteration 2401
+23:56:47 DEBUG Iteration 2402
+23:56:47 DEBUG Iteration 2403
+23:56:48 DEBUG Iteration 2404
+23:56:48 DEBUG Iteration 2405
+23:56:48 DEBUG Iteration 2406
+23:56:48 DEBUG Iteration 2407
+23:56:49 DEBUG Iteration 2408
+23:56:50 DEBUG Iteration 2409
+23:56:50 DEBUG Iteration 2410
+23:56:50 INFO Iter:   2410,  Acc:     100.00,  Flips:      12.50 (med) /      27.04 (mean) /      50.90 (max)
+23:56:50 DEBUG Iteration 2411
+23:56:50 DEBUG Iteration 2412
+23:56:50 DEBUG Iteration 2413
+23:56:50 DEBUG Iteration 2414
+23:56:51 DEBUG Iteration 2415
+23:56:52 DEBUG Iteration 2416
+23:56:52 DEBUG Iteration 2417
+23:56:52 DEBUG Iteration 2418
+23:56:52 DEBUG Iteration 2419
+23:56:52 DEBUG Iteration 2420
+23:56:52 INFO Iter:   2420,  Acc:     100.00,  Flips:      13.00 (med) /      28.68 (mean) /      57.60 (max)
+23:56:52 DEBUG Iteration 2421
+23:56:53 DEBUG Iteration 2422
+23:56:53 DEBUG Iteration 2423
+23:56:53 DEBUG Iteration 2424
+23:56:54 DEBUG Iteration 2425
+23:56:54 DEBUG Iteration 2426
+23:56:54 DEBUG Iteration 2427
+23:56:54 DEBUG Iteration 2428
+23:56:54 DEBUG Iteration 2429
+23:56:55 DEBUG Iteration 2430
+23:56:55 INFO Iter:   2430,  Acc:     100.00,  Flips:       8.00 (med) /      24.58 (mean) /      54.90 (max)
+23:56:55 DEBUG Iteration 2431
+23:56:56 DEBUG Iteration 2432
+23:56:56 DEBUG Iteration 2433
+23:56:56 DEBUG Iteration 2434
+23:56:56 DEBUG Iteration 2435
+23:56:57 DEBUG Iteration 2436
+23:56:57 DEBUG Iteration 2437
+23:56:57 DEBUG Iteration 2438
+23:56:57 DEBUG Iteration 2439
+23:56:57 DEBUG Iteration 2440
+23:56:57 INFO Iter:   2440,  Acc:     100.00,  Flips:       8.50 (med) /      23.70 (mean) /      48.70 (max)
+23:56:57 DEBUG Iteration 2441
+23:56:58 DEBUG Iteration 2442
+23:56:58 DEBUG Iteration 2443
+23:56:58 DEBUG Iteration 2444
+23:56:58 DEBUG Iteration 2445
+23:56:59 DEBUG Iteration 2446
+23:56:59 DEBUG Iteration 2447
+23:56:59 DEBUG Iteration 2448
+23:57:00 DEBUG Iteration 2449
+23:57:00 DEBUG Iteration 2450
+23:57:00 INFO Iter:   2450,  Acc:     100.00,  Flips:      10.00 (med) /      25.10 (mean) /      61.90 (max)
+23:57:00 INFO Saving last model parameters
+23:57:00 INFO Saving stats
+00:00:26 INFO (Eval)    Acc:      88.00,  Flips:      64.00 (med) /      88.12 (mean) /     196.36 (max)
+00:00:26 DEBUG Iteration 2451
+00:00:27 DEBUG Iteration 2452
+00:00:27 DEBUG Iteration 2453
+00:00:27 DEBUG Iteration 2454
+00:00:27 DEBUG Iteration 2455
+00:00:27 DEBUG Iteration 2456
+00:00:27 DEBUG Iteration 2457
+00:00:28 DEBUG Iteration 2458
+00:00:28 DEBUG Iteration 2459
+00:00:28 DEBUG Iteration 2460
+00:00:28 INFO Iter:   2460,  Acc:     100.00,  Flips:      10.50 (med) /      16.44 (mean) /      30.50 (max)
+00:00:28 DEBUG Iteration 2461
+00:00:28 DEBUG Iteration 2462
+00:00:29 DEBUG Iteration 2463
+00:00:29 DEBUG Iteration 2464
+00:00:29 DEBUG Iteration 2465
+00:00:29 DEBUG Iteration 2466
+00:00:29 DEBUG Iteration 2467
+00:00:29 DEBUG Iteration 2468
+00:00:30 DEBUG Iteration 2469
+00:00:30 DEBUG Iteration 2470
+00:00:30 INFO Iter:   2470,  Acc:     100.00,  Flips:      19.00 (med) /      23.50 (mean) /      48.40 (max)
+00:00:30 DEBUG Iteration 2471
+00:00:31 DEBUG Iteration 2472
+00:00:31 DEBUG Iteration 2473
+00:00:31 DEBUG Iteration 2474
+00:00:31 DEBUG Iteration 2475
+00:00:31 DEBUG Iteration 2476
+00:00:32 DEBUG Iteration 2477
+00:00:32 DEBUG Iteration 2478
+00:00:32 DEBUG Iteration 2479
+00:00:32 DEBUG Iteration 2480
+00:00:33 INFO Iter:   2480,  Acc:     100.00,  Flips:       9.50 (med) /      23.92 (mean) /      51.90 (max)
+00:00:33 DEBUG Iteration 2481
+00:00:33 DEBUG Iteration 2482
+00:00:33 DEBUG Iteration 2483
+00:00:34 DEBUG Iteration 2484
+00:00:34 DEBUG Iteration 2485
+00:00:34 DEBUG Iteration 2486
+00:00:34 DEBUG Iteration 2487
+00:00:34 DEBUG Iteration 2488
+00:00:35 DEBUG Iteration 2489
+00:00:35 DEBUG Iteration 2490
+00:00:35 INFO Iter:   2490,  Acc:     100.00,  Flips:      17.00 (med) /      18.62 (mean) /      30.80 (max)
+00:00:35 DEBUG Iteration 2491
+00:00:35 DEBUG Iteration 2492
+00:00:35 DEBUG Iteration 2493
+00:00:35 DEBUG Iteration 2494
+00:00:35 DEBUG Iteration 2495
+00:00:36 DEBUG Iteration 2496
+00:00:36 DEBUG Iteration 2497
+00:00:36 DEBUG Iteration 2498
+00:00:36 DEBUG Iteration 2499
+00:00:36 DEBUG Iteration 2500
+00:00:36 INFO Iter:   2500,  Acc:     100.00,  Flips:       7.50 (med) /      16.70 (mean) /      47.20 (max)
+00:00:36 INFO Saving last model parameters
+00:00:36 INFO Saving stats
+00:03:52 INFO (Eval)    Acc:     100.00,  Flips:      51.00 (med) /      69.71 (mean) /     189.40 (max)
+00:03:52 DEBUG Iteration 2501
+00:03:52 DEBUG Iteration 2502
+00:03:52 DEBUG Iteration 2503
+00:03:53 DEBUG Iteration 2504
+00:03:53 DEBUG Iteration 2505
+00:03:53 DEBUG Iteration 2506
+00:03:54 DEBUG Iteration 2507
+00:03:54 DEBUG Iteration 2508
+00:03:54 DEBUG Iteration 2509
+00:03:54 DEBUG Iteration 2510
+00:03:55 INFO Iter:   2510,  Acc:     100.00,  Flips:      15.50 (med) /      26.36 (mean) /      54.80 (max)
+00:03:55 DEBUG Iteration 2511
+00:03:55 DEBUG Iteration 2512
+00:03:55 DEBUG Iteration 2513
+00:03:55 DEBUG Iteration 2514
+00:03:55 DEBUG Iteration 2515
+00:03:56 DEBUG Iteration 2516
+00:03:56 DEBUG Iteration 2517
+00:03:56 DEBUG Iteration 2518
+00:03:56 DEBUG Iteration 2519
+00:03:57 DEBUG Iteration 2520
+00:03:57 INFO Iter:   2520,  Acc:     100.00,  Flips:      14.50 (med) /      25.42 (mean) /      53.30 (max)
+00:03:57 DEBUG Iteration 2521
+00:03:58 DEBUG Iteration 2522
+00:03:59 DEBUG Iteration 2523
+00:03:59 DEBUG Iteration 2524
+00:04:00 DEBUG Iteration 2525
+00:04:00 DEBUG Iteration 2526
+00:04:00 DEBUG Iteration 2527
+00:04:01 DEBUG Iteration 2528
+00:04:01 DEBUG Iteration 2529
+00:04:01 DEBUG Iteration 2530
+00:04:02 INFO Iter:   2530,  Acc:     100.00,  Flips:      31.00 (med) /      47.72 (mean) /     104.80 (max)
+00:04:02 DEBUG Iteration 2531
+00:04:02 DEBUG Iteration 2532
+00:04:02 DEBUG Iteration 2533
+00:04:03 DEBUG Iteration 2534
+00:04:03 DEBUG Iteration 2535
+00:04:03 DEBUG Iteration 2536
+00:04:03 DEBUG Iteration 2537
+00:04:04 DEBUG Iteration 2538
+00:04:04 DEBUG Iteration 2539
+00:04:04 DEBUG Iteration 2540
+00:04:04 INFO Iter:   2540,  Acc:     100.00,  Flips:      16.00 (med) /      25.96 (mean) /      62.20 (max)
+00:04:04 DEBUG Iteration 2541
+00:04:05 DEBUG Iteration 2542
+00:04:05 DEBUG Iteration 2543
+00:04:05 DEBUG Iteration 2544
+00:04:05 DEBUG Iteration 2545
+00:04:05 DEBUG Iteration 2546
+00:04:05 DEBUG Iteration 2547
+00:04:07 DEBUG Iteration 2548
+00:04:07 DEBUG Iteration 2549
+00:04:07 DEBUG Iteration 2550
+00:04:07 INFO Iter:   2550,  Acc:      90.00,  Flips:       7.50 (med) /      29.68 (mean) /      38.00 (max)
+00:04:07 INFO Saving last model parameters
+00:04:07 INFO Saving stats
+00:07:17 INFO (Eval)    Acc:     100.00,  Flips:      37.00 (med) /      61.50 (mean) /     166.04 (max)
+00:07:17 DEBUG Iteration 2551
+00:07:17 DEBUG Iteration 2552
+00:07:17 DEBUG Iteration 2553
+00:07:17 DEBUG Iteration 2554
+00:07:18 DEBUG Iteration 2555
+00:07:18 DEBUG Iteration 2556
+00:07:18 DEBUG Iteration 2557
+00:07:19 DEBUG Iteration 2558
+00:07:19 DEBUG Iteration 2559
+00:07:19 DEBUG Iteration 2560
+00:07:20 INFO Iter:   2560,  Acc:     100.00,  Flips:      18.50 (med) /      31.80 (mean) /      66.30 (max)
+00:07:20 DEBUG Iteration 2561
+00:07:21 DEBUG Iteration 2562
+00:07:21 DEBUG Iteration 2563
+00:07:21 DEBUG Iteration 2564
+00:07:22 DEBUG Iteration 2565
+00:07:22 DEBUG Iteration 2566
+00:07:22 DEBUG Iteration 2567
+00:07:23 DEBUG Iteration 2568
+00:07:23 DEBUG Iteration 2569
+00:07:23 DEBUG Iteration 2570
+00:07:24 INFO Iter:   2570,  Acc:     100.00,  Flips:      16.00 (med) /      37.40 (mean) /      76.80 (max)
+00:07:24 DEBUG Iteration 2571
+00:07:24 DEBUG Iteration 2572
+00:07:24 DEBUG Iteration 2573
+00:07:24 DEBUG Iteration 2574
+00:07:25 DEBUG Iteration 2575
+00:07:25 DEBUG Iteration 2576
+00:07:25 DEBUG Iteration 2577
+00:07:25 DEBUG Iteration 2578
+00:07:25 DEBUG Iteration 2579
+00:07:25 DEBUG Iteration 2580
+00:07:26 INFO Iter:   2580,  Acc:     100.00,  Flips:      14.50 (med) /      19.48 (mean) /      37.50 (max)
+00:07:26 DEBUG Iteration 2581
+00:07:26 DEBUG Iteration 2582
+00:07:26 DEBUG Iteration 2583
+00:07:26 DEBUG Iteration 2584
+00:07:27 DEBUG Iteration 2585
+00:07:27 DEBUG Iteration 2586
+00:07:27 DEBUG Iteration 2587
+00:07:27 DEBUG Iteration 2588
+00:07:27 DEBUG Iteration 2589
+00:07:28 DEBUG Iteration 2590
+00:07:28 INFO Iter:   2590,  Acc:     100.00,  Flips:      10.50 (med) /      27.20 (mean) /      57.40 (max)
+00:07:28 DEBUG Iteration 2591
+00:07:29 DEBUG Iteration 2592
+00:07:29 DEBUG Iteration 2593
+00:07:29 DEBUG Iteration 2594
+00:07:29 DEBUG Iteration 2595
+00:07:29 DEBUG Iteration 2596
+00:07:29 DEBUG Iteration 2597
+00:07:30 DEBUG Iteration 2598
+00:07:30 DEBUG Iteration 2599
+00:07:30 DEBUG Iteration 2600
+00:07:31 INFO Iter:   2600,  Acc:     100.00,  Flips:      13.50 (med) /      25.28 (mean) /      52.50 (max)
+00:07:31 INFO Saving last model parameters
+00:07:31 INFO Saving stats
+00:10:42 INFO (Eval)    Acc:     100.00,  Flips:      39.00 (med) /      61.36 (mean) /     163.64 (max)
+00:10:42 DEBUG Iteration 2601
+00:10:42 DEBUG Iteration 2602
+00:10:42 DEBUG Iteration 2603
+00:10:43 DEBUG Iteration 2604
+00:10:43 DEBUG Iteration 2605
+00:10:43 DEBUG Iteration 2606
+00:10:43 DEBUG Iteration 2607
+00:10:43 DEBUG Iteration 2608
+00:10:44 DEBUG Iteration 2609
+00:10:44 DEBUG Iteration 2610
+00:10:44 INFO Iter:   2610,  Acc:     100.00,  Flips:      11.50 (med) /      22.26 (mean) /      52.30 (max)
+00:10:44 DEBUG Iteration 2611
+00:10:44 DEBUG Iteration 2612
+00:10:44 DEBUG Iteration 2613
+00:10:45 DEBUG Iteration 2614
+00:10:45 DEBUG Iteration 2615
+00:10:46 DEBUG Iteration 2616
+00:10:46 DEBUG Iteration 2617
+00:10:46 DEBUG Iteration 2618
+00:10:47 DEBUG Iteration 2619
+00:10:47 DEBUG Iteration 2620
+00:10:47 INFO Iter:   2620,  Acc:     100.00,  Flips:      14.50 (med) /      30.28 (mean) /      70.00 (max)
+00:10:47 DEBUG Iteration 2621
+00:10:47 DEBUG Iteration 2622
+00:10:47 DEBUG Iteration 2623
+00:10:47 DEBUG Iteration 2624
+00:10:48 DEBUG Iteration 2625
+00:10:48 DEBUG Iteration 2626
+00:10:48 DEBUG Iteration 2627
+00:10:48 DEBUG Iteration 2628
+00:10:48 DEBUG Iteration 2629
+00:10:48 DEBUG Iteration 2630
+00:10:49 INFO Iter:   2630,  Acc:     100.00,  Flips:       8.00 (med) /      12.32 (mean) /      23.70 (max)
+00:10:49 DEBUG Iteration 2631
+00:10:49 DEBUG Iteration 2632
+00:10:49 DEBUG Iteration 2633
+00:10:49 DEBUG Iteration 2634
+00:10:49 DEBUG Iteration 2635
+00:10:50 DEBUG Iteration 2636
+00:10:50 DEBUG Iteration 2637
+00:10:51 DEBUG Iteration 2638
+00:10:51 DEBUG Iteration 2639
+00:10:51 DEBUG Iteration 2640
+00:10:51 INFO Iter:   2640,  Acc:     100.00,  Flips:      14.00 (med) /      27.18 (mean) /      65.40 (max)
+00:10:51 DEBUG Iteration 2641
+00:10:51 DEBUG Iteration 2642
+00:10:52 DEBUG Iteration 2643
+00:10:52 DEBUG Iteration 2644
+00:10:52 DEBUG Iteration 2645
+00:10:52 DEBUG Iteration 2646
+00:10:52 DEBUG Iteration 2647
+00:10:52 DEBUG Iteration 2648
+00:10:52 DEBUG Iteration 2649
+00:10:53 DEBUG Iteration 2650
+00:10:53 INFO Iter:   2650,  Acc:     100.00,  Flips:      11.00 (med) /      15.90 (mean) /      34.60 (max)
+00:10:53 INFO Saving last model parameters
+00:10:53 INFO Saving stats
+00:14:08 INFO (Eval)    Acc:     100.00,  Flips:      43.00 (med) /      60.97 (mean) /     165.64 (max)
+00:14:08 DEBUG Iteration 2651
+00:14:09 DEBUG Iteration 2652
+00:14:09 DEBUG Iteration 2653
+00:14:09 DEBUG Iteration 2654
+00:14:09 DEBUG Iteration 2655
+00:14:09 DEBUG Iteration 2656
+00:14:10 DEBUG Iteration 2657
+00:14:10 DEBUG Iteration 2658
+00:14:10 DEBUG Iteration 2659
+00:14:10 DEBUG Iteration 2660
+00:14:10 INFO Iter:   2660,  Acc:     100.00,  Flips:      14.00 (med) /      21.68 (mean) /      50.30 (max)
+00:14:10 DEBUG Iteration 2661
+00:14:11 DEBUG Iteration 2662
+00:14:11 DEBUG Iteration 2663
+00:14:11 DEBUG Iteration 2664
+00:14:12 DEBUG Iteration 2665
+00:14:12 DEBUG Iteration 2666
+00:14:12 DEBUG Iteration 2667
+00:14:13 DEBUG Iteration 2668
+00:14:13 DEBUG Iteration 2669
+00:14:13 DEBUG Iteration 2670
+00:14:13 INFO Iter:   2670,  Acc:     100.00,  Flips:      19.50 (med) /      28.56 (mean) /      61.60 (max)
+00:14:13 DEBUG Iteration 2671
+00:14:14 DEBUG Iteration 2672
+00:14:15 DEBUG Iteration 2673
+00:14:15 DEBUG Iteration 2674
+00:14:15 DEBUG Iteration 2675
+00:14:16 DEBUG Iteration 2676
+00:14:16 DEBUG Iteration 2677
+00:14:16 DEBUG Iteration 2678
+00:14:16 DEBUG Iteration 2679
+00:14:16 DEBUG Iteration 2680
+00:14:17 INFO Iter:   2680,  Acc:     100.00,  Flips:      21.00 (med) /      29.84 (mean) /      62.90 (max)
+00:14:17 DEBUG Iteration 2681
+00:14:17 DEBUG Iteration 2682
+00:14:17 DEBUG Iteration 2683
+00:14:17 DEBUG Iteration 2684
+00:14:17 DEBUG Iteration 2685
+00:14:18 DEBUG Iteration 2686
+00:14:18 DEBUG Iteration 2687
+00:14:18 DEBUG Iteration 2688
+00:14:18 DEBUG Iteration 2689
+00:14:18 DEBUG Iteration 2690
+00:14:18 INFO Iter:   2690,  Acc:     100.00,  Flips:      12.50 (med) /      16.42 (mean) /      37.20 (max)
+00:14:18 DEBUG Iteration 2691
+00:14:19 DEBUG Iteration 2692
+00:14:19 DEBUG Iteration 2693
+00:14:19 DEBUG Iteration 2694
+00:14:19 DEBUG Iteration 2695
+00:14:20 DEBUG Iteration 2696
+00:14:20 DEBUG Iteration 2697
+00:14:20 DEBUG Iteration 2698
+00:14:20 DEBUG Iteration 2699
+00:14:20 DEBUG Iteration 2700
+00:14:20 INFO Iter:   2700,  Acc:     100.00,  Flips:       9.00 (med) /      15.62 (mean) /      29.80 (max)
+00:14:20 INFO Saving last model parameters
+00:14:20 INFO Saving stats
+00:17:34 INFO (Eval)    Acc:     100.00,  Flips:      45.00 (med) /      61.83 (mean) /     176.72 (max)
+00:17:34 DEBUG Iteration 2701
+00:17:34 DEBUG Iteration 2702
+00:17:34 DEBUG Iteration 2703
+00:17:34 DEBUG Iteration 2704
+00:17:35 DEBUG Iteration 2705
+00:17:35 DEBUG Iteration 2706
+00:17:36 DEBUG Iteration 2707
+00:17:36 DEBUG Iteration 2708
+00:17:36 DEBUG Iteration 2709
+00:17:37 DEBUG Iteration 2710
+00:17:37 INFO Iter:   2710,  Acc:     100.00,  Flips:      13.50 (med) /      27.16 (mean) /      65.20 (max)
+00:17:37 DEBUG Iteration 2711
+00:17:37 DEBUG Iteration 2712
+00:17:37 DEBUG Iteration 2713
+00:17:37 DEBUG Iteration 2714
+00:17:37 DEBUG Iteration 2715
+00:17:37 DEBUG Iteration 2716
+00:17:38 DEBUG Iteration 2717
+00:17:38 DEBUG Iteration 2718
+00:17:38 DEBUG Iteration 2719
+00:17:39 DEBUG Iteration 2720
+00:17:39 INFO Iter:   2720,  Acc:     100.00,  Flips:      11.00 (med) /      19.04 (mean) /      48.00 (max)
+00:17:39 DEBUG Iteration 2721
+00:17:39 DEBUG Iteration 2722
+00:17:39 DEBUG Iteration 2723
+00:17:39 DEBUG Iteration 2724
+00:17:39 DEBUG Iteration 2725
+00:17:39 DEBUG Iteration 2726
+00:17:39 DEBUG Iteration 2727
+00:17:39 DEBUG Iteration 2728
+00:17:40 DEBUG Iteration 2729
+00:17:41 DEBUG Iteration 2730
+00:17:41 INFO Iter:   2730,  Acc:     100.00,  Flips:       8.50 (med) /      21.76 (mean) /      49.30 (max)
+00:17:41 DEBUG Iteration 2731
+00:17:41 DEBUG Iteration 2732
+00:17:41 DEBUG Iteration 2733
+00:17:42 DEBUG Iteration 2734
+00:17:42 DEBUG Iteration 2735
+00:17:43 DEBUG Iteration 2736
+00:17:43 DEBUG Iteration 2737
+00:17:43 DEBUG Iteration 2738
+00:17:43 DEBUG Iteration 2739
+00:17:43 DEBUG Iteration 2740
+00:17:44 INFO Iter:   2740,  Acc:     100.00,  Flips:      13.00 (med) /      25.72 (mean) /      54.30 (max)
+00:17:44 DEBUG Iteration 2741
+00:17:44 DEBUG Iteration 2742
+00:17:44 DEBUG Iteration 2743
+00:17:44 DEBUG Iteration 2744
+00:17:44 DEBUG Iteration 2745
+00:17:45 DEBUG Iteration 2746
+00:17:45 DEBUG Iteration 2747
+00:17:45 DEBUG Iteration 2748
+00:17:46 DEBUG Iteration 2749
+00:17:46 DEBUG Iteration 2750
+00:17:46 INFO Iter:   2750,  Acc:     100.00,  Flips:       6.50 (med) /      20.42 (mean) /      37.60 (max)
+00:17:46 INFO Saving last model parameters
+00:17:46 INFO Saving stats
+00:20:59 INFO (Eval)    Acc:     100.00,  Flips:      43.00 (med) /      66.23 (mean) /     176.64 (max)
+00:20:59 DEBUG Iteration 2751
+00:21:00 DEBUG Iteration 2752
+00:21:00 DEBUG Iteration 2753
+00:21:00 DEBUG Iteration 2754
+00:21:00 DEBUG Iteration 2755
+00:21:00 DEBUG Iteration 2756
+00:21:00 DEBUG Iteration 2757
+00:21:01 DEBUG Iteration 2758
+00:21:01 DEBUG Iteration 2759
+00:21:01 DEBUG Iteration 2760
+00:21:01 INFO Iter:   2760,  Acc:     100.00,  Flips:      12.50 (med) /      15.66 (mean) /      29.70 (max)
+00:21:01 DEBUG Iteration 2761
+00:21:01 DEBUG Iteration 2762
+00:21:01 DEBUG Iteration 2763
+00:21:01 DEBUG Iteration 2764
+00:21:01 DEBUG Iteration 2765
+00:21:02 DEBUG Iteration 2766
+00:21:02 DEBUG Iteration 2767
+00:21:02 DEBUG Iteration 2768
+00:21:02 DEBUG Iteration 2769
+00:21:02 DEBUG Iteration 2770
+00:21:02 INFO Iter:   2770,  Acc:     100.00,  Flips:      10.00 (med) /      12.40 (mean) /      22.30 (max)
+00:21:02 DEBUG Iteration 2771
+00:21:03 DEBUG Iteration 2772
+00:21:03 DEBUG Iteration 2773
+00:21:04 DEBUG Iteration 2774
+00:21:04 DEBUG Iteration 2775
+00:21:05 DEBUG Iteration 2776
+00:21:05 DEBUG Iteration 2777
+00:21:05 DEBUG Iteration 2778
+00:21:05 DEBUG Iteration 2779
+00:21:05 DEBUG Iteration 2780
+00:21:05 INFO Iter:   2780,  Acc:     100.00,  Flips:      23.50 (med) /      31.12 (mean) /      75.20 (max)
+00:21:05 DEBUG Iteration 2781
+00:21:06 DEBUG Iteration 2782
+00:21:06 DEBUG Iteration 2783
+00:21:06 DEBUG Iteration 2784
+00:21:06 DEBUG Iteration 2785
+00:21:07 DEBUG Iteration 2786
+00:21:07 DEBUG Iteration 2787
+00:21:07 DEBUG Iteration 2788
+00:21:08 DEBUG Iteration 2789
+00:21:08 DEBUG Iteration 2790
+00:21:08 INFO Iter:   2790,  Acc:     100.00,  Flips:      19.00 (med) /      29.26 (mean) /      60.40 (max)
+00:21:08 DEBUG Iteration 2791
+00:21:09 DEBUG Iteration 2792
+00:21:09 DEBUG Iteration 2793
+00:21:09 DEBUG Iteration 2794
+00:21:09 DEBUG Iteration 2795
+00:21:09 DEBUG Iteration 2796
+00:21:09 DEBUG Iteration 2797
+00:21:09 DEBUG Iteration 2798
+00:21:10 DEBUG Iteration 2799
+00:21:10 DEBUG Iteration 2800
+00:21:10 INFO Iter:   2800,  Acc:     100.00,  Flips:      11.50 (med) /      14.94 (mean) /      32.00 (max)
+00:21:10 INFO Saving last model parameters
+00:21:10 INFO Saving stats
+00:24:17 INFO (Eval)    Acc:     100.00,  Flips:      40.00 (med) /      60.18 (mean) /     169.08 (max)
+00:24:17 DEBUG Iteration 2801
+00:24:17 DEBUG Iteration 2802
+00:24:18 DEBUG Iteration 2803
+00:24:18 DEBUG Iteration 2804
+00:24:18 DEBUG Iteration 2805
+00:24:18 DEBUG Iteration 2806
+00:24:18 DEBUG Iteration 2807
+00:24:18 DEBUG Iteration 2808
+00:24:18 DEBUG Iteration 2809
+00:24:19 DEBUG Iteration 2810
+00:24:19 INFO Iter:   2810,  Acc:     100.00,  Flips:      12.00 (med) /      14.00 (mean) /      24.80 (max)
+00:24:19 DEBUG Iteration 2811
+00:24:19 DEBUG Iteration 2812
+00:24:19 DEBUG Iteration 2813
+00:24:19 DEBUG Iteration 2814
+00:24:19 DEBUG Iteration 2815
+00:24:19 DEBUG Iteration 2816
+00:24:20 DEBUG Iteration 2817
+00:24:20 DEBUG Iteration 2818
+00:24:21 DEBUG Iteration 2819
+00:24:21 DEBUG Iteration 2820
+00:24:21 INFO Iter:   2820,  Acc:     100.00,  Flips:      10.50 (med) /      19.84 (mean) /      45.90 (max)
+00:24:21 DEBUG Iteration 2821
+00:24:21 DEBUG Iteration 2822
+00:24:21 DEBUG Iteration 2823
+00:24:21 DEBUG Iteration 2824
+00:24:21 DEBUG Iteration 2825
+00:24:21 DEBUG Iteration 2826
+00:24:22 DEBUG Iteration 2827
+00:24:22 DEBUG Iteration 2828
+00:24:23 DEBUG Iteration 2829
+00:24:23 DEBUG Iteration 2830
+00:24:23 INFO Iter:   2830,  Acc:     100.00,  Flips:      13.00 (med) /      22.18 (mean) /      60.60 (max)
+00:24:23 DEBUG Iteration 2831
+00:24:24 DEBUG Iteration 2832
+00:24:25 DEBUG Iteration 2833
+00:24:25 DEBUG Iteration 2834
+00:24:25 DEBUG Iteration 2835
+00:24:25 DEBUG Iteration 2836
+00:24:26 DEBUG Iteration 2837
+00:24:26 DEBUG Iteration 2838
+00:24:27 DEBUG Iteration 2839
+00:24:27 DEBUG Iteration 2840
+00:24:27 INFO Iter:   2840,  Acc:     100.00,  Flips:      12.50 (med) /      40.48 (mean) /      79.60 (max)
+00:24:27 DEBUG Iteration 2841
+00:24:27 DEBUG Iteration 2842
+00:24:27 DEBUG Iteration 2843
+00:24:27 DEBUG Iteration 2844
+00:24:27 DEBUG Iteration 2845
+00:24:27 DEBUG Iteration 2846
+00:24:27 DEBUG Iteration 2847
+00:24:27 DEBUG Iteration 2848
+00:24:27 DEBUG Iteration 2849
+00:24:28 DEBUG Iteration 2850
+00:24:28 INFO Iter:   2850,  Acc:     100.00,  Flips:       4.50 (med) /       9.24 (mean) /      21.90 (max)
+00:24:28 INFO Saving last model parameters
+00:24:28 INFO Saving stats
+00:27:40 INFO (Eval)    Acc:     100.00,  Flips:      44.00 (med) /      62.62 (mean) /     170.40 (max)
+00:27:40 DEBUG Iteration 2851
+00:27:40 DEBUG Iteration 2852
+00:27:40 DEBUG Iteration 2853
+00:27:40 DEBUG Iteration 2854
+00:27:40 DEBUG Iteration 2855
+00:27:41 DEBUG Iteration 2856
+00:27:41 DEBUG Iteration 2857
+00:27:41 DEBUG Iteration 2858
+00:27:41 DEBUG Iteration 2859
+00:27:41 DEBUG Iteration 2860
+00:27:41 INFO Iter:   2860,  Acc:     100.00,  Flips:       6.50 (med) /      13.56 (mean) /      34.60 (max)
+00:27:41 DEBUG Iteration 2861
+00:27:42 DEBUG Iteration 2862
+00:27:42 DEBUG Iteration 2863
+00:27:43 DEBUG Iteration 2864
+00:27:43 DEBUG Iteration 2865
+00:27:44 DEBUG Iteration 2866
+00:27:44 DEBUG Iteration 2867
+00:27:44 DEBUG Iteration 2868
+00:27:45 DEBUG Iteration 2869
+00:27:46 DEBUG Iteration 2870
+00:27:46 INFO Iter:   2870,  Acc:      90.00,  Flips:      15.00 (med) /      46.58 (mean) /      84.00 (max)
+00:27:46 DEBUG Iteration 2871
+00:27:46 DEBUG Iteration 2872
+00:27:46 DEBUG Iteration 2873
+00:27:46 DEBUG Iteration 2874
+00:27:46 DEBUG Iteration 2875
+00:27:47 DEBUG Iteration 2876
+00:27:47 DEBUG Iteration 2877
+00:27:47 DEBUG Iteration 2878
+00:27:47 DEBUG Iteration 2879
+00:27:47 DEBUG Iteration 2880
+00:27:48 INFO Iter:   2880,  Acc:     100.00,  Flips:      13.00 (med) /      18.10 (mean) /      45.90 (max)
+00:27:48 DEBUG Iteration 2881
+00:27:48 DEBUG Iteration 2882
+00:27:48 DEBUG Iteration 2883
+00:27:49 DEBUG Iteration 2884
+00:27:49 DEBUG Iteration 2885
+00:27:49 DEBUG Iteration 2886
+00:27:50 DEBUG Iteration 2887
+00:27:50 DEBUG Iteration 2888
+00:27:50 DEBUG Iteration 2889
+00:27:51 DEBUG Iteration 2890
+00:27:51 INFO Iter:   2890,  Acc:     100.00,  Flips:      14.50 (med) /      37.82 (mean) /      72.20 (max)
+00:27:51 DEBUG Iteration 2891
+00:27:51 DEBUG Iteration 2892
+00:27:51 DEBUG Iteration 2893
+00:27:51 DEBUG Iteration 2894
+00:27:51 DEBUG Iteration 2895
+00:27:51 DEBUG Iteration 2896
+00:27:52 DEBUG Iteration 2897
+00:27:52 DEBUG Iteration 2898
+00:27:52 DEBUG Iteration 2899
+00:27:52 DEBUG Iteration 2900
+00:27:53 INFO Iter:   2900,  Acc:     100.00,  Flips:       7.00 (med) /      14.22 (mean) /      39.00 (max)
+00:27:53 INFO Saving last model parameters
+00:27:53 INFO Saving stats
+00:31:07 INFO (Eval)    Acc:     100.00,  Flips:      48.00 (med) /      63.13 (mean) /     179.76 (max)
+00:31:07 DEBUG Iteration 2901
+00:31:08 DEBUG Iteration 2902
+00:31:08 DEBUG Iteration 2903
+00:31:08 DEBUG Iteration 2904
+00:31:08 DEBUG Iteration 2905
+00:31:08 DEBUG Iteration 2906
+00:31:09 DEBUG Iteration 2907
+00:31:09 DEBUG Iteration 2908
+00:31:10 DEBUG Iteration 2909
+00:31:10 DEBUG Iteration 2910
+00:31:11 INFO Iter:   2910,  Acc:     100.00,  Flips:      14.50 (med) /      36.76 (mean) /      62.30 (max)
+00:31:11 DEBUG Iteration 2911
+00:31:11 DEBUG Iteration 2912
+00:31:11 DEBUG Iteration 2913
+00:31:12 DEBUG Iteration 2914
+00:31:13 DEBUG Iteration 2915
+00:31:13 DEBUG Iteration 2916
+00:31:13 DEBUG Iteration 2917
+00:31:13 DEBUG Iteration 2918
+00:31:13 DEBUG Iteration 2919
+00:31:14 DEBUG Iteration 2920
+00:31:14 INFO Iter:   2920,  Acc:     100.00,  Flips:      12.00 (med) /      24.60 (mean) /      43.40 (max)
+00:31:14 DEBUG Iteration 2921
+00:31:14 DEBUG Iteration 2922
+00:31:14 DEBUG Iteration 2923
+00:31:14 DEBUG Iteration 2924
+00:31:15 DEBUG Iteration 2925
+00:31:15 DEBUG Iteration 2926
+00:31:15 DEBUG Iteration 2927
+00:31:16 DEBUG Iteration 2928
+00:31:16 DEBUG Iteration 2929
+00:31:16 DEBUG Iteration 2930
+00:31:16 INFO Iter:   2930,  Acc:     100.00,  Flips:      18.00 (med) /      28.66 (mean) /      63.80 (max)
+00:31:16 DEBUG Iteration 2931
+00:31:17 DEBUG Iteration 2932
+00:31:18 DEBUG Iteration 2933
+00:31:18 DEBUG Iteration 2934
+00:31:18 DEBUG Iteration 2935
+00:31:18 DEBUG Iteration 2936
+00:31:19 DEBUG Iteration 2937
+00:31:19 DEBUG Iteration 2938
+00:31:19 DEBUG Iteration 2939
+00:31:19 DEBUG Iteration 2940
+00:31:19 INFO Iter:   2940,  Acc:     100.00,  Flips:      11.50 (med) /      26.46 (mean) /      62.40 (max)
+00:31:19 DEBUG Iteration 2941
+00:31:20 DEBUG Iteration 2942
+00:31:20 DEBUG Iteration 2943
+00:31:20 DEBUG Iteration 2944
+00:31:20 DEBUG Iteration 2945
+00:31:21 DEBUG Iteration 2946
+00:31:21 DEBUG Iteration 2947
+00:31:22 DEBUG Iteration 2948
+00:31:22 DEBUG Iteration 2949
+00:31:22 DEBUG Iteration 2950
+00:31:23 INFO Iter:   2950,  Acc:     100.00,  Flips:      16.00 (med) /      32.38 (mean) /      74.10 (max)
+00:31:23 INFO Saving last model parameters
+00:31:23 INFO Saving stats
+00:34:35 INFO (Eval)    Acc:     100.00,  Flips:      52.00 (med) /      69.50 (mean) /     203.76 (max)
+00:34:35 DEBUG Iteration 2951
+00:34:36 DEBUG Iteration 2952
+00:34:36 DEBUG Iteration 2953
+00:34:36 DEBUG Iteration 2954
+00:34:37 DEBUG Iteration 2955
+00:34:37 DEBUG Iteration 2956
+00:34:37 DEBUG Iteration 2957
+00:34:37 DEBUG Iteration 2958
+00:34:37 DEBUG Iteration 2959
+00:34:37 DEBUG Iteration 2960
+00:34:37 INFO Iter:   2960,  Acc:     100.00,  Flips:       9.00 (med) /      16.40 (mean) /      40.90 (max)
+00:34:37 DEBUG Iteration 2961
+00:34:37 DEBUG Iteration 2962
+00:34:37 DEBUG Iteration 2963
+00:34:37 DEBUG Iteration 2964
+00:34:39 DEBUG Iteration 2965
+00:34:39 DEBUG Iteration 2966
+00:34:40 DEBUG Iteration 2967
+00:34:41 DEBUG Iteration 2968
+00:34:41 DEBUG Iteration 2969
+00:34:41 DEBUG Iteration 2970
+00:34:42 INFO Iter:   2970,  Acc:     100.00,  Flips:      21.50 (med) /      46.88 (mean) /      79.80 (max)
+00:34:42 DEBUG Iteration 2971
+00:34:42 DEBUG Iteration 2972
+00:34:42 DEBUG Iteration 2973
+00:34:43 DEBUG Iteration 2974
+00:34:43 DEBUG Iteration 2975
+00:34:44 DEBUG Iteration 2976
+00:34:45 DEBUG Iteration 2977
+00:34:45 DEBUG Iteration 2978
+00:34:46 DEBUG Iteration 2979
+00:34:46 DEBUG Iteration 2980
+00:34:46 INFO Iter:   2980,  Acc:     100.00,  Flips:      15.50 (med) /      44.50 (mean) /      87.70 (max)
+00:34:46 DEBUG Iteration 2981
+00:34:46 DEBUG Iteration 2982
+00:34:47 DEBUG Iteration 2983
+00:34:47 DEBUG Iteration 2984
+00:34:47 DEBUG Iteration 2985
+00:34:47 DEBUG Iteration 2986
+00:34:47 DEBUG Iteration 2987
+00:34:48 DEBUG Iteration 2988
+00:34:48 DEBUG Iteration 2989
+00:34:48 DEBUG Iteration 2990
+00:34:49 INFO Iter:   2990,  Acc:     100.00,  Flips:      16.00 (med) /      30.92 (mean) /      70.30 (max)
+00:34:49 DEBUG Iteration 2991
+00:34:49 DEBUG Iteration 2992
+00:34:49 DEBUG Iteration 2993
+00:34:49 DEBUG Iteration 2994
+00:34:49 DEBUG Iteration 2995
+00:34:50 DEBUG Iteration 2996
+00:34:50 DEBUG Iteration 2997
+00:34:50 DEBUG Iteration 2998
+00:34:50 DEBUG Iteration 2999
+00:34:50 DEBUG Iteration 3000
+00:34:51 INFO Iter:   3000,  Acc:     100.00,  Flips:      11.50 (med) /      17.76 (mean) /      32.40 (max)
+00:34:51 INFO Saving last model parameters
+00:34:51 INFO Saving stats
+00:38:10 INFO (Eval)    Acc:     100.00,  Flips:      58.00 (med) /      75.37 (mean) /     201.00 (max)
+00:38:10 DEBUG Iteration 3001
+00:38:10 DEBUG Iteration 3002
+00:38:10 DEBUG Iteration 3003
+00:38:10 DEBUG Iteration 3004
+00:38:10 DEBUG Iteration 3005
+00:38:10 DEBUG Iteration 3006
+00:38:11 DEBUG Iteration 3007
+00:38:11 DEBUG Iteration 3008
+00:38:11 DEBUG Iteration 3009
+00:38:11 DEBUG Iteration 3010
+00:38:11 INFO Iter:   3010,  Acc:     100.00,  Flips:      11.50 (med) /      15.54 (mean) /      33.90 (max)
+00:38:11 DEBUG Iteration 3011
+00:38:11 DEBUG Iteration 3012
+00:38:11 DEBUG Iteration 3013
+00:38:12 DEBUG Iteration 3014
+00:38:12 DEBUG Iteration 3015
+00:38:12 DEBUG Iteration 3016
+00:38:12 DEBUG Iteration 3017
+00:38:13 DEBUG Iteration 3018
+00:38:13 DEBUG Iteration 3019
+00:38:13 DEBUG Iteration 3020
+00:38:13 INFO Iter:   3020,  Acc:     100.00,  Flips:      13.00 (med) /      20.24 (mean) /      43.40 (max)
+00:38:13 DEBUG Iteration 3021
+00:38:13 DEBUG Iteration 3022
+00:38:13 DEBUG Iteration 3023
+00:38:13 DEBUG Iteration 3024
+00:38:14 DEBUG Iteration 3025
+00:38:14 DEBUG Iteration 3026
+00:38:14 DEBUG Iteration 3027
+00:38:14 DEBUG Iteration 3028
+00:38:14 DEBUG Iteration 3029
+00:38:14 DEBUG Iteration 3030
+00:38:15 INFO Iter:   3030,  Acc:     100.00,  Flips:       7.00 (med) /      12.32 (mean) /      22.70 (max)
+00:38:15 DEBUG Iteration 3031
+00:38:15 DEBUG Iteration 3032
+00:38:15 DEBUG Iteration 3033
+00:38:15 DEBUG Iteration 3034
+00:38:16 DEBUG Iteration 3035
+00:38:16 DEBUG Iteration 3036
+00:38:17 DEBUG Iteration 3037
+00:38:17 DEBUG Iteration 3038
+00:38:17 DEBUG Iteration 3039
+00:38:17 DEBUG Iteration 3040
+00:38:18 INFO Iter:   3040,  Acc:     100.00,  Flips:      21.00 (med) /      39.54 (mean) /      67.70 (max)
+00:38:18 DEBUG Iteration 3041
+00:38:19 DEBUG Iteration 3042
+00:38:19 DEBUG Iteration 3043
+00:38:19 DEBUG Iteration 3044
+00:38:19 DEBUG Iteration 3045
+00:38:19 DEBUG Iteration 3046
+00:38:20 DEBUG Iteration 3047
+00:38:20 DEBUG Iteration 3048
+00:38:20 DEBUG Iteration 3049
+00:38:20 DEBUG Iteration 3050
+00:38:20 INFO Iter:   3050,  Acc:     100.00,  Flips:      16.00 (med) /      19.56 (mean) /      33.00 (max)
+00:38:20 INFO Saving last model parameters
+00:38:20 INFO Saving stats
+00:41:38 INFO (Eval)    Acc:     100.00,  Flips:      50.00 (med) /      71.68 (mean) /     199.84 (max)
+00:41:38 DEBUG Iteration 3051
+00:41:38 DEBUG Iteration 3052
+00:41:38 DEBUG Iteration 3053
+00:41:38 DEBUG Iteration 3054
+00:41:39 DEBUG Iteration 3055
+00:41:39 DEBUG Iteration 3056
+00:41:39 DEBUG Iteration 3057
+00:41:39 DEBUG Iteration 3058
+00:41:39 DEBUG Iteration 3059
+00:41:39 DEBUG Iteration 3060
+00:41:40 INFO Iter:   3060,  Acc:     100.00,  Flips:       6.00 (med) /      20.34 (mean) /      42.20 (max)
+00:41:40 DEBUG Iteration 3061
+00:41:40 DEBUG Iteration 3062
+00:41:40 DEBUG Iteration 3063
+00:41:40 DEBUG Iteration 3064
+00:41:41 DEBUG Iteration 3065
+00:41:41 DEBUG Iteration 3066
+00:41:41 DEBUG Iteration 3067
+00:41:42 DEBUG Iteration 3068
+00:41:42 DEBUG Iteration 3069
+00:41:43 DEBUG Iteration 3070
+00:41:43 INFO Iter:   3070,  Acc:     100.00,  Flips:      10.50 (med) /      25.80 (mean) /      48.90 (max)
+00:41:43 DEBUG Iteration 3071
+00:41:43 DEBUG Iteration 3072
+00:41:43 DEBUG Iteration 3073
+00:41:43 DEBUG Iteration 3074
+00:41:43 DEBUG Iteration 3075
+00:41:43 DEBUG Iteration 3076
+00:41:44 DEBUG Iteration 3077
+00:41:44 DEBUG Iteration 3078
+00:41:44 DEBUG Iteration 3079
+00:41:44 DEBUG Iteration 3080
+00:41:44 INFO Iter:   3080,  Acc:     100.00,  Flips:       7.50 (med) /      13.28 (mean) /      26.10 (max)
+00:41:44 DEBUG Iteration 3081
+00:41:45 DEBUG Iteration 3082
+00:41:45 DEBUG Iteration 3083
+00:41:45 DEBUG Iteration 3084
+00:41:45 DEBUG Iteration 3085
+00:41:45 DEBUG Iteration 3086
+00:41:46 DEBUG Iteration 3087
+00:41:46 DEBUG Iteration 3088
+00:41:46 DEBUG Iteration 3089
+00:41:46 DEBUG Iteration 3090
+00:41:46 INFO Iter:   3090,  Acc:     100.00,  Flips:      10.50 (med) /      24.82 (mean) /      48.40 (max)
+00:41:46 DEBUG Iteration 3091
+00:41:47 DEBUG Iteration 3092
+00:41:48 DEBUG Iteration 3093
+00:41:48 DEBUG Iteration 3094
+00:41:48 DEBUG Iteration 3095
+00:41:48 DEBUG Iteration 3096
+00:41:48 DEBUG Iteration 3097
+00:41:48 DEBUG Iteration 3098
+00:41:49 DEBUG Iteration 3099
+00:41:49 DEBUG Iteration 3100
+00:41:50 INFO Iter:   3100,  Acc:     100.00,  Flips:      11.50 (med) /      35.90 (mean) /      68.60 (max)
+00:41:50 INFO Saving last model parameters
+00:41:50 INFO Saving stats
+00:45:03 INFO (Eval)    Acc:     100.00,  Flips:      46.00 (med) /      69.78 (mean) /     191.60 (max)
+00:45:03 DEBUG Iteration 3101
+00:45:04 DEBUG Iteration 3102
+00:45:04 DEBUG Iteration 3103
+00:45:04 DEBUG Iteration 3104
+00:45:04 DEBUG Iteration 3105
+00:45:04 DEBUG Iteration 3106
+00:45:04 DEBUG Iteration 3107
+00:45:05 DEBUG Iteration 3108
+00:45:05 DEBUG Iteration 3109
+00:45:05 DEBUG Iteration 3110
+00:45:05 INFO Iter:   3110,  Acc:     100.00,  Flips:      13.00 (med) /      17.30 (mean) /      32.30 (max)
+00:45:05 DEBUG Iteration 3111
+00:45:05 DEBUG Iteration 3112
+00:45:05 DEBUG Iteration 3113
+00:45:06 DEBUG Iteration 3114
+00:45:06 DEBUG Iteration 3115
+00:45:07 DEBUG Iteration 3116
+00:45:07 DEBUG Iteration 3117
+00:45:08 DEBUG Iteration 3118
+00:45:08 DEBUG Iteration 3119
+00:45:08 DEBUG Iteration 3120
+00:45:08 INFO Iter:   3120,  Acc:     100.00,  Flips:      15.50 (med) /      30.12 (mean) /      52.70 (max)
+00:45:08 DEBUG Iteration 3121
+00:45:08 DEBUG Iteration 3122
+00:45:09 DEBUG Iteration 3123
+00:45:09 DEBUG Iteration 3124
+00:45:09 DEBUG Iteration 3125
+00:45:09 DEBUG Iteration 3126
+00:45:09 DEBUG Iteration 3127
+00:45:09 DEBUG Iteration 3128
+00:45:10 DEBUG Iteration 3129
+00:45:10 DEBUG Iteration 3130
+00:45:10 INFO Iter:   3130,  Acc:     100.00,  Flips:       9.50 (med) /      17.30 (mean) /      44.40 (max)
+00:45:10 DEBUG Iteration 3131
+00:45:10 DEBUG Iteration 3132
+00:45:11 DEBUG Iteration 3133
+00:45:12 DEBUG Iteration 3134
+00:45:12 DEBUG Iteration 3135
+00:45:12 DEBUG Iteration 3136
+00:45:12 DEBUG Iteration 3137
+00:45:12 DEBUG Iteration 3138
+00:45:12 DEBUG Iteration 3139
+00:45:12 DEBUG Iteration 3140
+00:45:13 INFO Iter:   3140,  Acc:     100.00,  Flips:      12.00 (med) /      26.88 (mean) /      60.80 (max)
+00:45:13 DEBUG Iteration 3141
+00:45:13 DEBUG Iteration 3142
+00:45:13 DEBUG Iteration 3143
+00:45:14 DEBUG Iteration 3144
+00:45:14 DEBUG Iteration 3145
+00:45:14 DEBUG Iteration 3146
+00:45:14 DEBUG Iteration 3147
+00:45:14 DEBUG Iteration 3148
+00:45:14 DEBUG Iteration 3149
+00:45:14 DEBUG Iteration 3150
+00:45:15 INFO Iter:   3150,  Acc:     100.00,  Flips:      16.00 (med) /      22.90 (mean) /      51.80 (max)
+00:45:15 INFO Saving last model parameters
+00:45:15 INFO Saving stats
+00:48:29 INFO (Eval)    Acc:     100.00,  Flips:      46.00 (med) /      66.45 (mean) /     170.48 (max)
+00:48:29 DEBUG Iteration 3151
+00:48:29 DEBUG Iteration 3152
+00:48:29 DEBUG Iteration 3153
+00:48:30 DEBUG Iteration 3154
+00:48:30 DEBUG Iteration 3155
+00:48:30 DEBUG Iteration 3156
+00:48:30 DEBUG Iteration 3157
+00:48:30 DEBUG Iteration 3158
+00:48:31 DEBUG Iteration 3159
+00:48:31 DEBUG Iteration 3160
+00:48:32 INFO Iter:   3160,  Acc:     100.00,  Flips:      16.50 (med) /      29.12 (mean) /      58.50 (max)
+00:48:32 DEBUG Iteration 3161
+00:48:32 DEBUG Iteration 3162
+00:48:32 DEBUG Iteration 3163
+00:48:33 DEBUG Iteration 3164
+00:48:34 DEBUG Iteration 3165
+00:48:34 DEBUG Iteration 3166
+00:48:34 DEBUG Iteration 3167
+00:48:34 DEBUG Iteration 3168
+00:48:35 DEBUG Iteration 3169
+00:48:35 DEBUG Iteration 3170
+00:48:35 INFO Iter:   3170,  Acc:      90.00,  Flips:       7.50 (med) /      30.80 (mean) /      54.10 (max)
+00:48:35 DEBUG Iteration 3171
+00:48:35 DEBUG Iteration 3172
+00:48:35 DEBUG Iteration 3173
+00:48:36 DEBUG Iteration 3174
+00:48:36 DEBUG Iteration 3175
+00:48:36 DEBUG Iteration 3176
+00:48:36 DEBUG Iteration 3177
+00:48:37 DEBUG Iteration 3178
+00:48:37 DEBUG Iteration 3179
+00:48:37 DEBUG Iteration 3180
+00:48:38 INFO Iter:   3180,  Acc:     100.00,  Flips:      22.50 (med) /      27.78 (mean) /      58.20 (max)
+00:48:38 DEBUG Iteration 3181
+00:48:38 DEBUG Iteration 3182
+00:48:38 DEBUG Iteration 3183
+00:48:39 DEBUG Iteration 3184
+00:48:39 DEBUG Iteration 3185
+00:48:39 DEBUG Iteration 3186
+00:48:39 DEBUG Iteration 3187
+00:48:40 DEBUG Iteration 3188
+00:48:40 DEBUG Iteration 3189
+00:48:40 DEBUG Iteration 3190
+00:48:40 INFO Iter:   3190,  Acc:     100.00,  Flips:      17.50 (med) /      26.04 (mean) /      58.90 (max)
+00:48:40 DEBUG Iteration 3191
+00:48:40 DEBUG Iteration 3192
+00:48:41 DEBUG Iteration 3193
+00:48:41 DEBUG Iteration 3194
+00:48:41 DEBUG Iteration 3195
+00:48:41 DEBUG Iteration 3196
+00:48:41 DEBUG Iteration 3197
+00:48:41 DEBUG Iteration 3198
+00:48:42 DEBUG Iteration 3199
+00:48:42 DEBUG Iteration 3200
+00:48:42 INFO Iter:   3200,  Acc:     100.00,  Flips:      12.00 (med) /      16.60 (mean) /      38.50 (max)
+00:48:42 INFO Saving last model parameters
+00:48:42 INFO Saving stats
+00:51:53 INFO (Eval)    Acc:     100.00,  Flips:      47.00 (med) /      66.88 (mean) /     172.96 (max)
+00:51:53 DEBUG Iteration 3201
+00:51:54 DEBUG Iteration 3202
+00:51:54 DEBUG Iteration 3203
+00:51:54 DEBUG Iteration 3204
+00:51:54 DEBUG Iteration 3205
+00:51:54 DEBUG Iteration 3206
+00:51:54 DEBUG Iteration 3207
+00:51:54 DEBUG Iteration 3208
+00:51:55 DEBUG Iteration 3209
+00:51:55 DEBUG Iteration 3210
+00:51:56 INFO Iter:   3210,  Acc:     100.00,  Flips:      16.00 (med) /      27.48 (mean) /      44.70 (max)
+00:51:56 DEBUG Iteration 3211
+00:51:56 DEBUG Iteration 3212
+00:51:56 DEBUG Iteration 3213
+00:51:57 DEBUG Iteration 3214
+00:51:57 DEBUG Iteration 3215
+00:51:57 DEBUG Iteration 3216
+00:51:57 DEBUG Iteration 3217
+00:51:58 DEBUG Iteration 3218
+00:51:58 DEBUG Iteration 3219
+00:51:58 DEBUG Iteration 3220
+00:51:58 INFO Iter:   3220,  Acc:     100.00,  Flips:      15.00 (med) /      19.78 (mean) /      43.10 (max)
+00:51:58 DEBUG Iteration 3221
+00:51:58 DEBUG Iteration 3222
+00:51:58 DEBUG Iteration 3223
+00:51:58 DEBUG Iteration 3224
+00:51:58 DEBUG Iteration 3225
+00:51:59 DEBUG Iteration 3226
+00:51:59 DEBUG Iteration 3227
+00:51:59 DEBUG Iteration 3228
+00:51:59 DEBUG Iteration 3229
+00:52:00 DEBUG Iteration 3230
+00:52:00 INFO Iter:   3230,  Acc:     100.00,  Flips:      12.00 (med) /      19.72 (mean) /      49.50 (max)
+00:52:00 DEBUG Iteration 3231
+00:52:00 DEBUG Iteration 3232
+00:52:00 DEBUG Iteration 3233
+00:52:00 DEBUG Iteration 3234
+00:52:01 DEBUG Iteration 3235
+00:52:02 DEBUG Iteration 3236
+00:52:03 DEBUG Iteration 3237
+00:52:03 DEBUG Iteration 3238
+00:52:03 DEBUG Iteration 3239
+00:52:03 DEBUG Iteration 3240
+00:52:03 INFO Iter:   3240,  Acc:     100.00,  Flips:      13.00 (med) /      37.00 (mean) /      70.20 (max)
+00:52:03 DEBUG Iteration 3241
+00:52:04 DEBUG Iteration 3242
+00:52:04 DEBUG Iteration 3243
+00:52:05 DEBUG Iteration 3244
+00:52:05 DEBUG Iteration 3245
+00:52:05 DEBUG Iteration 3246
+00:52:05 DEBUG Iteration 3247
+00:52:05 DEBUG Iteration 3248
+00:52:06 DEBUG Iteration 3249
+00:52:06 DEBUG Iteration 3250
+00:52:06 INFO Iter:   3250,  Acc:     100.00,  Flips:      16.00 (med) /      26.08 (mean) /      50.50 (max)
+00:52:06 INFO Saving last model parameters
+00:52:06 INFO Saving stats
+00:55:16 INFO (Eval)    Acc:     100.00,  Flips:      41.00 (med) /      65.25 (mean) /     159.12 (max)
+00:55:16 DEBUG Iteration 3251
+00:55:16 DEBUG Iteration 3252
+00:55:16 DEBUG Iteration 3253
+00:55:16 DEBUG Iteration 3254
+00:55:17 DEBUG Iteration 3255
+00:55:18 DEBUG Iteration 3256
+00:55:18 DEBUG Iteration 3257
+00:55:18 DEBUG Iteration 3258
+00:55:18 DEBUG Iteration 3259
+00:55:18 DEBUG Iteration 3260
+00:55:18 INFO Iter:   3260,  Acc:     100.00,  Flips:      13.50 (med) /      21.58 (mean) /      39.00 (max)
+00:55:18 DEBUG Iteration 3261
+00:55:19 DEBUG Iteration 3262
+00:55:19 DEBUG Iteration 3263
+00:55:19 DEBUG Iteration 3264
+00:55:19 DEBUG Iteration 3265
+00:55:20 DEBUG Iteration 3266
+00:55:20 DEBUG Iteration 3267
+00:55:20 DEBUG Iteration 3268
+00:55:20 DEBUG Iteration 3269
+00:55:21 DEBUG Iteration 3270
+00:55:21 INFO Iter:   3270,  Acc:     100.00,  Flips:      10.50 (med) /      25.36 (mean) /      57.90 (max)
+00:55:21 DEBUG Iteration 3271
+00:55:21 DEBUG Iteration 3272
+00:55:22 DEBUG Iteration 3273
+00:55:22 DEBUG Iteration 3274
+00:55:22 DEBUG Iteration 3275
+00:55:22 DEBUG Iteration 3276
+00:55:22 DEBUG Iteration 3277
+00:55:22 DEBUG Iteration 3278
+00:55:23 DEBUG Iteration 3279
+00:55:23 DEBUG Iteration 3280
+00:55:23 INFO Iter:   3280,  Acc:     100.00,  Flips:      13.00 (med) /      19.50 (mean) /      40.30 (max)
+00:55:23 DEBUG Iteration 3281
+00:55:23 DEBUG Iteration 3282
+00:55:23 DEBUG Iteration 3283
+00:55:23 DEBUG Iteration 3284
+00:55:23 DEBUG Iteration 3285
+00:55:24 DEBUG Iteration 3286
+00:55:24 DEBUG Iteration 3287
+00:55:24 DEBUG Iteration 3288
+00:55:24 DEBUG Iteration 3289
+00:55:24 DEBUG Iteration 3290
+00:55:25 INFO Iter:   3290,  Acc:     100.00,  Flips:      16.50 (med) /      18.74 (mean) /      35.60 (max)
+00:55:25 DEBUG Iteration 3291
+00:55:25 DEBUG Iteration 3292
+00:55:25 DEBUG Iteration 3293
+00:55:25 DEBUG Iteration 3294
+00:55:25 DEBUG Iteration 3295
+00:55:25 DEBUG Iteration 3296
+00:55:25 DEBUG Iteration 3297
+00:55:26 DEBUG Iteration 3298
+00:55:26 DEBUG Iteration 3299
+00:55:26 DEBUG Iteration 3300
+00:55:26 INFO Iter:   3300,  Acc:     100.00,  Flips:      10.50 (med) /      15.22 (mean) /      27.60 (max)
+00:55:26 INFO Saving last model parameters
+00:55:26 INFO Saving stats
+00:58:38 INFO (Eval)    Acc:     100.00,  Flips:      40.00 (med) /      67.48 (mean) /     165.36 (max)
+00:58:38 DEBUG Iteration 3301
+00:58:39 DEBUG Iteration 3302
+00:58:39 DEBUG Iteration 3303
+00:58:39 DEBUG Iteration 3304
+00:58:40 DEBUG Iteration 3305
+00:58:40 DEBUG Iteration 3306
+00:58:40 DEBUG Iteration 3307
+00:58:40 DEBUG Iteration 3308
+00:58:41 DEBUG Iteration 3309
+00:58:41 DEBUG Iteration 3310
+00:58:41 INFO Iter:   3310,  Acc:     100.00,  Flips:      13.00 (med) /      25.50 (mean) /      50.10 (max)
+00:58:41 DEBUG Iteration 3311
+00:58:41 DEBUG Iteration 3312
+00:58:41 DEBUG Iteration 3313
+00:58:42 DEBUG Iteration 3314
+00:58:42 DEBUG Iteration 3315
+00:58:42 DEBUG Iteration 3316
+00:58:42 DEBUG Iteration 3317
+00:58:42 DEBUG Iteration 3318
+00:58:43 DEBUG Iteration 3319
+00:58:43 DEBUG Iteration 3320
+00:58:43 INFO Iter:   3320,  Acc:     100.00,  Flips:      17.50 (med) /      18.20 (mean) /      36.70 (max)
+00:58:43 DEBUG Iteration 3321
+00:58:43 DEBUG Iteration 3322
+00:58:43 DEBUG Iteration 3323
+00:58:44 DEBUG Iteration 3324
+00:58:44 DEBUG Iteration 3325
+00:58:44 DEBUG Iteration 3326
+00:58:45 DEBUG Iteration 3327
+00:58:45 DEBUG Iteration 3328
+00:58:45 DEBUG Iteration 3329
+00:58:45 DEBUG Iteration 3330
+00:58:45 INFO Iter:   3330,  Acc:     100.00,  Flips:      11.00 (med) /      26.18 (mean) /      65.70 (max)
+00:58:45 DEBUG Iteration 3331
+00:58:46 DEBUG Iteration 3332
+00:58:46 DEBUG Iteration 3333
+00:58:46 DEBUG Iteration 3334
+00:58:46 DEBUG Iteration 3335
+00:58:47 DEBUG Iteration 3336
+00:58:47 DEBUG Iteration 3337
+00:58:47 DEBUG Iteration 3338
+00:58:47 DEBUG Iteration 3339
+00:58:47 DEBUG Iteration 3340
+00:58:47 INFO Iter:   3340,  Acc:     100.00,  Flips:      13.50 (med) /      16.84 (mean) /      41.90 (max)
+00:58:47 DEBUG Iteration 3341
+00:58:47 DEBUG Iteration 3342
+00:58:47 DEBUG Iteration 3343
+00:58:48 DEBUG Iteration 3344
+00:58:48 DEBUG Iteration 3345
+00:58:48 DEBUG Iteration 3346
+00:58:48 DEBUG Iteration 3347
+00:58:48 DEBUG Iteration 3348
+00:58:48 DEBUG Iteration 3349
+00:58:49 DEBUG Iteration 3350
+00:58:49 INFO Iter:   3350,  Acc:     100.00,  Flips:      13.50 (med) /      14.82 (mean) /      32.90 (max)
+00:58:49 INFO Saving last model parameters
+00:58:49 INFO Saving stats
+01:02:01 INFO (Eval)    Acc:      96.00,  Flips:      40.00 (med) /      66.98 (mean) /     171.24 (max)
+01:02:01 DEBUG Iteration 3351
+01:02:01 DEBUG Iteration 3352
+01:02:01 DEBUG Iteration 3353
+01:02:02 DEBUG Iteration 3354
+01:02:02 DEBUG Iteration 3355
+01:02:03 DEBUG Iteration 3356
+01:02:03 DEBUG Iteration 3357
+01:02:03 DEBUG Iteration 3358
+01:02:03 DEBUG Iteration 3359
+01:02:04 DEBUG Iteration 3360
+01:02:04 INFO Iter:   3360,  Acc:     100.00,  Flips:      15.00 (med) /      24.22 (mean) /      48.40 (max)
+01:02:04 DEBUG Iteration 3361
+01:02:04 DEBUG Iteration 3362
+01:02:05 DEBUG Iteration 3363
+01:02:05 DEBUG Iteration 3364
+01:02:05 DEBUG Iteration 3365
+01:02:06 DEBUG Iteration 3366
+01:02:06 DEBUG Iteration 3367
+01:02:07 DEBUG Iteration 3368
+01:02:07 DEBUG Iteration 3369
+01:02:07 DEBUG Iteration 3370
+01:02:07 INFO Iter:   3370,  Acc:     100.00,  Flips:      17.00 (med) /      34.54 (mean) /      66.80 (max)
+01:02:07 DEBUG Iteration 3371
+01:02:07 DEBUG Iteration 3372
+01:02:07 DEBUG Iteration 3373
+01:02:08 DEBUG Iteration 3374
+01:02:08 DEBUG Iteration 3375
+01:02:08 DEBUG Iteration 3376
+01:02:09 DEBUG Iteration 3377
+01:02:09 DEBUG Iteration 3378
+01:02:09 DEBUG Iteration 3379
+01:02:09 DEBUG Iteration 3380
+01:02:09 INFO Iter:   3380,  Acc:     100.00,  Flips:      15.50 (med) /      24.16 (mean) /      54.80 (max)
+01:02:09 DEBUG Iteration 3381
+01:02:10 DEBUG Iteration 3382
+01:02:10 DEBUG Iteration 3383
+01:02:11 DEBUG Iteration 3384
+01:02:11 DEBUG Iteration 3385
+01:02:11 DEBUG Iteration 3386
+01:02:11 DEBUG Iteration 3387
+01:02:11 DEBUG Iteration 3388
+01:02:11 DEBUG Iteration 3389
+01:02:11 DEBUG Iteration 3390
+01:02:11 INFO Iter:   3390,  Acc:     100.00,  Flips:      12.50 (med) /      19.58 (mean) /      54.00 (max)
+01:02:11 DEBUG Iteration 3391
+01:02:11 DEBUG Iteration 3392
+01:02:12 DEBUG Iteration 3393
+01:02:12 DEBUG Iteration 3394
+01:02:13 DEBUG Iteration 3395
+01:02:13 DEBUG Iteration 3396
+01:02:13 DEBUG Iteration 3397
+01:02:13 DEBUG Iteration 3398
+01:02:14 DEBUG Iteration 3399
+01:02:14 DEBUG Iteration 3400
+01:02:14 INFO Iter:   3400,  Acc:     100.00,  Flips:      20.00 (med) /      29.04 (mean) /      67.00 (max)
+01:02:14 INFO Saving last model parameters
+01:02:14 INFO Saving stats
+01:05:32 INFO (Eval)    Acc:     100.00,  Flips:      52.00 (med) /      72.87 (mean) /     198.64 (max)
+01:05:32 DEBUG Iteration 3401
+01:05:33 DEBUG Iteration 3402
+01:05:33 DEBUG Iteration 3403
+01:05:33 DEBUG Iteration 3404
+01:05:33 DEBUG Iteration 3405
+01:05:33 DEBUG Iteration 3406
+01:05:33 DEBUG Iteration 3407
+01:05:34 DEBUG Iteration 3408
+01:05:35 DEBUG Iteration 3409
+01:05:35 DEBUG Iteration 3410
+01:05:35 INFO Iter:   3410,  Acc:     100.00,  Flips:      15.00 (med) /      30.08 (mean) /      50.90 (max)
+01:05:35 DEBUG Iteration 3411
+01:05:35 DEBUG Iteration 3412
+01:05:36 DEBUG Iteration 3413
+01:05:36 DEBUG Iteration 3414
+01:05:36 DEBUG Iteration 3415
+01:05:36 DEBUG Iteration 3416
+01:05:36 DEBUG Iteration 3417
+01:05:36 DEBUG Iteration 3418
+01:05:37 DEBUG Iteration 3419
+01:05:37 DEBUG Iteration 3420
+01:05:37 INFO Iter:   3420,  Acc:     100.00,  Flips:       8.00 (med) /      16.90 (mean) /      31.70 (max)
+01:05:37 DEBUG Iteration 3421
+01:05:37 DEBUG Iteration 3422
+01:05:37 DEBUG Iteration 3423
+01:05:38 DEBUG Iteration 3424
+01:05:38 DEBUG Iteration 3425
+01:05:38 DEBUG Iteration 3426
+01:05:38 DEBUG Iteration 3427
+01:05:38 DEBUG Iteration 3428
+01:05:38 DEBUG Iteration 3429
+01:05:39 DEBUG Iteration 3430
+01:05:39 INFO Iter:   3430,  Acc:     100.00,  Flips:      14.50 (med) /      16.76 (mean) /      35.60 (max)
+01:05:39 DEBUG Iteration 3431
+01:05:39 DEBUG Iteration 3432
+01:05:39 DEBUG Iteration 3433
+01:05:39 DEBUG Iteration 3434
+01:05:40 DEBUG Iteration 3435
+01:05:40 DEBUG Iteration 3436
+01:05:40 DEBUG Iteration 3437
+01:05:40 DEBUG Iteration 3438
+01:05:40 DEBUG Iteration 3439
+01:05:40 DEBUG Iteration 3440
+01:05:40 INFO Iter:   3440,  Acc:     100.00,  Flips:      10.50 (med) /      14.72 (mean) /      32.20 (max)
+01:05:40 DEBUG Iteration 3441
+01:05:41 DEBUG Iteration 3442
+01:05:41 DEBUG Iteration 3443
+01:05:41 DEBUG Iteration 3444
+01:05:41 DEBUG Iteration 3445
+01:05:41 DEBUG Iteration 3446
+01:05:41 DEBUG Iteration 3447
+01:05:42 DEBUG Iteration 3448
+01:05:42 DEBUG Iteration 3449
+01:05:42 DEBUG Iteration 3450
+01:05:43 INFO Iter:   3450,  Acc:     100.00,  Flips:      13.00 (med) /      23.38 (mean) /      61.90 (max)
+01:05:43 INFO Saving last model parameters
+01:05:43 INFO Saving stats
+01:08:50 INFO (Eval)    Acc:     100.00,  Flips:      45.00 (med) /      61.41 (mean) /     158.52 (max)
+01:08:50 DEBUG Iteration 3451
+01:08:50 DEBUG Iteration 3452
+01:08:50 DEBUG Iteration 3453
+01:08:50 DEBUG Iteration 3454
+01:08:50 DEBUG Iteration 3455
+01:08:50 DEBUG Iteration 3456
+01:08:51 DEBUG Iteration 3457
+01:08:52 DEBUG Iteration 3458
+01:08:53 DEBUG Iteration 3459
+01:08:53 DEBUG Iteration 3460
+01:08:53 INFO Iter:   3460,  Acc:     100.00,  Flips:      15.50 (med) /      28.94 (mean) /      56.30 (max)
+01:08:53 DEBUG Iteration 3461
+01:08:53 DEBUG Iteration 3462
+01:08:53 DEBUG Iteration 3463
+01:08:53 DEBUG Iteration 3464
+01:08:53 DEBUG Iteration 3465
+01:08:53 DEBUG Iteration 3466
+01:08:53 DEBUG Iteration 3467
+01:08:54 DEBUG Iteration 3468
+01:08:54 DEBUG Iteration 3469
+01:08:54 DEBUG Iteration 3470
+01:08:54 INFO Iter:   3470,  Acc:     100.00,  Flips:       7.00 (med) /      17.74 (mean) /      45.60 (max)
+01:08:54 DEBUG Iteration 3471
+01:08:54 DEBUG Iteration 3472
+01:08:54 DEBUG Iteration 3473
+01:08:55 DEBUG Iteration 3474
+01:08:55 DEBUG Iteration 3475
+01:08:55 DEBUG Iteration 3476
+01:08:55 DEBUG Iteration 3477
+01:08:55 DEBUG Iteration 3478
+01:08:55 DEBUG Iteration 3479
+01:08:55 DEBUG Iteration 3480
+01:08:55 INFO Iter:   3480,  Acc:     100.00,  Flips:       7.00 (med) /       9.10 (mean) /      18.10 (max)
+01:08:55 DEBUG Iteration 3481
+01:08:55 DEBUG Iteration 3482
+01:08:56 DEBUG Iteration 3483
+01:08:56 DEBUG Iteration 3484
+01:08:56 DEBUG Iteration 3485
+01:08:56 DEBUG Iteration 3486
+01:08:57 DEBUG Iteration 3487
+01:08:57 DEBUG Iteration 3488
+01:08:58 DEBUG Iteration 3489
+01:08:58 DEBUG Iteration 3490
+01:08:58 INFO Iter:   3490,  Acc:     100.00,  Flips:      16.00 (med) /      24.66 (mean) /      49.30 (max)
+01:08:58 DEBUG Iteration 3491
+01:08:58 DEBUG Iteration 3492
+01:08:59 DEBUG Iteration 3493
+01:08:59 DEBUG Iteration 3494
+01:08:59 DEBUG Iteration 3495
+01:08:59 DEBUG Iteration 3496
+01:09:00 DEBUG Iteration 3497
+01:09:00 DEBUG Iteration 3498
+01:09:01 DEBUG Iteration 3499
+01:09:01 DEBUG Iteration 3500
+01:09:01 INFO Iter:   3500,  Acc:     100.00,  Flips:      19.50 (med) /      34.22 (mean) /      82.70 (max)
+01:09:01 INFO Saving last model parameters
+01:09:01 INFO Saving stats
+01:12:12 INFO (Eval)    Acc:     100.00,  Flips:      35.00 (med) /      61.79 (mean) /     159.68 (max)
+01:12:12 DEBUG Iteration 3501
+01:12:12 DEBUG Iteration 3502
+01:12:12 DEBUG Iteration 3503
+01:12:12 DEBUG Iteration 3504
+01:12:12 DEBUG Iteration 3505
+01:12:13 DEBUG Iteration 3506
+01:12:13 DEBUG Iteration 3507
+01:12:13 DEBUG Iteration 3508
+01:12:13 DEBUG Iteration 3509
+01:12:13 DEBUG Iteration 3510
+01:12:13 INFO Iter:   3510,  Acc:     100.00,  Flips:      10.00 (med) /      13.60 (mean) /      28.90 (max)
+01:12:13 DEBUG Iteration 3511
+01:12:13 DEBUG Iteration 3512
+01:12:13 DEBUG Iteration 3513
+01:12:14 DEBUG Iteration 3514
+01:12:14 DEBUG Iteration 3515
+01:12:14 DEBUG Iteration 3516
+01:12:14 DEBUG Iteration 3517
+01:12:14 DEBUG Iteration 3518
+01:12:15 DEBUG Iteration 3519
+01:12:15 DEBUG Iteration 3520
+01:12:15 INFO Iter:   3520,  Acc:     100.00,  Flips:      11.50 (med) /      16.10 (mean) /      32.80 (max)
+01:12:15 DEBUG Iteration 3521
+01:12:15 DEBUG Iteration 3522
+01:12:16 DEBUG Iteration 3523
+01:12:16 DEBUG Iteration 3524
+01:12:16 DEBUG Iteration 3525
+01:12:16 DEBUG Iteration 3526
+01:12:17 DEBUG Iteration 3527
+01:12:17 DEBUG Iteration 3528
+01:12:17 DEBUG Iteration 3529
+01:12:17 DEBUG Iteration 3530
+01:12:18 INFO Iter:   3530,  Acc:     100.00,  Flips:      13.00 (med) /      25.46 (mean) /      79.30 (max)
+01:12:18 DEBUG Iteration 3531
+01:12:18 DEBUG Iteration 3532
+01:12:18 DEBUG Iteration 3533
+01:12:18 DEBUG Iteration 3534
+01:12:19 DEBUG Iteration 3535
+01:12:19 DEBUG Iteration 3536
+01:12:19 DEBUG Iteration 3537
+01:12:20 DEBUG Iteration 3538
+01:12:21 DEBUG Iteration 3539
+01:12:21 DEBUG Iteration 3540
+01:12:21 INFO Iter:   3540,  Acc:     100.00,  Flips:      18.00 (med) /      33.70 (mean) /      75.30 (max)
+01:12:21 DEBUG Iteration 3541
+01:12:21 DEBUG Iteration 3542
+01:12:21 DEBUG Iteration 3543
+01:12:21 DEBUG Iteration 3544
+01:12:21 DEBUG Iteration 3545
+01:12:22 DEBUG Iteration 3546
+01:12:22 DEBUG Iteration 3547
+01:12:23 DEBUG Iteration 3548
+01:12:23 DEBUG Iteration 3549
+01:12:23 DEBUG Iteration 3550
+01:12:23 INFO Iter:   3550,  Acc:     100.00,  Flips:      11.50 (med) /      22.06 (mean) /      53.50 (max)
+01:12:23 INFO Saving last model parameters
+01:12:23 INFO Saving stats
+01:15:32 INFO (Eval)    Acc:     100.00,  Flips:      33.00 (med) /      58.49 (mean) /     165.72 (max)
+01:15:32 DEBUG Iteration 3551
+01:15:32 DEBUG Iteration 3552
+01:15:32 DEBUG Iteration 3553
+01:15:33 DEBUG Iteration 3554
+01:15:33 DEBUG Iteration 3555
+01:15:33 DEBUG Iteration 3556
+01:15:33 DEBUG Iteration 3557
+01:15:34 DEBUG Iteration 3558
+01:15:34 DEBUG Iteration 3559
+01:15:34 DEBUG Iteration 3560
+01:15:34 INFO Iter:   3560,  Acc:     100.00,  Flips:      10.00 (med) /      19.60 (mean) /      37.70 (max)
+01:15:34 DEBUG Iteration 3561
+01:15:34 DEBUG Iteration 3562
+01:15:35 DEBUG Iteration 3563
+01:15:35 DEBUG Iteration 3564
+01:15:35 DEBUG Iteration 3565
+01:15:35 DEBUG Iteration 3566
+01:15:35 DEBUG Iteration 3567
+01:15:35 DEBUG Iteration 3568
+01:15:36 DEBUG Iteration 3569
+01:15:36 DEBUG Iteration 3570
+01:15:36 INFO Iter:   3570,  Acc:     100.00,  Flips:      13.50 (med) /      20.84 (mean) /      33.30 (max)
+01:15:36 DEBUG Iteration 3571
+01:15:36 DEBUG Iteration 3572
+01:15:37 DEBUG Iteration 3573
+01:15:37 DEBUG Iteration 3574
+01:15:37 DEBUG Iteration 3575
+01:15:38 DEBUG Iteration 3576
+01:15:39 DEBUG Iteration 3577
+01:15:39 DEBUG Iteration 3578
+01:15:39 DEBUG Iteration 3579
+01:15:40 DEBUG Iteration 3580
+01:15:40 INFO Iter:   3580,  Acc:     100.00,  Flips:      25.00 (med) /      37.16 (mean) /      75.90 (max)
+01:15:40 DEBUG Iteration 3581
+01:15:40 DEBUG Iteration 3582
+01:15:40 DEBUG Iteration 3583
+01:15:41 DEBUG Iteration 3584
+01:15:41 DEBUG Iteration 3585
+01:15:41 DEBUG Iteration 3586
+01:15:42 DEBUG Iteration 3587
+01:15:42 DEBUG Iteration 3588
+01:15:42 DEBUG Iteration 3589
+01:15:42 DEBUG Iteration 3590
+01:15:43 INFO Iter:   3590,  Acc:     100.00,  Flips:      16.50 (med) /      32.06 (mean) /      63.30 (max)
+01:15:43 DEBUG Iteration 3591
+01:15:43 DEBUG Iteration 3592
+01:15:44 DEBUG Iteration 3593
+01:15:44 DEBUG Iteration 3594
+01:15:44 DEBUG Iteration 3595
+01:15:44 DEBUG Iteration 3596
+01:15:45 DEBUG Iteration 3597
+01:15:45 DEBUG Iteration 3598
+01:15:45 DEBUG Iteration 3599
+01:15:45 DEBUG Iteration 3600
+01:15:45 INFO Iter:   3600,  Acc:     100.00,  Flips:      11.00 (med) /      23.90 (mean) /      51.70 (max)
+01:15:45 INFO Saving last model parameters
+01:15:45 INFO Saving stats
+01:18:56 INFO (Eval)    Acc:     100.00,  Flips:      40.00 (med) /      57.86 (mean) /     166.32 (max)
+01:18:56 DEBUG Iteration 3601
+01:18:56 DEBUG Iteration 3602
+01:18:56 DEBUG Iteration 3603
+01:18:56 DEBUG Iteration 3604
+01:18:56 DEBUG Iteration 3605
+01:18:57 DEBUG Iteration 3606
+01:18:57 DEBUG Iteration 3607
+01:18:57 DEBUG Iteration 3608
+01:18:57 DEBUG Iteration 3609
+01:18:58 DEBUG Iteration 3610
+01:18:58 INFO Iter:   3610,  Acc:     100.00,  Flips:      12.50 (med) /      16.16 (mean) /      28.30 (max)
+01:18:58 DEBUG Iteration 3611
+01:18:58 DEBUG Iteration 3612
+01:18:58 DEBUG Iteration 3613
+01:18:58 DEBUG Iteration 3614
+01:18:58 DEBUG Iteration 3615
+01:18:59 DEBUG Iteration 3616
+01:18:59 DEBUG Iteration 3617
+01:18:59 DEBUG Iteration 3618
+01:19:00 DEBUG Iteration 3619
+01:19:00 DEBUG Iteration 3620
+01:19:01 INFO Iter:   3620,  Acc:     100.00,  Flips:      13.00 (med) /      31.18 (mean) /      58.20 (max)
+01:19:01 DEBUG Iteration 3621
+01:19:01 DEBUG Iteration 3622
+01:19:01 DEBUG Iteration 3623
+01:19:01 DEBUG Iteration 3624
+01:19:02 DEBUG Iteration 3625
+01:19:03 DEBUG Iteration 3626
+01:19:04 DEBUG Iteration 3627
+01:19:04 DEBUG Iteration 3628
+01:19:04 DEBUG Iteration 3629
+01:19:04 DEBUG Iteration 3630
+01:19:05 INFO Iter:   3630,  Acc:      90.00,  Flips:      18.50 (med) /      42.18 (mean) /      74.50 (max)
+01:19:05 DEBUG Iteration 3631
+01:19:05 DEBUG Iteration 3632
+01:19:05 DEBUG Iteration 3633
+01:19:05 DEBUG Iteration 3634
+01:19:05 DEBUG Iteration 3635
+01:19:05 DEBUG Iteration 3636
+01:19:05 DEBUG Iteration 3637
+01:19:05 DEBUG Iteration 3638
+01:19:06 DEBUG Iteration 3639
+01:19:06 DEBUG Iteration 3640
+01:19:06 INFO Iter:   3640,  Acc:     100.00,  Flips:       9.50 (med) /      10.58 (mean) /      19.90 (max)
+01:19:06 DEBUG Iteration 3641
+01:19:06 DEBUG Iteration 3642
+01:19:06 DEBUG Iteration 3643
+01:19:07 DEBUG Iteration 3644
+01:19:07 DEBUG Iteration 3645
+01:19:07 DEBUG Iteration 3646
+01:19:07 DEBUG Iteration 3647
+01:19:07 DEBUG Iteration 3648
+01:19:07 DEBUG Iteration 3649
+01:19:07 DEBUG Iteration 3650
+01:19:07 INFO Iter:   3650,  Acc:     100.00,  Flips:      11.50 (med) /      17.28 (mean) /      43.10 (max)
+01:19:07 INFO Saving last model parameters
+01:19:08 INFO Saving stats
+01:22:18 INFO (Eval)    Acc:     100.00,  Flips:      41.00 (med) /      62.53 (mean) /     161.44 (max)
+01:22:18 DEBUG Iteration 3651
+01:22:18 DEBUG Iteration 3652
+01:22:19 DEBUG Iteration 3653
+01:22:19 DEBUG Iteration 3654
+01:22:19 DEBUG Iteration 3655
+01:22:19 DEBUG Iteration 3656
+01:22:19 DEBUG Iteration 3657
+01:22:19 DEBUG Iteration 3658
+01:22:20 DEBUG Iteration 3659
+01:22:20 DEBUG Iteration 3660
+01:22:20 INFO Iter:   3660,  Acc:     100.00,  Flips:      14.00 (med) /      18.06 (mean) /      31.50 (max)
+01:22:20 DEBUG Iteration 3661
+01:22:20 DEBUG Iteration 3662
+01:22:20 DEBUG Iteration 3663
+01:22:20 DEBUG Iteration 3664
+01:22:20 DEBUG Iteration 3665
+01:22:21 DEBUG Iteration 3666
+01:22:21 DEBUG Iteration 3667
+01:22:21 DEBUG Iteration 3668
+01:22:21 DEBUG Iteration 3669
+01:22:22 DEBUG Iteration 3670
+01:22:22 INFO Iter:   3670,  Acc:     100.00,  Flips:      10.50 (med) /      18.64 (mean) /      40.80 (max)
+01:22:22 DEBUG Iteration 3671
+01:22:22 DEBUG Iteration 3672
+01:22:22 DEBUG Iteration 3673
+01:22:22 DEBUG Iteration 3674
+01:22:22 DEBUG Iteration 3675
+01:22:23 DEBUG Iteration 3676
+01:22:23 DEBUG Iteration 3677
+01:22:23 DEBUG Iteration 3678
+01:22:23 DEBUG Iteration 3679
+01:22:23 DEBUG Iteration 3680
+01:22:24 INFO Iter:   3680,  Acc:     100.00,  Flips:       9.50 (med) /      17.96 (mean) /      40.70 (max)
+01:22:24 DEBUG Iteration 3681
+01:22:24 DEBUG Iteration 3682
+01:22:24 DEBUG Iteration 3683
+01:22:24 DEBUG Iteration 3684
+01:22:24 DEBUG Iteration 3685
+01:22:24 DEBUG Iteration 3686
+01:22:25 DEBUG Iteration 3687
+01:22:25 DEBUG Iteration 3688
+01:22:25 DEBUG Iteration 3689
+01:22:25 DEBUG Iteration 3690
+01:22:25 INFO Iter:   3690,  Acc:     100.00,  Flips:      12.50 (med) /      14.52 (mean) /      26.90 (max)
+01:22:25 DEBUG Iteration 3691
+01:22:25 DEBUG Iteration 3692
+01:22:25 DEBUG Iteration 3693
+01:22:26 DEBUG Iteration 3694
+01:22:26 DEBUG Iteration 3695
+01:22:27 DEBUG Iteration 3696
+01:22:27 DEBUG Iteration 3697
+01:22:27 DEBUG Iteration 3698
+01:22:28 DEBUG Iteration 3699
+01:22:28 DEBUG Iteration 3700
+01:22:29 INFO Iter:   3700,  Acc:     100.00,  Flips:      15.50 (med) /      35.78 (mean) /      74.90 (max)
+01:22:29 INFO Saving last model parameters
+01:22:29 INFO Saving stats
+01:25:52 INFO (Eval)    Acc:     100.00,  Flips:      45.00 (med) /      68.24 (mean) /     190.48 (max)
+01:25:52 DEBUG Iteration 3701
+01:25:52 DEBUG Iteration 3702
+01:25:52 DEBUG Iteration 3703
+01:25:52 DEBUG Iteration 3704
+01:25:52 DEBUG Iteration 3705
+01:25:52 DEBUG Iteration 3706
+01:25:53 DEBUG Iteration 3707
+01:25:53 DEBUG Iteration 3708
+01:25:53 DEBUG Iteration 3709
+01:25:53 DEBUG Iteration 3710
+01:25:54 INFO Iter:   3710,  Acc:     100.00,  Flips:      12.50 (med) /      17.32 (mean) /      36.80 (max)
+01:25:54 DEBUG Iteration 3711
+01:25:54 DEBUG Iteration 3712
+01:25:54 DEBUG Iteration 3713
+01:25:56 DEBUG Iteration 3714
+01:25:56 DEBUG Iteration 3715
+01:25:56 DEBUG Iteration 3716
+01:25:56 DEBUG Iteration 3717
+01:25:56 DEBUG Iteration 3718
+01:25:56 DEBUG Iteration 3719
+01:25:57 DEBUG Iteration 3720
+01:25:57 INFO Iter:   3720,  Acc:     100.00,  Flips:      15.00 (med) /      30.38 (mean) /      64.30 (max)
+01:25:57 DEBUG Iteration 3721
+01:25:57 DEBUG Iteration 3722
+01:25:58 DEBUG Iteration 3723
+01:25:58 DEBUG Iteration 3724
+01:25:58 DEBUG Iteration 3725
+01:25:59 DEBUG Iteration 3726
+01:25:59 DEBUG Iteration 3727
+01:25:59 DEBUG Iteration 3728
+01:25:59 DEBUG Iteration 3729
+01:25:59 DEBUG Iteration 3730
+01:26:00 INFO Iter:   3730,  Acc:     100.00,  Flips:      12.50 (med) /      27.20 (mean) /      57.00 (max)
+01:26:00 DEBUG Iteration 3731
+01:26:00 DEBUG Iteration 3732
+01:26:00 DEBUG Iteration 3733
+01:26:00 DEBUG Iteration 3734
+01:26:00 DEBUG Iteration 3735
+01:26:01 DEBUG Iteration 3736
+01:26:01 DEBUG Iteration 3737
+01:26:01 DEBUG Iteration 3738
+01:26:02 DEBUG Iteration 3739
+01:26:02 DEBUG Iteration 3740
+01:26:02 INFO Iter:   3740,  Acc:     100.00,  Flips:      15.50 (med) /      19.66 (mean) /      44.60 (max)
+01:26:02 DEBUG Iteration 3741
+01:26:02 DEBUG Iteration 3742
+01:26:02 DEBUG Iteration 3743
+01:26:02 DEBUG Iteration 3744
+01:26:03 DEBUG Iteration 3745
+01:26:03 DEBUG Iteration 3746
+01:26:03 DEBUG Iteration 3747
+01:26:03 DEBUG Iteration 3748
+01:26:03 DEBUG Iteration 3749
+01:26:03 DEBUG Iteration 3750
+01:26:03 INFO Iter:   3750,  Acc:     100.00,  Flips:      12.50 (med) /      15.12 (mean) /      30.90 (max)
+01:26:03 INFO Saving last model parameters
+01:26:03 INFO Saving stats
+01:29:30 INFO (Eval)    Acc:     100.00,  Flips:      57.00 (med) /      71.25 (mean) /     193.36 (max)
+01:29:30 DEBUG Iteration 3751
+01:29:31 DEBUG Iteration 3752
+01:29:31 DEBUG Iteration 3753
+01:29:31 DEBUG Iteration 3754
+01:29:31 DEBUG Iteration 3755
+01:29:31 DEBUG Iteration 3756
+01:29:32 DEBUG Iteration 3757
+01:29:32 DEBUG Iteration 3758
+01:29:32 DEBUG Iteration 3759
+01:29:32 DEBUG Iteration 3760
+01:29:32 INFO Iter:   3760,  Acc:     100.00,  Flips:      17.00 (med) /      17.56 (mean) /      34.60 (max)
+01:29:32 DEBUG Iteration 3761
+01:29:33 DEBUG Iteration 3762
+01:29:33 DEBUG Iteration 3763
+01:29:33 DEBUG Iteration 3764
+01:29:33 DEBUG Iteration 3765
+01:29:33 DEBUG Iteration 3766
+01:29:34 DEBUG Iteration 3767
+01:29:34 DEBUG Iteration 3768
+01:29:34 DEBUG Iteration 3769
+01:29:34 DEBUG Iteration 3770
+01:29:34 INFO Iter:   3770,  Acc:     100.00,  Flips:      12.00 (med) /      19.74 (mean) /      50.20 (max)
+01:29:34 DEBUG Iteration 3771
+01:29:34 DEBUG Iteration 3772
+01:29:34 DEBUG Iteration 3773
+01:29:34 DEBUG Iteration 3774
+01:29:35 DEBUG Iteration 3775
+01:29:35 DEBUG Iteration 3776
+01:29:35 DEBUG Iteration 3777
+01:29:35 DEBUG Iteration 3778
+01:29:36 DEBUG Iteration 3779
+01:29:36 DEBUG Iteration 3780
+01:29:36 INFO Iter:   3780,  Acc:     100.00,  Flips:      10.00 (med) /      21.44 (mean) /      51.30 (max)
+01:29:36 DEBUG Iteration 3781
+01:29:36 DEBUG Iteration 3782
+01:29:36 DEBUG Iteration 3783
+01:29:37 DEBUG Iteration 3784
+01:29:37 DEBUG Iteration 3785
+01:29:38 DEBUG Iteration 3786
+01:29:39 DEBUG Iteration 3787
+01:29:39 DEBUG Iteration 3788
+01:29:39 DEBUG Iteration 3789
+01:29:39 DEBUG Iteration 3790
+01:29:39 INFO Iter:   3790,  Acc:     100.00,  Flips:      10.00 (med) /      27.78 (mean) /      47.30 (max)
+01:29:39 DEBUG Iteration 3791
+01:29:39 DEBUG Iteration 3792
+01:29:40 DEBUG Iteration 3793
+01:29:40 DEBUG Iteration 3794
+01:29:40 DEBUG Iteration 3795
+01:29:41 DEBUG Iteration 3796
+01:29:41 DEBUG Iteration 3797
+01:29:41 DEBUG Iteration 3798
+01:29:41 DEBUG Iteration 3799
+01:29:41 DEBUG Iteration 3800
+01:29:41 INFO Iter:   3800,  Acc:     100.00,  Flips:      12.00 (med) /      23.18 (mean) /      41.50 (max)
+01:29:41 INFO Saving last model parameters
+01:29:41 INFO Saving stats
+01:32:57 INFO (Eval)    Acc:      96.00,  Flips:      51.00 (med) /      74.12 (mean) /     205.48 (max)
+01:32:57 DEBUG Iteration 3801
+01:32:57 DEBUG Iteration 3802
+01:32:58 DEBUG Iteration 3803
+01:32:58 DEBUG Iteration 3804
+01:32:59 DEBUG Iteration 3805
+01:32:59 DEBUG Iteration 3806
+01:33:00 DEBUG Iteration 3807
+01:33:00 DEBUG Iteration 3808
+01:33:00 DEBUG Iteration 3809
+01:33:00 DEBUG Iteration 3810
+01:33:00 INFO Iter:   3810,  Acc:     100.00,  Flips:      14.00 (med) /      32.04 (mean) /      86.30 (max)
+01:33:00 DEBUG Iteration 3811
+01:33:01 DEBUG Iteration 3812
+01:33:01 DEBUG Iteration 3813
+01:33:01 DEBUG Iteration 3814
+01:33:01 DEBUG Iteration 3815
+01:33:01 DEBUG Iteration 3816
+01:33:01 DEBUG Iteration 3817
+01:33:03 DEBUG Iteration 3818
+01:33:03 DEBUG Iteration 3819
+01:33:05 DEBUG Iteration 3820
+01:33:05 INFO Iter:   3820,  Acc:      90.00,  Flips:      13.50 (med) /      41.32 (mean) /      66.20 (max)
+01:33:05 DEBUG Iteration 3821
+01:33:05 DEBUG Iteration 3822
+01:33:05 DEBUG Iteration 3823
+01:33:06 DEBUG Iteration 3824
+01:33:06 DEBUG Iteration 3825
+01:33:06 DEBUG Iteration 3826
+01:33:06 DEBUG Iteration 3827
+01:33:06 DEBUG Iteration 3828
+01:33:06 DEBUG Iteration 3829
+01:33:06 DEBUG Iteration 3830
+01:33:06 INFO Iter:   3830,  Acc:     100.00,  Flips:      10.50 (med) /      16.10 (mean) /      29.90 (max)
+01:33:06 DEBUG Iteration 3831
+01:33:07 DEBUG Iteration 3832
+01:33:07 DEBUG Iteration 3833
+01:33:07 DEBUG Iteration 3834
+01:33:07 DEBUG Iteration 3835
+01:33:07 DEBUG Iteration 3836
+01:33:08 DEBUG Iteration 3837
+01:33:08 DEBUG Iteration 3838
+01:33:08 DEBUG Iteration 3839
+01:33:08 DEBUG Iteration 3840
+01:33:08 INFO Iter:   3840,  Acc:     100.00,  Flips:      13.00 (med) /      19.10 (mean) /      34.60 (max)
+01:33:08 DEBUG Iteration 3841
+01:33:09 DEBUG Iteration 3842
+01:33:09 DEBUG Iteration 3843
+01:33:09 DEBUG Iteration 3844
+01:33:10 DEBUG Iteration 3845
+01:33:10 DEBUG Iteration 3846
+01:33:10 DEBUG Iteration 3847
+01:33:10 DEBUG Iteration 3848
+01:33:10 DEBUG Iteration 3849
+01:33:11 DEBUG Iteration 3850
+01:33:11 INFO Iter:   3850,  Acc:     100.00,  Flips:      10.50 (med) /      22.42 (mean) /      44.20 (max)
+01:33:11 INFO Saving last model parameters
+01:33:11 INFO Saving stats
+01:36:23 INFO (Eval)    Acc:     100.00,  Flips:      52.00 (med) /      68.65 (mean) /     198.88 (max)
+01:36:23 DEBUG Iteration 3851
+01:36:23 DEBUG Iteration 3852
+01:36:23 DEBUG Iteration 3853
+01:36:23 DEBUG Iteration 3854
+01:36:23 DEBUG Iteration 3855
+01:36:24 DEBUG Iteration 3856
+01:36:24 DEBUG Iteration 3857
+01:36:24 DEBUG Iteration 3858
+01:36:25 DEBUG Iteration 3859
+01:36:25 DEBUG Iteration 3860
+01:36:25 INFO Iter:   3860,  Acc:     100.00,  Flips:      10.00 (med) /      18.38 (mean) /      31.30 (max)
+01:36:25 DEBUG Iteration 3861
+01:36:25 DEBUG Iteration 3862
+01:36:25 DEBUG Iteration 3863
+01:36:25 DEBUG Iteration 3864
+01:36:25 DEBUG Iteration 3865
+01:36:25 DEBUG Iteration 3866
+01:36:25 DEBUG Iteration 3867
+01:36:26 DEBUG Iteration 3868
+01:36:26 DEBUG Iteration 3869
+01:36:26 DEBUG Iteration 3870
+01:36:26 INFO Iter:   3870,  Acc:     100.00,  Flips:      10.00 (med) /      16.80 (mean) /      44.00 (max)
+01:36:26 DEBUG Iteration 3871
+01:36:26 DEBUG Iteration 3872
+01:36:26 DEBUG Iteration 3873
+01:36:27 DEBUG Iteration 3874
+01:36:27 DEBUG Iteration 3875
+01:36:28 DEBUG Iteration 3876
+01:36:28 DEBUG Iteration 3877
+01:36:28 DEBUG Iteration 3878
+01:36:28 DEBUG Iteration 3879
+01:36:28 DEBUG Iteration 3880
+01:36:29 INFO Iter:   3880,  Acc:     100.00,  Flips:       9.00 (med) /      25.40 (mean) /      68.00 (max)
+01:36:29 DEBUG Iteration 3881
+01:36:29 DEBUG Iteration 3882
+01:36:29 DEBUG Iteration 3883
+01:36:30 DEBUG Iteration 3884
+01:36:30 DEBUG Iteration 3885
+01:36:30 DEBUG Iteration 3886
+01:36:30 DEBUG Iteration 3887
+01:36:30 DEBUG Iteration 3888
+01:36:30 DEBUG Iteration 3889
+01:36:30 DEBUG Iteration 3890
+01:36:31 INFO Iter:   3890,  Acc:     100.00,  Flips:      17.50 (med) /      19.54 (mean) /      37.10 (max)
+01:36:31 DEBUG Iteration 3891
+01:36:31 DEBUG Iteration 3892
+01:36:31 DEBUG Iteration 3893
+01:36:31 DEBUG Iteration 3894
+01:36:31 DEBUG Iteration 3895
+01:36:32 DEBUG Iteration 3896
+01:36:33 DEBUG Iteration 3897
+01:36:33 DEBUG Iteration 3898
+01:36:33 DEBUG Iteration 3899
+01:36:33 DEBUG Iteration 3900
+01:36:33 INFO Iter:   3900,  Acc:      90.00,  Flips:      14.50 (med) /      28.42 (mean) /      49.00 (max)
+01:36:33 INFO Saving last model parameters
+01:36:33 INFO Saving stats
+01:39:44 INFO (Eval)    Acc:     100.00,  Flips:      50.00 (med) /      62.91 (mean) /     173.68 (max)
+01:39:44 DEBUG Iteration 3901
+01:39:44 DEBUG Iteration 3902
+01:39:44 DEBUG Iteration 3903
+01:39:44 DEBUG Iteration 3904
+01:39:45 DEBUG Iteration 3905
+01:39:45 DEBUG Iteration 3906
+01:39:45 DEBUG Iteration 3907
+01:39:46 DEBUG Iteration 3908
+01:39:46 DEBUG Iteration 3909
+01:39:46 DEBUG Iteration 3910
+01:39:46 INFO Iter:   3910,  Acc:     100.00,  Flips:      12.00 (med) /      22.96 (mean) /      44.90 (max)
+01:39:46 DEBUG Iteration 3911
+01:39:46 DEBUG Iteration 3912
+01:39:47 DEBUG Iteration 3913
+01:39:47 DEBUG Iteration 3914
+01:39:47 DEBUG Iteration 3915
+01:39:47 DEBUG Iteration 3916
+01:39:47 DEBUG Iteration 3917
+01:39:48 DEBUG Iteration 3918
+01:39:48 DEBUG Iteration 3919
+01:39:48 DEBUG Iteration 3920
+01:39:48 INFO Iter:   3920,  Acc:     100.00,  Flips:      10.00 (med) /      17.36 (mean) /      39.80 (max)
+01:39:48 DEBUG Iteration 3921
+01:39:48 DEBUG Iteration 3922
+01:39:49 DEBUG Iteration 3923
+01:39:49 DEBUG Iteration 3924
+01:39:49 DEBUG Iteration 3925
+01:39:49 DEBUG Iteration 3926
+01:39:49 DEBUG Iteration 3927
+01:39:49 DEBUG Iteration 3928
+01:39:50 DEBUG Iteration 3929
+01:39:50 DEBUG Iteration 3930
+01:39:50 INFO Iter:   3930,  Acc:     100.00,  Flips:      13.00 (med) /      18.86 (mean) /      37.90 (max)
+01:39:50 DEBUG Iteration 3931
+01:39:50 DEBUG Iteration 3932
+01:39:50 DEBUG Iteration 3933
+01:39:50 DEBUG Iteration 3934
+01:39:51 DEBUG Iteration 3935
+01:39:51 DEBUG Iteration 3936
+01:39:51 DEBUG Iteration 3937
+01:39:51 DEBUG Iteration 3938
+01:39:51 DEBUG Iteration 3939
+01:39:51 DEBUG Iteration 3940
+01:39:51 INFO Iter:   3940,  Acc:     100.00,  Flips:      14.00 (med) /      15.68 (mean) /      33.40 (max)
+01:39:51 DEBUG Iteration 3941
+01:39:52 DEBUG Iteration 3942
+01:39:52 DEBUG Iteration 3943
+01:39:52 DEBUG Iteration 3944
+01:39:52 DEBUG Iteration 3945
+01:39:52 DEBUG Iteration 3946
+01:39:52 DEBUG Iteration 3947
+01:39:53 DEBUG Iteration 3948
+01:39:53 DEBUG Iteration 3949
+01:39:53 DEBUG Iteration 3950
+01:39:53 INFO Iter:   3950,  Acc:     100.00,  Flips:      12.00 (med) /      17.16 (mean) /      37.10 (max)
+01:39:53 INFO Saving last model parameters
+01:39:53 INFO Saving stats
+01:43:11 INFO (Eval)    Acc:      96.00,  Flips:      56.00 (med) /      80.42 (mean) /     202.16 (max)
+01:43:12 DEBUG Iteration 3951
+01:43:12 DEBUG Iteration 3952
+01:43:12 DEBUG Iteration 3953
+01:43:12 DEBUG Iteration 3954
+01:43:12 DEBUG Iteration 3955
+01:43:12 DEBUG Iteration 3956
+01:43:12 DEBUG Iteration 3957
+01:43:12 DEBUG Iteration 3958
+01:43:13 DEBUG Iteration 3959
+01:43:13 DEBUG Iteration 3960
+01:43:13 INFO Iter:   3960,  Acc:     100.00,  Flips:       9.50 (med) /      19.00 (mean) /      44.90 (max)
+01:43:13 DEBUG Iteration 3961
+01:43:14 DEBUG Iteration 3962
+01:43:14 DEBUG Iteration 3963
+01:43:14 DEBUG Iteration 3964
+01:43:14 DEBUG Iteration 3965
+01:43:15 DEBUG Iteration 3966
+01:43:15 DEBUG Iteration 3967
+01:43:15 DEBUG Iteration 3968
+01:43:15 DEBUG Iteration 3969
+01:43:16 DEBUG Iteration 3970
+01:43:16 INFO Iter:   3970,  Acc:     100.00,  Flips:      11.50 (med) /      21.16 (mean) /      49.40 (max)
+01:43:16 DEBUG Iteration 3971
+01:43:16 DEBUG Iteration 3972
+01:43:16 DEBUG Iteration 3973
+01:43:17 DEBUG Iteration 3974
+01:43:18 DEBUG Iteration 3975
+01:43:18 DEBUG Iteration 3976
+01:43:18 DEBUG Iteration 3977
+01:43:18 DEBUG Iteration 3978
+01:43:18 DEBUG Iteration 3979
+01:43:18 DEBUG Iteration 3980
+01:43:19 INFO Iter:   3980,  Acc:      90.00,  Flips:      18.00 (med) /      36.60 (mean) /      73.40 (max)
+01:43:19 DEBUG Iteration 3981
+01:43:20 DEBUG Iteration 3982
+01:43:21 DEBUG Iteration 3983
+01:43:21 DEBUG Iteration 3984
+01:43:21 DEBUG Iteration 3985
+01:43:22 DEBUG Iteration 3986
+01:43:22 DEBUG Iteration 3987
+01:43:22 DEBUG Iteration 3988
+01:43:22 DEBUG Iteration 3989
+01:43:22 DEBUG Iteration 3990
+01:43:23 INFO Iter:   3990,  Acc:     100.00,  Flips:      20.50 (med) /      30.70 (mean) /      69.60 (max)
+01:43:23 DEBUG Iteration 3991
+01:43:23 DEBUG Iteration 3992
+01:43:23 DEBUG Iteration 3993
+01:43:24 DEBUG Iteration 3994
+01:43:24 DEBUG Iteration 3995
+01:43:24 DEBUG Iteration 3996
+01:43:24 DEBUG Iteration 3997
+01:43:24 DEBUG Iteration 3998
+01:43:25 DEBUG Iteration 3999
+01:43:25 DEBUG Iteration 4000
+01:43:25 INFO Iter:   4000,  Acc:     100.00,  Flips:      19.50 (med) /      23.10 (mean) /      55.70 (max)
+01:43:25 INFO Saving last model parameters
+01:43:25 INFO Saving stats

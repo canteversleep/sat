@@ -11,8 +11,8 @@ data_shuffle: True
 
 latent_size: 16
 pretrain_vgae:
-  num_epochs: 20
-  out_name: vgae_mixed_class_comp.pth
+  num_epochs: 50
+  out_name: vgae_mixed_all_v1.pth
   batch_size: 16
 
 data_path: data/mixed
@@ -37,7 +37,7 @@ model_path: results/
 
 gnn_hidden_size: 32
 gnn_iter: 2
-readout_hidden_size: 64
+# readout_hidden_size: 64
 
 cycles: 1
 optimizer: RMSprop
